@@ -1,0 +1,126 @@
+---
+// Two kinds of pages share this address:
+//   /en/wedding/places/crete            → all venues in Crete
+//   /en/wedding/places/private-winery-crete → one venue
+import Base from '../../../../layouts/Base.astro';
+import Img from '../../../../components/Img.astro';
+import Icon from '../../../../components/Icon.astro';
+import SectionHead from '../../../../components/SectionHead.astro';
+import VenueCard from '../../../../components/VenueCard.astro';
+import Lightbox from '../../../../components/Lightbox.astro';
+import CtaBand from '../../../../components/CtaBand.astro';
+import images from '../../../../data/images.json';
+import { venues, venuesFor, destinations, DEST_NAMES, DESTINATIONS, seo } from '../../../../lib/content';
+
+export function getStaticPaths() {
+  const lists = DESTINATIONS.filter((d) => venuesFor(d).length > 0).map((d) => ({ params: { slug: d }, props: { kind: 'list', dest: d } }));
+  const pages = venues.map((v) => ({ params: { slug: v.slug }, props: { kind: 'venue', venue: v } }));
+  return [...lists, ...pages];
+}
+const { kind, dest, venue } = Astro.props as any;
+const withVenues = DESTINATIONS.filter((d) => venuesFor(d).length > 0);
+const big = (n: string) => { const w = (images as any)[n].widths; return `/img/${n}-${w[w.length - 1]}.webp`; };
+const more = [
+  { href: '/en/wedding/servicepackages/concierge', title: 'Concierge Service', text: '24/7 assistance with your wedding planning', img: 'destinations/specific-venue-additional-services-dsc03508-18' },
+  { href: '/en/wedding/servicepackages/photography', title: 'Wedding Photography', text: 'Professional photography for every moment of your wedding', img: 'destinations/specific-venue-additional-services-beleon-tours-my-greek-wedding-backs' },
+  { href: '/en/wedding/servicepackages/transport', title: 'Premium Transport', text: 'Top-tier wedding cars for your ceremony', img: 'services/premium-transportation' },
+];
+let page: { title: string; description: string; image: string } = { title: '', description: '', image: '' };
+if (kind === 'list') {
+  const d = destinations.find((x) => x.slug === dest)!;
+  const s = seo[`/en/wedding/places/${dest}`];
+  page = { title: s?.title || `Wedding Venues in ${DEST_NAMES[dest]} | Wedding by Luxury Travel`, description: s?.description || '', image: d.hero || d.image };
+} else {
+  page = { title: venue.title, description: venue.description, image: venue.photos[0] };
+}
+const ess = venue ? Object.entries(venue.essentials as Record<string, string | string[]>) : [];
+---
+<Base title={page.title} description={page.description} image={page.image}>
+  {kind === 'list' && (
+    <>
+      <section class="media-hero"><Img name={page.image} alt={`Wedding venues in ${DEST_NAMES[dest]}`} sizes="100vw" priority /></section>
+      <section class="title-band">
+        <p class="kicker">Wedding venues in</p>
+        <h1 class="h1">{DEST_NAMES[dest]}</h1>
+      </section>
+      <section class="section section--tight">
+        <div class="container">
+          <nav class="pills" aria-label="Venues by destination">
+            {withVenues.map((d) => <a class="pill" href={`/en/wedding/places/${d}`} aria-current={d === dest ? 'page' : undefined}>{DEST_NAMES[d]}</a>)}
+          </nav>
+          <div class="venues" data-count={Math.min(venuesFor(dest).length, 3)}>{venuesFor(dest).map((v) => <VenueCard venue={v} />)}</div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0"><div class="container"><CtaBand title={`Your wedding in ${DEST_NAMES[dest]}`} /></div></section>
+    </>
+  )}
+
+  {kind === 'venue' && (
+    <>
+      <section class="media-hero"><Img name={venue.photos[0]} alt={venue.name} sizes="100vw" priority /></section>
+      <section class="title-band">
+        <p class="kicker">{venue.subtitle}</p>
+        <h1 class="h1">{venue.name}</h1>
+      </section>
+      <section class="section">
+        <div class="container split" style="align-items:start">
+          <div class="prose" set:html={venue.body} data-reveal />
+          <aside class="info-card" data-reveal>
+            <h2 class="h3">Venue Essentials</h2>
+            <dl style="margin:0">
+              {ess.map(([k, v]) => (
+                <div style="padding:10px 0;border-bottom:1px solid rgba(176,93,65,.15)">
+                  <dt style="font-weight:600;color:var(--ink)">{k}</dt>
+                  <dd style="margin:2px 0 0">{Array.isArray(v) ? v.join(' · ') : v}</dd>
+                </div>
+              ))}
+            </dl>
+            <p style="margin-top:24px"><a class="btn" href={`/en/contact?destination=${venue.destination}&venue=${encodeURIComponent(venue.name)}#request`}>Plan Your Wedding Here</a></p>
+          </aside>
+        </div>
+      </section>
+      {venue.photos.length > 1 && (
+        <section class="section section--paper">
+          <div class="container">
+            <SectionHead title="Gallery" subtitle={venue.name} />
+            <div class="masonry" data-gallery>
+              {venue.photos.map((ph: string, i: number) => (
+                <button type="button" data-full={big(ph)} aria-label={`Open photo ${i + 1} of ${venue.photos.length}`}>
+                  <Img name={ph} alt={`${venue.name}, photo ${i + 1}`} sizes="(max-width: 700px) 92vw, 400px" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+      {venuesFor(venue.destination).length > 1 && (
+        <section class="section">
+          <div class="container">
+            <SectionHead title={`More Venues in ${DEST_NAMES[venue.destination]}`} />
+            <div class="venues" data-count={Math.min(venuesFor(venue.destination).length - 1, 3)}>
+              {venuesFor(venue.destination).filter((v) => v.slug !== venue.slug).slice(0, 3).map((v) => <VenueCard venue={v} />)}
+            </div>
+          </div>
+        </section>
+      )}
+      <section class="section section--rose">
+        <div class="container">
+          <SectionHead title="More for Your Wedding" subtitle="Additional services for this venue" />
+          <div class="venues">
+            {more.map((m) => (
+              <a class="photo-card" href={m.href} style="height:280px">
+                <Img name={m.img} alt="" sizes="(max-width: 600px) 92vw, 400px" />
+                <span class="photo-card__body">
+                  <span class="photo-card__title">{m.title}</span>
+                  <span class="photo-card__text" style="display:block">{m.text}</span>
+                  <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+      <Lightbox />
+    </>
+  )}
+</Base>

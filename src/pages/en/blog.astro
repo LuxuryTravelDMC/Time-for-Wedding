@@ -1,0 +1,46 @@
+---
+// Blog.
+// Changes from the review: one design for the article list, each article only
+// once; a call to action at the end.
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import page from '../../data/blog_page.json';
+import { blog, seo } from '../../lib/content';
+const s = seo['/en/blog'];
+const featured = blog.find((b) => (b as any).featured) ?? blog[0];
+const rest = blog.filter((b) => b !== featured);
+---
+<Base title={s.title} description={s.description} image={page.hero}>
+  <section class="blog-hero">
+    <Img name={page.hero} alt={page.hero_alt} sizes="100vw" priority style="object-position:50% 40%" />
+    <div class="blog-hero__text">
+      <div class="container">
+        <p class="kicker">{page.kicker}</p>
+        <h1 class="h1">{page.h1}</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="article-grid">
+        <ArticleCard a={featured} featured />
+        {rest.map((a) => <ArticleCard a={a} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container split">
+      <div class="split__media" data-reveal><Img name={page.organize_image} alt="Bride and groom kissing on a white terrace overlooking the Santorini caldera" sizes="(max-width: 860px) 92vw, 580px" /></div>
+      <div class="prose" data-reveal>
+        <h2 class="h2">{page.organize_title}</h2>
+        <Fragment set:html={page.organize} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section"><div class="container"><CtaBand /></div></section>
+</Base>

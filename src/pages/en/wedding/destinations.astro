@@ -1,0 +1,85 @@
+---
+// Destinations.
+// Changes from the review: the whole text is visible (no "Discover more" button);
+// only destinations that have venues appear in "Wedding Venues", and two venues
+// are the same size; "How to choose…" is now an article on the blog.
+import Base from '../../../layouts/Base.astro';
+import Img from '../../../components/Img.astro';
+import Icon from '../../../components/Icon.astro';
+import SectionHead from '../../../components/SectionHead.astro';
+import VenuesByDestination from '../../../components/VenuesByDestination.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import page from '../../../data/destinations_page.json';
+import { destinations, seo } from '../../../lib/content';
+const s = seo['/en/wedding/destinations'];
+const book = destinations.filter((d) => d.short);
+const active = 'santorini';
+---
+<Base title={s.title} description={s.description} image={book[0].image}>
+  <section class="page-intro" style="padding-bottom: 32px">
+    <div class="container container--narrow">
+      <h1 class="h1">{page.intro_h1}</h1>
+      <p class="subheading">Nine places, one wedding planner who knows each of them inside out.</p>
+    </div>
+  </section>
+
+  <!-- Kept as it was: one panel per destination, the active one opens -->
+  <section>
+    <div class="container">
+      <div class="book" data-book>
+        {book.map((d) => (
+          <div class:list={['book__panel', { 'is-active': d.slug === active }]} data-book-panel tabindex="0" role="button" aria-expanded={String(d.slug === active)} aria-label={`Wedding in ${d.name}`}>
+            <Img name={d.image} alt="" sizes="(max-width: 860px) 100vw, 1100px" />
+            <span class="book__spine" aria-hidden="true">{d.name.toUpperCase()}</span>
+            <span class="book__body">
+              <span class="book__kicker">Wedding in</span>
+              <span class="book__title" style="display:block">{d.name.toUpperCase()}</span>
+              <span class="book__text">{d.short}</span>
+              <a class="link-arrow link-arrow--light" href={`/en/wedding/destinations/${d.slug}`}>Explore {d.name} <Icon name="arrow" class="arrow" /></a>
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The whole text, no "Discover more" button -->
+  <section class="section">
+    <div class="container split" style="align-items:start">
+      <div data-reveal>
+        <h2 class="h2">There Is No Single Perfect Wedding Destination</h2>
+        <p class="slogan">Only the one that perfectly reflects your love story.</p>
+      </div>
+      <div class="prose" data-reveal>
+        <p set:html={page.intro} />
+        <Fragment set:html={page.intro_more} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="venues">
+    <div class="container">
+      <SectionHead title="Wedding Venues" subtitle="Choose a setting that reflects your unique love story" />
+      <VenuesByDestination />
+    </div>
+  </section>
+
+  <!-- "How to choose…" is now a blog article; here, a link to it -->
+  <section class="section">
+    <div class="container">
+      <article class="teaser" data-reveal>
+        <div class="teaser__media"><Img name="destinations/mykonos" alt="Whitewashed houses and the sea on Mykonos" sizes="(max-width: 760px) 100vw, 520px" /></div>
+        <div class="teaser__body">
+          <p class="kicker">From our blog</p>
+          <h2 class="h3">How to Choose the Right Wedding Destination in Greece</h2>
+          <p>Santorini or Crete, an island or the mainland, peak season or September? A practical guide to the choices that shape your wedding destination.</p>
+          <a class="btn btn--outline" href="/en/blog/how-to-choose-the-right-wedding-destination-in-greece">Read the article <Icon name="arrow" class="arrow" /></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container"><CtaBand /></div>
+  </section>
+</Base>

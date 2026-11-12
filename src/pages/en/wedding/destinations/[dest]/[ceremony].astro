@@ -1,0 +1,67 @@
+---
+// One ceremony in one destination: Symbolic Wedding in Crete, Civil Wedding in Rhodes…
+import Base from '../../../../../layouts/Base.astro';
+import SectionHead from '../../../../../components/SectionHead.astro';
+import TrioHero from '../../../../../components/TrioHero.astro';
+import VenueCard from '../../../../../components/VenueCard.astro';
+import WeddingCard from '../../../../../components/WeddingCard.astro';
+import ServicesGrid from '../../../../../components/ServicesGrid.astro';
+import Faq from '../../../../../components/Faq.astro';
+import CtaBand from '../../../../../components/CtaBand.astro';
+import { destCeremony, venuesFor, venueTypes, coupleBySlug, DEST_NAMES, CEREMONY_NAMES, CEREMONY_SHORT } from '../../../../../lib/content';
+
+export function getStaticPaths() {
+  return destCeremony.map((p) => ({ params: { dest: p.destination, ceremony: p.ceremony }, props: { p } }));
+}
+const { p } = Astro.props;
+const name = DEST_NAMES[p.destination];
+const word = CEREMONY_SHORT[p.ceremony].toLowerCase();
+const venues = venuesFor(p.destination).filter((v) => venueTypes(v).some((t) => t.toLowerCase().includes(word)));
+const weddings = p.portfolio.map((s) => coupleBySlug(s)).filter((c) => c !== undefined);
+const photos = p.hero.map((h) => h.src);
+const cta = `/en/contact?ceremony=${p.ceremony}&destination=${p.destination}#request`;
+---
+<Base title={p.title} description={p.description || p.intro} image={photos[0]}>
+  {photos.length > 0 && <TrioHero photos={photos} alt={p.h1} />}
+  <section class="title-band">
+    <h1 class="h1">{p.h1}</h1>
+    {p.intro && <><hr class="thin-rule" /><p class="lead">{p.intro}</p></>}
+    <p style="margin-top:22px"><a class="btn" href={cta}>Plan Your Wedding in {name}</a></p>
+  </section>
+
+  {venues.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <SectionHead title={`Wedding Venues in ${name}`} subtitle={p.venues_subtitle || undefined} />
+        <div class="venues" data-count={Math.min(venues.length, 3)}>{venues.slice(0, 6).map((v) => <VenueCard venue={v} />)}</div>
+      </div>
+    </section>
+  )}
+
+  {p.planning.length > 0 && (
+    <section class="section section--paper">
+      <div class="container">
+        <SectionHead title={p.planning_title || 'Planning'} subtitle={p.planning_subtitle || undefined} />
+        <Faq items={p.planning} />
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container">
+      <SectionHead title="Tailored Services" subtitle="Thoughtfully curated experiences, designed around you." />
+      <ServicesGrid />
+    </div>
+  </section>
+
+  {weddings.length > 0 && (
+    <section class="section section--paper">
+      <div class="container">
+        <SectionHead title={p.portfolio_title || 'Portfolio'} subtitle="Love stories, beautifully brought to life by our team" />
+        <div class="portfolio-grid">{weddings.slice(0, 6).map((c) => <div data-reveal><WeddingCard couple={c!} /></div>)}</div>
+      </div>
+    </section>
+  )}
+
+  <section class="section"><div class="container"><CtaBand title={`${CEREMONY_NAMES[p.ceremony]} in ${name}`} /></div></section>
+</Base>

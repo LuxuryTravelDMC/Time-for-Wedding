@@ -1,0 +1,41 @@
+---
+// Overview of the four ceremony types.
+import Base from '../../../layouts/Base.astro';
+import Img from '../../../components/Img.astro';
+import Icon from '../../../components/Icon.astro';
+import Designer from '../../../components/Designer.astro';
+import shapes from '../../../data/ceremony_shapes.json';
+import { seo } from '../../../lib/content';
+const s = seo['/en/wedding/ceremonytype'];
+const img: Record<string, [string, string]> = {
+  civil: ['ceremonytype/wedding-type-civil', '/en/wedding/ceremonytype/official'],
+  symbolic: ['ceremonytype/wedding-type-symbolic', '/en/wedding/ceremonytype/symbolic'],
+  church: ['ceremonytype/wedding-type-church', '/en/wedding/ceremonytype/orthodox'],
+  proposal: ['ceremonytype/wedding-type-proposal', '/en/wedding/ceremonytype/proposal'],
+};
+---
+<Base title={s.title} description={s.description} image="ceremonytype/wedding-type-civil">
+  <section class="page-intro">
+    <div class="container container--narrow">
+      <h1 class="h1">Wedding Ceremonies in Greece</h1>
+      <p class="lead">Civil, symbolic or church wedding, or the proposal that starts it all. Choose the ceremony that fits your story and we plan everything around it.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="article-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        {shapes.map((sh) => (
+          <a class="article-card" href={img[sh.shape][1]} data-reveal>
+            <Img name={img[sh.shape][0]} alt="" sizes="(max-width: 640px) 92vw, 300px" />
+            <span class="article-card__body">
+              <h2 class="h3" style="font-size:1.45rem">{sh.title}</h2>
+              <p>{sh.text}</p>
+              <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <Designer />
+</Base>

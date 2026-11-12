@@ -1,0 +1,125 @@
+---
+// Contact and the "Plan Your Wedding" form.
+// Changes from the review: icons in the brand colour (not orange); "Choose
+// location" instead of "Choose resort"; the euro sign before the amount.
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../data/site';
+import { seo, DEST_NAMES, DESTINATIONS } from '../../lib/content';
+const s = seo['/en/contact'];
+const ceremonies = [
+  { v: 'symbolic', l: 'Symbolic wedding ceremony' }, { v: 'official', l: 'Civil wedding' },
+  { v: 'orthodox', l: 'Church wedding' }, { v: 'proposal', l: 'Wedding proposal' },
+];
+const guests = ['2 guests', '3–5 guests', '5–15 guests', '15–50 guests', '50–100 guests', '100–150 guests', 'More than 150 guests'];
+const budgets = ['Approximately €1,500', '€2,000 – €2,500', '€3,000 – €5,000', '€6,000 – €10,000', '€10,000 – €20,000', '€20,000 and more'];
+---
+<Base title={s.title} description={s.description}>
+  <section class="page-intro" style="padding-bottom:40px">
+    <div class="container container--narrow">
+      <h1 class="h1">Contact</h1>
+      <p class="lead">Tell us about your celebration and we will take care of the rest.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container contact-grid">
+      <div data-reveal>
+        <h2 class="h3">Our Office</h2>
+        <ul class="contact-list">
+          <li><a href={site.phoneHref}><Icon name="phone" />{site.phoneDisplay}</a></li>
+          <li><a href={`mailto:${site.email}`}><Icon name="mail" />{site.email}</a></li>
+          <li><a href={site.mapsUrl} rel="noopener"><Icon name="pin" />{site.address}</a></li>
+        </ul>
+        <a class="link-arrow" href={site.mapsUrl} rel="noopener">Open in Google Maps <Icon name="arrow" class="arrow" /></a>
+      </div>
+      <div class="contact-map" data-reveal>
+        <iframe src="https://maps.google.com/maps?q=Danaidon%209%2C%2054626%20Thessaloniki%2C%20Greece&z=16&output=embed" title="Map: Danaidon 9, Thessaloniki" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="request">
+    <div class="container" style="max-width:980px">
+      <header class="section-head">
+        <h2 class="h2">Plan Your Wedding</h2>
+        <p class="subheading">A few details are enough for us to start. We reply within two working days.</p>
+      </header>
+      <form class="form" data-request-form data-endpoint={site.formEndpoint} data-email={site.email} novalidate>
+        <div class="form__grid">
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="given-name" required /><p class="error">Please enter your name</p></div>
+          <div class="field"><label for="f-surname">Your surname</label><input id="f-surname" name="surname" autocomplete="family-name" /></div>
+          <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required /><p class="error">Please enter a valid email address</p></div>
+          <div class="field"><label for="f-phone">Your phone <span class="optional">(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" /></div>
+          <div class="field"><label for="f-ceremony">Desired ceremony</label>
+            <select id="f-ceremony" name="ceremony"><option value="">Choose ceremony type</option>{ceremonies.map((c) => <option value={c.v}>{c.l}</option>)}</select></div>
+          <div class="field"><label for="f-destination">Desired location</label>
+            <select id="f-destination" name="destination"><option value="">Choose location</option>{DESTINATIONS.map((d) => <option value={d}>{DEST_NAMES[d]}</option>)}<option value="not-sure">Not sure yet</option></select></div>
+          <div class="field"><label for="f-date">Desired date <span class="optional">(optional)</span></label><input id="f-date" name="date" type="date" /></div>
+          <div class="field"><label for="f-guests">Number of guests</label>
+            <select id="f-guests" name="guests"><option value="">Number of guests</option>{guests.map((g) => <option>{g}</option>)}</select></div>
+          <div class="field"><label for="f-budget">Available budget</label>
+            <select id="f-budget" name="budget"><option value="">Available budget</option>{budgets.map((b) => <option>{b}</option>)}</select></div>
+          <div class="field"><label for="f-venue">Venue you liked <span class="optional">(optional)</span></label><input id="f-venue" name="venue" /></div>
+          <div class="field field--full"><label for="f-message">Tell us about your plans <span class="optional">(optional)</span></label><textarea id="f-message" name="message"></textarea></div>
+        </div>
+        <p class="form__notice">Please be aware that our offers include valuable information. This is why we do not send any detailed offer without receiving a minimum fee of €500 (for weddings under 50 guests) or €1,000 (for weddings above 50 guests) for building the project, which is non-refundable and only for the wedding purpose. It will be deducted from the final invoice.</p>
+        <div class="form__actions"><button class="btn" type="submit">Send Your Request</button></div>
+        <p class="form__status" data-status aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-request-form]');
+  if (form) {
+    // Fill in what the visitor already chose on another page (?ceremony=…&destination=…&email=…)
+    const q = new URLSearchParams(location.search);
+    for (const [k, v] of q) {
+      const el = form.elements.namedItem(k) as HTMLInputElement | HTMLSelectElement | null;
+      if (el && v) el.value = v;
+    }
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const check = () => {
+      let ok = true;
+      for (const name of ['name', 'email']) {
+        const el = form.elements.namedItem(name) as HTMLInputElement;
+        const bad = !el.value.trim() || (name === 'email' && !/^\S+@\S+\.\S+$/.test(el.value));
+        el.closest('.field')!.classList.toggle('has-error', bad);
+        el.setAttribute('aria-invalid', String(bad));
+        if (bad && ok) { el.focus(); ok = false; }
+      }
+      return ok;
+    };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!check()) return;
+      const data = new FormData(form);
+      const label = (n: string) => {
+        const el = form.elements.namedItem(n) as HTMLSelectElement | HTMLInputElement;
+        return el instanceof HTMLSelectElement ? (el.value ? el.selectedOptions[0].text : '') : el.value;
+      };
+      const endpoint = form.dataset.endpoint;
+      if (endpoint) {
+        status.textContent = 'Sending…';
+        try {
+          const r = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+          if (!r.ok) throw new Error();
+          form.reset();
+          status.textContent = 'Thank you! We have received your request and will reply soon.';
+        } catch {
+          status.textContent = `Something went wrong. Please write to us at ${form.dataset.email}.`;
+        }
+        return;
+      }
+      // No form service yet: open the visitor's email program with everything filled in
+      const lines = [['Name', `${label('name')} ${label('surname')}`.trim()], ['E-mail', label('email')], ['Phone', label('phone')],
+        ['Ceremony', label('ceremony')], ['Location', label('destination')], ['Date', label('date')], ['Guests', label('guests')],
+        ['Budget', label('budget')], ['Venue', label('venue')], ['Message', label('message')]].filter(([, v]) => v);
+      const body = lines.map(([k, v]) => `${k}: ${v}`).join('\n');
+      location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent('Wedding request: ' + label('name'))}&body=${encodeURIComponent(body)}`;
+      status.textContent = 'Your email program should open with your request ready to send.';
+    });
+  }
+</script>

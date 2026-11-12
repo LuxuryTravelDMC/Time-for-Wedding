@@ -1,0 +1,9 @@
+---
+interface Props { title: string; subtitle?: string; level?: 'h1' | 'h2'; }
+const { title, subtitle, level = 'h2' } = Astro.props;
+const H = level;
+---
+<header class="section-head" data-reveal>
+  <H class:list={[level === 'h1' ? 'h1' : 'h2']}>{title}</H>
+  {subtitle && <p class="subheading">{subtitle}</p>}
+</header>

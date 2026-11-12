@@ -1,0 +1,16 @@
+---
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import { plain } from '../lib/content';
+interface Props { a: any; featured?: boolean }
+const { a, featured = false } = Astro.props;
+const text = a.excerpt || plain(a.body);
+---
+<a class:list={['article-card', { 'article-card--featured': featured }]} href={`/en/blog/${a.slug}`} data-reveal>
+  <Img name={a.card_image || a.hero} alt={a.card_alt || a.hero_alt || ''} sizes={featured ? '(max-width: 640px) 92vw, 680px' : '(max-width: 640px) 92vw, (max-width: 960px) 46vw, 400px'} />
+  <span class="article-card__body">
+    <h3>{a.h1}</h3>
+    <p>{text}</p>
+    <span class="link-arrow">Read the article <Icon name="arrow" class="arrow" /></span>
+  </span>
+</a>

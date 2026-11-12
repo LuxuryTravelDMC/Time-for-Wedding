@@ -1,0 +1,85 @@
+---
+// One ceremony type: Civil, Symbolic, Church Wedding or Wedding Proposal.
+import Base from '../../../../layouts/Base.astro';
+import Img from '../../../../components/Img.astro';
+import Icon from '../../../../components/Icon.astro';
+import SectionHead from '../../../../components/SectionHead.astro';
+import TrioHero from '../../../../components/TrioHero.astro';
+import WeddingCard from '../../../../components/WeddingCard.astro';
+import ServicesGrid from '../../../../components/ServicesGrid.astro';
+import Designer from '../../../../components/Designer.astro';
+import Faq from '../../../../components/Faq.astro';
+import { ceremonies, coupleBySlug, destCeremony, DEST_NAMES } from '../../../../lib/content';
+
+export function getStaticPaths() {
+  return ceremonies.map((c) => ({ params: { type: c.ceremony }, props: { c } }));
+}
+const { c } = Astro.props;
+// only destinations with a text, and a page for this ceremony
+const dests = c.destinations.filter((d) => d.text && destCeremony.some((x) => x.destination === d.destination && x.ceremony === c.ceremony));
+const first = dests[0]?.destination;
+const weddings = c.portfolio.map((s) => coupleBySlug(s)).filter((x) => x !== undefined);
+const photos = c.hero.map((h) => h.src);
+const label = c.h1.replace(/ in Greece$/i, '');
+---
+<Base title={c.title} description={c.description || c.intro} image={photos[0]}>
+  {photos.length > 0 && <TrioHero photos={photos} alt={c.h1} />}
+  <section class="title-band">
+    <h1 class="h1">{c.h1}</h1>
+    {c.intro && <><hr class="thin-rule" /><p class="lead">{c.intro}</p></>}
+    <p style="margin-top:22px"><a class="btn" href={`/en/contact?ceremony=${c.ceremony}#request`}>Plan Your {label}</a></p>
+  </section>
+
+  {dests.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <SectionHead title={c.dest_title} subtitle={c.dest_subtitle} />
+        <div data-tabs>
+          <div class="pills" role="tablist" aria-label="Destination">
+            {dests.map((d) => <button class="pill" type="button" role="tab" data-tab={d.destination} aria-selected={String(d.destination === first)} tabindex={d.destination === first ? 0 : -1}>{DEST_NAMES[d.destination]}</button>)}
+          </div>
+          {dests.map((d) => (
+            <div data-tab-panel={d.destination} role="tabpanel" hidden={d.destination !== first}>
+              <div class="teaser">
+                <div class="teaser__media">{d.image && <Img name={d.image} alt={`${label} in ${DEST_NAMES[d.destination]}`} sizes="(max-width: 760px) 100vw, 520px" />}</div>
+                <div class="teaser__body">
+                  <p class="kicker">{label} in</p>
+                  <h3 class="h3">{DEST_NAMES[d.destination]}</h3>
+                  <p>{d.text}</p>
+                  <a class="link-arrow" href={`/en/wedding/destinations/${d.destination}/${c.ceremony}`}>Explore <Icon name="arrow" class="arrow" /></a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {c.planning.length > 0 && (
+    <section class="section section--paper">
+      <div class="container">
+        <SectionHead title={c.planning_title || 'Planning'} subtitle={c.planning_subtitle || undefined} />
+        <Faq items={c.planning} />
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container">
+      <SectionHead title="Tailored Services" subtitle="Thoughtfully curated experiences, designed around you." />
+      <ServicesGrid />
+    </div>
+  </section>
+
+  {weddings.length > 0 && (
+    <section class="section section--paper">
+      <div class="container">
+        <SectionHead title={c.portfolio_title || 'Portfolio'} subtitle="Love stories, beautifully brought to life by our team" />
+        <div class="portfolio-grid">{weddings.slice(0, 6).map((x) => <div data-reveal><WeddingCard couple={x!} /></div>)}</div>
+        <p class="center" style="margin-top:40px"><a class="btn btn--outline" href={`/en/wedding/portfolio?type=${c.ceremony}`}>More {label.toLowerCase()}s <Icon name="arrow" class="arrow" /></a></p>
+      </div>
+    </section>
+  )}
+  <Designer />
+</Base>

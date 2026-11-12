@@ -1,0 +1,16 @@
+---
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import { CEREMONY_SHORT, DEST_NAMES, type Couple } from '../lib/content';
+interface Props { couple: Couple }
+const { couple: c } = Astro.props;
+const meta = [CEREMONY_SHORT[c.ceremony], DEST_NAMES[c.destSlug] ?? c.destination, c.when].filter(Boolean).join(' · ');
+---
+<a class="wedding-card" href={`/en/wedding/couples/${c.slug}`} data-ceremony={c.ceremony} data-destination={c.destSlug}>
+  <Img name={c.photos[0]} alt={c.name} sizes="(max-width: 640px) 92vw, (max-width: 1100px) 46vw, 400px" />
+  <span class="wedding-card__count"><Icon name="camera" />{c.photos.length} photos</span>
+  <span class="wedding-card__body">
+    <span class="wedding-card__name">{c.name}</span>
+    <span class="wedding-card__meta">{meta}</span>
+  </span>
+</a>

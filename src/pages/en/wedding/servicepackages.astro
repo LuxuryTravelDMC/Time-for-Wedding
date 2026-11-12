@@ -1,0 +1,53 @@
+---
+// Services hub.
+// Changes from the review: cards are plain links (no squeezed text flashing before
+// the page opens), equal heights on phones, and the "Additional touches" text is a
+// normal section instead of a hidden accordion.
+import Base from '../../../layouts/Base.astro';
+import Img from '../../../components/Img.astro';
+import Icon from '../../../components/Icon.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import page from '../../../data/services_page.json';
+import { services, seo } from '../../../lib/content';
+const s = seo['/en/wedding/servicepackages'];
+---
+<Base title={s.title} description={s.description} image={services[0].card_image}>
+  <section class="page-intro">
+    <div class="container container--narrow">
+      <h1 class="h1">Tailored Services</h1>
+      <p class="lead">Everything around the ceremony, organised by the same team: where you stay, how you travel, who captures the day and how you celebrate it.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="services-hub">
+        {services.map((sv, i) => (
+          <a class="photo-card" href={`/en/wedding/servicepackages/${sv.slug}`} data-reveal style={`transition-delay:${(i % 4) * 60}ms`}>
+            <Img name={sv.card_image} alt="" sizes="(max-width: 560px) 92vw, (max-width: 960px) 46vw, 600px" />
+            <span class="photo-card__body">
+              <span class="photo-card__title">{sv.card_title}</span>
+              <span class="photo-card__text" style="display:block">{sv.card_text.length > 110 ? sv.card_text.slice(0, sv.card_text.indexOf('!') + 1 || 110) : sv.card_text}</span>
+              <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <!-- Was a hidden accordion; now a normal section anyone can read -->
+  <section class="section section--paper">
+    <div class="container split" style="align-items:start">
+      <div data-reveal>
+        <p class="kicker">Additional touches</p>
+        <h2 class="h2">{page.aside_title}</h2>
+        <img src="/img/logos/wlt-logoframe-bronze.svg" alt="" width="180" height="180" style="width:150px;margin-top:24px;opacity:.7" loading="lazy" />
+      </div>
+      <div class="prose" data-reveal>
+        <p class="slogan">{page.lead}</p>
+        <Fragment set:html={page.body} />
+        <a class="btn" href="/en/contact#request">Share your wishes</a>
+      </div>
+    </div>
+  </section>
+  <section class="section"><div class="container"><CtaBand /></div></section>
+</Base>

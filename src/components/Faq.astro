@@ -1,0 +1,13 @@
+---
+// Planning questions. A real FAQ list: each question opens with a clear + sign.
+interface Props { items: { q: string; a: string }[]; open?: boolean }
+const { items, open = true } = Astro.props;
+---
+<div class="faq">
+  {items.map((it, i) => (
+    <details open={open && i === 0}>
+      <summary>{it.q}</summary>
+      <div class="prose" set:html={it.a} />
+    </details>
+  ))}
+</div>

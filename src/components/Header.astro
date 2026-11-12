@@ -1,0 +1,39 @@
+---
+// The menu. On the homepage it sits inside the photo, transparent, and turns
+// white when you scroll. Lighter letters and more space between the items.
+import Icon from './Icon.astro';
+import { nav, cta, site } from '../data/site';
+interface Props { overlay?: boolean }
+const { overlay = false } = Astro.props;
+const current = Astro.url.pathname.replace(/\/$/, '');
+const isCurrent = (href: string) => current === href || (href !== '/en/wedding' && current.startsWith(href + '/'));
+---
+<header class:list={['site-header', { 'site-header--overlay': overlay }]} data-header>
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/en" aria-label={`${site.name}, home`}>
+      <img src="/img/logos/wlogo.svg" alt="" width="46" height="30" />
+      <span>{site.name}</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <ul class="nav__list">
+        {nav.map((item) => (
+          <li><a class="nav__link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+      <a class="btn btn--outline nav__cta nav__cta--desktop" href={cta.href}>{cta.label}</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-open>
+        <Icon name="menu" /><span class="sr-only">Open menu</span>
+      </button>
+    </nav>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu" data-menu>
+  <div class="mobile-menu__top">
+    <a href="/en"><img src="/img/logos/wlogo.svg" alt={site.name} width="46" height="30" /></a>
+    <button class="mobile-menu__close" type="button" data-menu-close><Icon name="close" /><span class="sr-only">Close menu</span></button>
+  </div>
+  <ul>
+    {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+  </ul>
+  <a class="btn" href={cta.href}>{cta.label}</a>
+</div>

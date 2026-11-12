@@ -1,0 +1,39 @@
+---
+// One article. The title has its own space (it is never hidden behind the photo)
+// and every article ends with a call to action.
+import Base from '../../../layouts/Base.astro';
+import Img from '../../../components/Img.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { blog } from '../../../lib/content';
+
+export function getStaticPaths() {
+  return blog.map((a) => ({ params: { slug: a.slug }, props: { a } }));
+}
+const { a } = Astro.props;
+const more = blog.filter((b) => b.slug !== a.slug).slice(0, 3);
+---
+<Base title={a.title} description={a.description || a.excerpt} image={a.hero}>
+  <header class="article-head">
+    <div class="container">
+      <p class="kicker"><a href="/en/blog" style="text-decoration:none">Wedding Blog</a></p>
+      <h1 class="h1">{a.h1}</h1>
+    </div>
+  </header>
+  {a.hero && <div class="container"><div class="article-cover"><Img name={a.hero} alt={a.hero_alt} sizes="(max-width: 1240px) 92vw, 1160px" priority /></div></div>}
+  <article class="article-body">
+    <div class="container container--narrow prose">
+      <Fragment set:html={a.body} />
+      {a.images.map((im) => <figure><Img name={im.src} alt={im.alt} sizes="(max-width: 860px) 92vw, 780px" /></figure>)}
+    </div>
+  </article>
+  <section class="section" style="padding-top:0">
+    <div class="container"><CtaBand title="Planning your wedding in Greece?" text="Tell us about the day you imagine. We will help you choose the destination and the venue, and take care of every detail." /></div>
+  </section>
+  <section class="section section--paper">
+    <div class="container">
+      <h2 class="h2 center" style="margin-bottom:36px">More from the Blog</h2>
+      <div class="article-grid">{more.map((m) => <ArticleCard a={m} />)}</div>
+    </div>
+  </section>
+</Base>

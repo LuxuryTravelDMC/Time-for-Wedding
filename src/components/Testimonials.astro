@@ -1,0 +1,30 @@
+---
+// Testimonials change on their own every 7 seconds (they pause while you hover or use the arrows).
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+const items = [
+  { quote: "We couldn't have imagined a more beautiful wedding. The attention to detail, the venues, the atmosphere. Everything exceeded our expectations.", names: 'Emma & James', place: 'United Kingdom', img: 'testimonials/testimonials' },
+  { quote: 'From the first call to the last dance, the team made us feel cared for every step of the way. Santorini was pure magic.', names: 'Sophie & Michael', place: 'United States', img: 'homepage/events-romantic' },
+  { quote: 'Our wedding in Crete was elegant, personal, and flawlessly organised. We would relive every moment in a heartbeat.', names: 'Anna & David', place: 'Germany', img: 'homepage/events-wedding' },
+];
+---
+<section class="testimonials" aria-roledescription="carousel" aria-label="Testimonials" data-slider data-interval="7000">
+  {items.map((t, i) => (
+    <div class:list={['testimonials__slide', { 'is-active': i === 0 }]} data-slide aria-roledescription="slide" aria-label={`${i + 1} of ${items.length}`}>
+      <Img name={t.img} alt="" sizes="100vw" />
+      <div class="testimonials__inner">
+        <p class="kicker" style="color: var(--rose)">Stories from couples who lived their dream in Greece</p>
+        <img class="testimonials__icon" src="/img/logos/quotationsicon.svg" alt="" width="46" height="39" loading="lazy" />
+        <p class="testimonials__quote">{t.quote}</p>
+        <div class="divider"><img src="/img/logos/wlogo.svg" alt="" width="22" height="14" loading="lazy" /></div>
+        <p class="testimonials__name">{t.names}</p>
+        <p class="testimonials__place">{t.place}</p>
+      </div>
+    </div>
+  ))}
+  <div class="slider-controls">
+    <button class="slider-arrow" type="button" data-prev aria-label="Previous testimonial"><Icon name="arrow-left" /></button>
+    <div class="slider-dots">{items.map((_, i) => <button type="button" data-dot aria-label={`Testimonial ${i + 1}`}></button>)}</div>
+    <button class="slider-arrow" type="button" data-next aria-label="Next testimonial"><Icon name="arrow" /></button>
+  </div>
+</section>

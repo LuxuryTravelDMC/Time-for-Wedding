@@ -1,0 +1,14 @@
+# Cloudflare reads this file and adds these headers to every response.
+# It asks search engines not to list any page or photo of the site, so only
+# people with the link find it. Delete the first block when the site goes live
+# (and set hideFromSearch to false in src/data/site.ts).
+# Do not block the site in a robots.txt instead: search engines would then
+# never see this "noindex" and could still list the bare address.
+/*
+  X-Robots-Tag: noindex, nofollow
+
+# Photos, fonts and scripts never change under the same name: let browsers keep them for a year.
+/img/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

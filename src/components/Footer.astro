@@ -1,0 +1,41 @@
+---
+// Dark footer so it stands apart from the page, with white text.
+// The email field now asks for an email, and the button leads to the full form.
+import Icon from './Icon.astro';
+import { site, cta } from '../data/site';
+const social = Object.entries(site.social).filter(([, url]) => url);
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <img src="/img/logos/wlt-logo-vert-bronze-light.svg" alt={site.name} width="220" height="220" loading="lazy" />
+        <p>You pop the question; we do the rest!</p>
+      </div>
+      <div>
+        <ul class="site-footer__contact">
+          <li><a href={site.mapsUrl} rel="noopener"><Icon name="pin" />{site.address}</a></li>
+          <li><a href={site.phoneHref}><Icon name="phone" />{site.phoneDisplay}</a></li>
+          <li><a href={`mailto:${site.email}`}><Icon name="mail" />{site.email}</a></li>
+        </ul>
+        {social.length > 0 && (
+          <div class="site-footer__social">
+            {social.map(([name, url]) => <a href={url} rel="noopener" aria-label={name}><Icon name={name} /></a>)}
+          </div>
+        )}
+        <form class="footer-form" action="/en/contact" method="get">
+          <label for="footer-email">Start planning: leave your email and we'll take it from there.</label>
+          <div class="footer-form__row">
+            <input id="footer-email" type="email" name="email" placeholder="Your email address" autocomplete="email" required />
+            <button class="btn" type="submit">{cta.label}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© 2008–{year} {site.name}, member of Beleon Group.</span>
+      <span><a href="/en/contact">Contact</a></span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,10 @@
+---
+// Three photos side by side instead of one cropped slide: faces stay in the frame.
+import Img from './Img.astro';
+interface Props { photos: string[]; alt: string }
+const { photos, alt } = Astro.props;
+const three = photos.slice(0, 3);
+---
+<div class="trio">
+  {three.map((p, i) => <Img name={p} alt={`${alt}, photo ${i + 1}`} sizes="(max-width: 760px) 50vw, 34vw" priority={i === 0} />)}
+</div>

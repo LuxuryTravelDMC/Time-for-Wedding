@@ -1,0 +1,123 @@
+---
+// Homepage.
+// Changes from the review: the menu sits inside the photo; the H1 with the main
+// keyword is above the fold; the W photo is smaller and never under text on phones;
+// soft movement (fade-in, parallax, testimonials that rotate on their own).
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import Icon from '../../components/Icon.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import GreeceMap from '../../components/GreeceMap.astro';
+import ServicesGrid from '../../components/ServicesGrid.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import WeddingCard from '../../components/WeddingCard.astro';
+import Designer from '../../components/Designer.astro';
+import { couples, seo } from '../../lib/content';
+import { cta } from '../../data/site';
+
+const types = [
+  { key: 'civil', title: 'Civil Wedding', tab: 'Civil Wedding', img: 'ceremonytype/wedding-type-civil', href: '/en/wedding/ceremonytype/official',
+    text: 'Professional civil wedding planning in Greece, with legal coordination, beautiful locations, and every detail carefully organized for your special day.' },
+  { key: 'symbolic', title: 'Symbolic Wedding', tab: 'Symbolic Wedding', img: 'ceremonytype/wedding-type-symbolic', href: '/en/wedding/ceremonytype/symbolic',
+    text: 'Bespoke symbolic weddings and elopements in Greece, thoughtfully designed for couples seeking an intimate and unforgettable celebration.' },
+  { key: 'church', title: 'Church Wedding', tab: 'Church Wedding', img: 'ceremonytype/wedding-type-church', href: '/en/wedding/ceremonytype/orthodox',
+    text: 'Traditional church wedding planning in Greece, with respectful coordination, historic venues, and seamless organization from start to finish.' },
+  { key: 'proposal', title: 'Wedding Proposal', tab: 'Wedding Proposal', img: 'ceremonytype/wedding-type-proposal', href: '/en/wedding/ceremonytype/proposal',
+    text: 'Romantic wedding proposal planning in Greece, from breathtaking locations to flawless execution, creating unforgettable engagement moments.' },
+];
+// the 6 most recent weddings that have a full gallery
+const featured = couples.filter((c) => c.photos.length >= 6).slice(0, 6);
+const s = seo['/en'];
+---
+<Base title={s.title} description={s.description} image="homepage/destination-wedding-greek-islands-hero" overlayHeader preload="homepage/destination-wedding-greek-islands-hero">
+  <!-- Above the fold: photo, H1 with the keyword, slogan and the main action -->
+  <section class="hero">
+    <div class="hero__media">
+      <Img name="homepage/destination-wedding-greek-islands-hero" alt="Bride and groom on a whitewashed terrace above the Santorini caldera" sizes="100vw" priority />
+    </div>
+    <div class="hero__content">
+      <img class="hero__logo" src="/img/logos/wlogo.svg" alt="" width="64" height="42" />
+      <h1 class="display">Your Wedding Planner in Greece</h1>
+      <p class="hero__slogan">You pop the question; we do the rest!</p>
+      <div class="hero__actions">
+        <a class="btn btn--light" href={cta.href}>{cta.label}</a>
+        <a class="btn btn--outline" style="color:#fff;border-color:rgba(255,255,255,.8)" href="/en/wedding/destinations">Explore Destinations</a>
+      </div>
+    </div>
+    <a class="hero__scroll" href="#story" aria-label="Scroll to the next section"><Icon name="chevron-down" /></a>
+  </section>
+
+  <!-- The W photo: smaller, with gentle parallax; on phones the text sits under it -->
+  <section class="section" id="story">
+    <div class="container story">
+      <div data-reveal>
+        <h2 class="h2">We believe that every love story is unique</h2>
+        <p class="slogan">…and deserves to be celebrated beautifully.</p>
+        <p class="lead">Every couple has a unique story to tell, and every wedding should reflect it. For almost 20 years, we have been providing professional wedding planning across Greece, helping couples create elegant destination weddings in some of the country's most beautiful locations.</p>
+        <a class="link-arrow" href="/en/wedding">Wedding in Greece <Icon name="arrow" class="arrow" /></a>
+      </div>
+      <div class="story__w">
+        <div data-parallax="0.08">
+          <Img name="homepage/greek-island-church-sunset-wedding-venue" alt="Church bells at sunset on a Greek island, framed by the W of our logo" sizes="(max-width: 860px) 92vw, 600px" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <SectionHead title="Wedding in Greece" subtitle="Four beautiful options to celebrate your love" />
+      <div class="types" data-tabs data-active-class="is-active" data-reveal>
+        <div class="types__nav" role="tablist" aria-label="Wedding ceremony types">
+          {types.map((t, i) => (
+            <button class="types__tab" type="button" role="tab" data-tab={t.key} aria-selected={String(i === 0)} tabindex={i === 0 ? 0 : -1}>
+              {t.tab}<Icon name="arrow" />
+            </button>
+          ))}
+        </div>
+        <div class="types__stage">
+          {types.map((t, i) => (
+            <article class:list={['types__panel', { 'is-active': i === 0 }]} data-tab-panel={t.key} role="tabpanel">
+              <Img name={t.img} alt="" sizes="(max-width: 860px) 100vw, 980px" />
+              <div class="types__overlay">
+                <h3>{t.title}</h3>
+                <div class="divider" style="margin-left:0;color:#fff;max-width:180px"><img src="/img/logos/wlogo.svg" alt="" width="22" height="14" style="filter:brightness(0) invert(1)" /></div>
+                <p>{t.text}</p>
+                <a class="link-arrow link-arrow--light" href={t.href}>Explore <Icon name="arrow" class="arrow" /></a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead title="Wedding Destinations" subtitle={'Explore Greece’s most enchanting places to say “I do”'} />
+      <div data-reveal="fade"><GreeceMap /></div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <SectionHead title="Tailored Services" subtitle="Thoughtfully curated experiences, designed around you." />
+      <ServicesGrid />
+      <p class="center" style="margin-top:36px"><a class="btn btn--outline" href="/en/wedding/servicepackages">All services <Icon name="arrow" class="arrow" /></a></p>
+    </div>
+  </section>
+
+  <Testimonials />
+
+  <section class="section">
+    <div class="container">
+      <SectionHead title="Our Portfolio" subtitle="Love stories, beautifully brought to life by our team" />
+      <div class="portfolio-grid">
+        {featured.map((c) => <div data-reveal><WeddingCard couple={c} /></div>)}
+      </div>
+      <p class="center" style="margin-top:44px"><a class="btn" href="/en/wedding/portfolio">Explore Portfolio <Icon name="arrow" class="arrow" /></a></p>
+    </div>
+  </section>
+
+  <div class="section--paper"><Designer /></div>
+</Base>

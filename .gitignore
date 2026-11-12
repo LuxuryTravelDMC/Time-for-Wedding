@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+artifact-preview/
+artifact-files.json
+.DS_Store
+.wrangler/
+# Original photos in full size. Only the light versions in public/img/ go to GitHub.
+photos/

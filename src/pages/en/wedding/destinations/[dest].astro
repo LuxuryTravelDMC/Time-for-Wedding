@@ -1,0 +1,77 @@
+---
+// One destination: Wedding in Crete, Wedding in Rhodes…
+import Base from '../../../../layouts/Base.astro';
+import Img from '../../../../components/Img.astro';
+import Icon from '../../../../components/Icon.astro';
+import SectionHead from '../../../../components/SectionHead.astro';
+import VenuesByDestination from '../../../../components/VenuesByDestination.astro';
+import WeddingCard from '../../../../components/WeddingCard.astro';
+import Designer from '../../../../components/Designer.astro';
+import CtaBand from '../../../../components/CtaBand.astro';
+import { destinations, venuesFor, couples, CEREMONY_NAMES } from '../../../../lib/content';
+
+export function getStaticPaths() {
+  return destinations.map((d) => ({ params: { dest: d.slug }, props: { d } }));
+}
+const { d } = Astro.props;
+const venues = venuesFor(d.slug);
+const weddings = couples.filter((c) => c.destSlug === d.slug).slice(0, 6);
+const title = d.title || `Wedding in ${d.name} | Wedding by Luxury Travel`;
+---
+<Base title={title} description={d.description || d.short} image={d.hero || d.image}>
+  <section class="media-hero"><Img name={d.hero || d.image} alt={`Wedding destination: ${d.name}, Greece`} sizes="100vw" priority /></section>
+  <section class="title-band">
+    <p class="kicker">Wedding in</p>
+    <h1 class="h1">{d.name}</h1>
+  </section>
+
+  {(d.intro || d.short) && (
+    <section class="section section--tight">
+      <div class="container container--narrow prose center lead" data-reveal set:html={d.intro || `<p>${d.short}</p>`} />
+    </section>
+  )}
+
+  {venues.length > 0 && (
+    <section class="section section--paper" id="venues">
+      <div class="container">
+        <SectionHead title={`Wedding Venues in ${d.name}`} subtitle={`Choose a setting that reflects your unique love story in ${d.name}`} />
+        <VenuesByDestination only={d.slug} />
+      </div>
+    </section>
+  )}
+
+  {d.pins.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <SectionHead title={`Your Wedding in ${d.name}`} subtitle="Explore every way to make it yours" />
+        <div class="dest-map">
+          {d.map && <div class="dest-map__img" data-reveal><img src={`/img/${d.map}`} alt={`Map of ${d.name}`} width="800" height="572" loading="lazy" /></div>}
+          <div class="dest-map__list">
+            {d.pins.map((p) => (
+              <div class="dest-map__item" data-reveal>
+                <h3>{p.title || `${CEREMONY_NAMES[p.ceremony]} in ${d.name}`}</h3>
+                <p>{p.text}</p>
+                <a class="link-arrow" href={`/en/wedding/destinations/${d.slug}/${p.ceremony}`}>Explore <Icon name="arrow" class="arrow" /></a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {weddings.length > 0 && (
+    <section class="section section--paper">
+      <div class="container">
+        <SectionHead title={`Weddings in ${d.name}`} subtitle="Love stories, beautifully brought to life by our team" />
+        <div class="portfolio-grid">{weddings.map((c) => <div data-reveal><WeddingCard couple={c} /></div>)}</div>
+        <p class="center" style="margin-top:40px"><a class="btn btn--outline" href={`/en/wedding/portfolio?destination=${d.slug}`}>All weddings in {d.name} <Icon name="arrow" class="arrow" /></a></p>
+      </div>
+    </section>
+  )}
+
+  {venues.length === 0 && d.pins.length === 0 && (
+    <section class="section"><div class="container"><CtaBand title={`Dreaming of a wedding in ${d.name}?`} /></div></section>
+  )}
+  <Designer />
+</Base>

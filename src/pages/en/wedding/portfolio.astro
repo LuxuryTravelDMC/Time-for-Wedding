@@ -1,0 +1,104 @@
+---
+// Portfolio.
+// Changes from the review: the hero shows less sky; the filter is "smart"
+// (an option that would give no results is greyed out); "See more" disappears
+// once every wedding is on the page.
+import Base from '../../../layouts/Base.astro';
+import Img from '../../../components/Img.astro';
+import WeddingCard from '../../../components/WeddingCard.astro';
+import SectionHead from '../../../components/SectionHead.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import page from '../../../data/portfolio_page.json';
+import { couples, CEREMONIES, CEREMONY_SHORT, DEST_NAMES, DESTINATIONS, seo } from '../../../lib/content';
+const s = seo['/en/wedding/portfolio'];
+const types = CEREMONIES.filter((c) => couples.some((x) => x.ceremony === c));
+const dests = DESTINATIONS.filter((d) => couples.some((x) => x.destSlug === d));
+const PAGE = 12;
+---
+<Base title={s.title} description={s.description} image={page.hero}>
+  <section class="portfolio-hero">
+    <div class="portfolio-hero__media"><Img name={page.hero} alt="Bride and groom walking up stone steps at a wedding in Santorini" sizes="(max-width: 860px) 100vw, 55vw" priority /></div>
+    <div class="portfolio-hero__text">
+      <p class="kicker">Real weddings</p>
+      <h1 class="h1">Portfolio</h1>
+      <p class="lead" style="margin:0">{page.intro}</p>
+    </div>
+  </section>
+
+  <section class="section" data-portfolio data-page={PAGE}>
+    <div class="container">
+      <SectionHead title="Our Portfolio" subtitle="Love stories, beautifully brought to life by our team" />
+      <form class="filters" onsubmit="return false" aria-label="Filter weddings">
+        <label class="select"><span class="sr-only">Wedding type</span>
+          <select name="type" data-filter="ceremony">
+            <option value="">All wedding types</option>
+            {types.map((t) => <option value={t}>{CEREMONY_SHORT[t]}</option>)}
+          </select>
+        </label>
+        <label class="select"><span class="sr-only">Destination</span>
+          <select name="destination" data-filter="destination">
+            <option value="">All destinations</option>
+            {dests.map((d) => <option value={d}>{DEST_NAMES[d]}</option>)}
+          </select>
+        </label>
+        <button class="btn btn--outline" type="button" data-clear hidden>Clear filters</button>
+        <p class="filters__count" aria-live="polite" data-count></p>
+      </form>
+      <div class="portfolio-grid">
+        {couples.map((c, i) => <div data-item data-ceremony={c.ceremony} data-destination={c.destSlug} hidden={i >= PAGE}><WeddingCard couple={c} /></div>)}
+      </div>
+      <p class="load-more"><button class="btn" type="button" data-more>See more</button></p>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container container--narrow center"><p class="lead" style="margin:0">{page.closing}</p></div>
+  </section>
+  <section class="section"><div class="container"><CtaBand /></div></section>
+</Base>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-portfolio]');
+  if (root) {
+    const step = Number(root.dataset.page || 12);
+    const items = [...root.querySelectorAll<HTMLElement>('[data-item]')];
+    const selects = [...root.querySelectorAll<HTMLSelectElement>('[data-filter]')];
+    const more = root.querySelector<HTMLButtonElement>('[data-more]')!;
+    const clear = root.querySelector<HTMLButtonElement>('[data-clear]')!;
+    const count = root.querySelector<HTMLElement>('[data-count]')!;
+    let shown = step;
+    const params = new URLSearchParams(location.search);
+    const val = (k: string) => selects.find((s) => s.dataset.filter === k)!.value;
+    const sel = (k: string) => selects.find((s) => s.dataset.filter === k)!;
+    if (params.get('type')) sel('ceremony').value = params.get('type')!;
+    if (params.get('destination')) sel('destination').value = params.get('destination')!;
+    const matches = (el: HTMLElement, f: Record<string, string>) => Object.entries(f).every(([k, v]) => !v || el.dataset[k] === v);
+    function render() {
+      const f = { ceremony: val('ceremony'), destination: val('destination') };
+      const hits = items.filter((el) => matches(el, f));
+      items.forEach((el) => { el.hidden = true; });
+      hits.slice(0, shown).forEach((el) => { el.hidden = false; });
+      more.hidden = hits.length <= shown;            // disappears when everything is shown
+      clear.hidden = !f.ceremony && !f.destination;
+      count.textContent = `${hits.length} ${hits.length === 1 ? 'wedding' : 'weddings'}`;
+      // smart filter: grey out options that would give no weddings with the other filter
+      for (const s of selects) {
+        const other = { ...f, [s.dataset.filter!]: '' };
+        for (const o of s.options) {
+          if (!o.value) continue;
+          const n = items.filter((el) => matches(el, { ...other, [s.dataset.filter!]: o.value })).length;
+          o.disabled = n === 0;
+          o.textContent = `${o.textContent!.replace(/ \(\d+\)$/, '')} (${n})`;
+        }
+      }
+      const q = new URLSearchParams();
+      if (f.ceremony) q.set('type', f.ceremony);
+      if (f.destination) q.set('destination', f.destination);
+      history.replaceState(null, '', q.toString() ? `?${q}` : location.pathname);
+    }
+    selects.forEach((s) => s.addEventListener('change', () => { shown = step; render(); }));
+    more.addEventListener('click', () => { shown += step; render(); });
+    clear.addEventListener('click', () => { selects.forEach((s) => (s.value = '')); shown = step; render(); });
+    render();
+  }
+</script>

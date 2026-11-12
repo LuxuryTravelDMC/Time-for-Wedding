@@ -1,0 +1,10 @@
+---
+import { cta } from '../data/site';
+interface Props { title?: string; text?: string }
+const { title = 'Ready to plan your wedding in Greece?', text = 'Tell us how you imagine the day. We will advise you on the destination, the venue and every detail, and take care of the rest.' } = Astro.props;
+---
+<div class="cta-band" data-reveal>
+  <h2 class="h2">{title}</h2>
+  <p>{text}</p>
+  <a class="btn" href={cta.href}>{cta.label}</a>
+</div>

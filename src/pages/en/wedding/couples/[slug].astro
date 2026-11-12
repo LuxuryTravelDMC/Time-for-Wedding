@@ -1,0 +1,62 @@
+---
+// One couple's gallery.
+// Changes from the review: instead of one wide slide that cut off heads, three
+// photos side by side at the top; the gallery keeps every photo whole (no
+// cropping) and opens large in a viewer. Small light photos load first, so the
+// page no longer gets stuck.
+import Base from '../../../../layouts/Base.astro';
+import Img from '../../../../components/Img.astro';
+import Icon from '../../../../components/Icon.astro';
+import TrioHero from '../../../../components/TrioHero.astro';
+import WeddingCard from '../../../../components/WeddingCard.astro';
+import SectionHead from '../../../../components/SectionHead.astro';
+import Lightbox from '../../../../components/Lightbox.astro';
+import images from '../../../../data/images.json';
+import { couples, CEREMONY_NAMES, DEST_NAMES } from '../../../../lib/content';
+
+export function getStaticPaths() {
+  return couples.map((c) => ({ params: { slug: c.slug }, props: { c } }));
+}
+const { c } = Astro.props;
+const big = (n: string) => { const w = (images as any)[n].widths; return `/img/${n}-${w[w.length - 1]}.webp`; };
+// choose portrait photos first for the top row: they keep faces in frame
+const meta = images as Record<string, { w: number; h: number }>;
+const portraits = c.photos.filter((p) => meta[p].h > meta[p].w);
+const top = [...portraits, ...c.photos.filter((p) => !portraits.includes(p))].slice(0, 3);
+const dest = DEST_NAMES[c.destSlug] ?? c.destination;
+const related = couples.filter((x) => x.slug !== c.slug && (x.destSlug === c.destSlug || x.ceremony === c.ceremony)).slice(0, 3);
+const cta = `/en/contact?ceremony=${c.ceremony}&destination=${c.destSlug}#request`;
+---
+<Base title={c.title || `${c.name} | Wedding by Luxury Travel`} description={c.description || c.story} image={c.photos[0]}>
+  <TrioHero photos={top} alt={c.name} />
+  <section class="title-band">
+    <h1 class="h1">{c.name}</h1>
+    <p class="couple-meta"><span>{CEREMONY_NAMES[c.ceremony]}</span><span>{dest}</span>{c.when && <span>{c.when}</span>}</p>
+    {c.story && <><hr class="thin-rule" /><p class="lead">{c.story}</p></>}
+    <p style="margin-top:20px"><a class="btn" href={cta}>Plan a Similar Wedding</a></p>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <SectionHead title="Gallery" subtitle={c.subtitle ? c.subtitle.charAt(0).toUpperCase() + c.subtitle.slice(1) : undefined} />
+      <div class="masonry" data-gallery>
+        {c.photos.map((ph, i) => (
+          <button type="button" data-full={big(ph)} aria-label={`Open photo ${i + 1} of ${c.photos.length}`}>
+            <Img name={ph} alt={`${c.name}, photo ${i + 1}`} sizes="(max-width: 700px) 92vw, 400px" />
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="section section--paper">
+      <div class="container">
+        <SectionHead title="More Love Stories" />
+        <div class="portfolio-grid">{related.map((r) => <WeddingCard couple={r} />)}</div>
+        <p class="center" style="margin-top:36px"><a class="btn btn--outline" href="/en/wedding/portfolio">Back to the portfolio <Icon name="arrow" class="arrow" /></a></p>
+      </div>
+    </section>
+  )}
+  <Lightbox />
+</Base>

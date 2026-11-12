@@ -1,0 +1,81 @@
+---
+// One service.
+// Changes from the review: the title sits under the photo (no more covered faces,
+// and its background always fits the text); a thin divider; the two options are
+// shown side by side instead of in tabs with vertical text.
+import Base from '../../../../layouts/Base.astro';
+import Img from '../../../../components/Img.astro';
+import Icon from '../../../../components/Icon.astro';
+import SectionHead from '../../../../components/SectionHead.astro';
+import CtaBand from '../../../../components/CtaBand.astro';
+import { services, destinations, DEST_NAMES } from '../../../../lib/content';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { service: s.slug }, props: { s } }));
+}
+const { s } = Astro.props;
+const destPages = new Set(destinations.map((d) => d.slug));
+const dests = s.destinations.filter((d) => destPages.has(d)); // drop links to pages that do not exist (zakynthos)
+const others = services.filter((x) => x.slug !== s.slug).slice(0, 3);
+const hero = s.hero || s.card_image;
+---
+<Base title={s.title} description={s.description || s.card_text} image={hero}>
+  <section class="media-hero"><Img name={hero} alt={s.hero_alt || s.h1} sizes="100vw" priority style="object-position:50% 40%" /></section>
+  <section class="title-band">
+    <h1 class="h1">{s.h1}</h1>
+    <hr class="thin-rule" />
+    {s.intro_title && <p class="slogan" style="margin:0 auto;max-width:760px">{s.intro_title}</p>}
+  </section>
+
+  <section class="section section--tight">
+    <div class="container container--narrow prose lead" data-reveal set:html={s.intro} />
+  </section>
+
+  {s.variations && (
+    <section class="section section--paper">
+      <div class="container">
+        <SectionHead title={s.variations.heading} />
+        <div class="options">
+          {s.variations.tabs.map((t) => (
+            <article class="option" data-reveal>
+              {t.image && <Img name={t.image} alt="" sizes="(max-width: 760px) 92vw, 600px" />}
+              <div class="option__body">
+                <h3>{t.label}</h3>
+                <p style="margin:0">{t.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {dests.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <SectionHead title={s.dest_title || s.h1} subtitle={s.dest_subtitle || undefined} />
+        <nav class="dest-links" aria-label="Destinations">
+          {dests.map((d) => <a class="pill" href={`/en/wedding/destinations/${d}`}>{DEST_NAMES[d]}</a>)}
+        </nav>
+      </div>
+    </section>
+  )}
+
+  <section class="section section--rose">
+    <div class="container">
+      <SectionHead title="More for Your Wedding" subtitle="Discover our other services" />
+      <div class="venues">
+        {others.map((o) => (
+          <a class="photo-card" href={`/en/wedding/servicepackages/${o.slug}`} style="height:280px">
+            <Img name={o.card_image} alt="" sizes="(max-width: 600px) 92vw, 400px" />
+            <span class="photo-card__body">
+              <span class="photo-card__title">{o.card_title}</span>
+              <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section"><div class="container"><CtaBand /></div></section>
+</Base>

@@ -1,0 +1,15 @@
+---
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import { venueTypes } from '../lib/content';
+interface Props { venue: any }
+const { venue: v } = Astro.props;
+---
+<a class="venue-card" href={`/en/wedding/places/${v.slug}`}>
+  <div class="venue-card__media"><Img name={v.photos[0]} alt={v.name} sizes="(max-width: 600px) 92vw, (max-width: 960px) 46vw, 400px" /></div>
+  <div class="venue-card__body">
+    <h3 class="venue-card__name">{v.name}</h3>
+    <p class="venue-card__types">{venueTypes(v).join(' · ')}</p>
+    <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
+  </div>
+</a>

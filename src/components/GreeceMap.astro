@@ -1,0 +1,41 @@
+---
+// Map of Greece with smaller, lighter pins. The card opens beside the pin and
+// always stays inside the map; on phones it opens under the map.
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import images from '../data/images.json';
+import { destinations } from '../lib/content';
+const pins = [
+  { slug: 'mykonos', top: 56, left: 66 }, { slug: 'santorini', top: 70, left: 65 }, { slug: 'crete', top: 88, left: 63 },
+  { slug: 'corfu', top: 26, left: 4 }, { slug: 'rhodes', top: 76, left: 94 }, { slug: 'athens', top: 49, left: 45 },
+  { slug: 'skopelos', top: 33, left: 47 }, { slug: 'halkidiki', top: 20, left: 50 },
+];
+const meta = images as Record<string, { widths: number[] }>;
+const data = Object.fromEntries(pins.map((p) => {
+  const d = destinations.find((x) => x.slug === p.slug)!;
+  const w = meta[d.image].widths;
+  return [p.slug, {
+    name: d.name, text: d.short.length > 170 ? d.short.slice(0, d.short.lastIndexOf(' ', 165)) + '…' : d.short,
+    href: `/en/wedding/destinations/${p.slug}`, image: `/img/${d.image}-${w.find((x) => x >= 480) ?? w[0]}.webp`,
+    srcset: w.filter((x) => x <= 960).map((x) => `/img/${d.image}-${x}.webp ${x}w`).join(', '),
+  }];
+}));
+---
+<div class="map" data-map>
+  <img class="map__img" src="/img/homepage/greece-map-home.svg" alt="Map of Greece with our wedding destinations" width="647" height="666" loading="lazy" />
+  {pins.map((p) => (
+    <button class="map__pin" type="button" style={`top:${p.top}%;left:${p.left}%`} data-pin={p.slug} aria-expanded="false" aria-label={`${data[p.slug].name}: show details`}>
+      <Icon name="map-pin" /><span>{data[p.slug].name}</span>
+    </button>
+  ))}
+  <aside class="map__card" data-map-card aria-live="polite">
+    <img src="" alt="" width="300" height="150" sizes="300px" />
+    <button class="map__close" type="button" data-map-close aria-label="Close"><Icon name="close" /></button>
+    <div class="map__card-body">
+      <h3></h3>
+      <p></p>
+      <a class="link-arrow" href="#">Explore <Icon name="arrow" class="arrow" /></a>
+    </div>
+  </aside>
+  <script type="application/json" data-map-data set:html={JSON.stringify(data)} />
+</div>

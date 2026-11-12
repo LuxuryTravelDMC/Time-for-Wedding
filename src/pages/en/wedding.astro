@@ -1,0 +1,124 @@
+---
+// Wedding in Greece.
+// Changes from the review: a new H1 section above the fold; "The Art of Wedding
+// Planning" becomes an H2; the ceremony slider keeps a fixed text height so
+// nothing jumps; on phones the text no longer covers the couple's faces;
+// the copies of homepage sections are replaced by new, more useful content.
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import Icon from '../../components/Icon.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import RequestCta from '../../components/RequestCta.astro';
+import shapes from '../../data/ceremony_shapes.json';
+import { destinations, seo } from '../../lib/content';
+import { cta } from '../../data/site';
+const s = seo['/en/wedding'];
+const shapeImg: Record<string, string> = {
+  civil: 'wedding/shapes-civil-wedding.svg', symbolic: 'wedding/shapes-symbolic-wedding.svg',
+  church: 'wedding/shapes-church-wedding.svg', proposal: 'wedding/shapes-wedding-proposal.svg',
+};
+// The proposal used to link to the request form; it has its own page.
+const shapeHref = (sh: { shape: string; href: string }) => (sh.shape === 'proposal' ? '/en/wedding/ceremonytype/proposal' : sh.href);
+const list = destinations.filter((d) => d.short);
+const tips = [
+  { n: '01', title: 'Start with what you love', text: 'Is it the caldera, the whitewashed villages or the beaches? Knowing what drew you to a place shows which destinations can give you the same feeling.' },
+  { n: '02', title: 'Think about your guests', text: 'Some islands need an extra flight or a ferry, the mainland is easier to reach. The right balance between atmosphere and access is often the first decision.' },
+  { n: '03', title: 'Destination and venue together', text: 'A beautiful place is not enough on its own: the venue decides the atmosphere, the ceremony type that is possible and the guest experience.' },
+  { n: '04', title: 'Season matters', text: 'Peak season brings long sunny days but higher demand. In some regions September already marks the end of the tourist season.' },
+];
+---
+<Base title={s.title} description={s.description} image="wedding/wedding-in-greece">
+  <!-- New: H1 with a short text above the fold -->
+  <section class="page-intro">
+    <div class="container container--narrow">
+      <p class="kicker">Destination weddings, almost 20 years</p>
+      <h1 class="h1">Wedding in Greece</h1>
+      <p class="lead">From intimate ceremonies for two to large celebrations with family and friends, we plan civil, symbolic and church weddings, and unforgettable proposals, in Greece's most beautiful destinations. One team takes care of the documents, the venue, the guests and every detail of the day.</p>
+      <a class="btn" href={cta.href}>{cta.label}</a>
+    </div>
+  </section>
+
+  <!-- Ceremony types. All texts share one fixed-height area (as tall as the longest
+       text), so the button below never moves and the page does not jump. -->
+  <section class="section section--paper shapes" data-slider aria-label="Wedding ceremonies">
+    <div class="shapes__film" data-slide-linked aria-hidden="true">
+      {shapes.map((sh, i) => <img class:list={[{ 'is-active': i === 0 }]} data-index={i} src={`/img/${shapeImg[sh.shape]}`} alt="" width="3264" height="556" loading="lazy" />)}
+    </div>
+    <div class="container">
+      <div class="pills" role="tablist" aria-label="Ceremony type" data-slide-linked>
+        {shapes.map((sh, i) => (
+          <button class="pill" type="button" role="tab" data-goto={i} data-index={i} aria-selected={String(i === 0)}>{sh.title.replace(' in Greece', '').replace('Wedding Proposal', 'Proposal').replace(' Wedding', '')}</button>
+        ))}
+      </div>
+      <div class="shapes__stack" data-slide-linked>
+        {shapes.map((sh, i) => (
+          <div class:list={['shapes__item', { 'is-active': i === 0 }]} data-index={i}>
+            <h2 class="h2">{sh.title}</h2>
+            <p>{sh.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="shapes__cta">
+        {shapes.map((sh, i) => (
+          <a class:list={['btn', { 'is-active': i === 0 }]} data-slide href={shapeHref(sh)}>Explore {sh.title.replace(' in Greece', '')} <Icon name="arrow" class="arrow" /></a>
+        ))}
+      </div>
+      <div class="shapes__nav">
+        <button class="slider-arrow" type="button" data-prev aria-label="Previous ceremony"><Icon name="arrow-left" /></button>
+        <button class="slider-arrow" type="button" data-next aria-label="Next ceremony"><Icon name="arrow" /></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Art of Wedding Planning: now an H2. The text sits on its own card under
+       the photo, so on phones it never covers the couple's faces. -->
+  <section class="banner">
+    <div class="banner__media"><Img name="wedding/wedding-in-greece" alt="A couple sitting above a blue-domed church in Santorini" sizes="100vw" style="object-position: 50% 35%" /></div>
+    <div class="container">
+      <div class="banner__card" data-reveal>
+        <h2 class="h2">The Art of Wedding Planning</h2>
+        <p>Greece is one of the world's most popular destinations for couples dreaming of an unforgettable wedding abroad. From the rose-sand shores of Prasonisi Beach in Crete and the iconic blue-domed churches of Santorini to elegant rooftop venues overlooking the Acropolis in Athens, the country offers extraordinary settings for every type of wedding ceremony. With almost 20 years of experience, dedicated in-house teams and extensive destination knowledge, we transform your vision into a seamless and beautifully executed wedding in Greece.</p>
+        <p style="margin:0">From intimate ceremonies for two to large wedding parties with family and friends, we create bespoke destination weddings across Greece's most iconic wedding destinations, including Santorini, Crete, Mykonos and Athens. Thanks to our insider destination knowledge, experienced wedding specialists and carefully selected local suppliers, couples benefit from exceptional wedding opportunities, competitive pricing for wedding services and personalized solutions that are often unavailable through standard wedding providers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- New: destinations at a glance (instead of a second copy of the homepage map) -->
+  <section class="section">
+    <div class="container">
+      <SectionHead title="Where to Say “I Do”" subtitle="Our wedding destinations at a glance" />
+      <div class="dest-list">
+        {list.map((d) => (
+          <a class="dest-list__item" href={`/en/wedding/destinations/${d.slug}`} data-reveal>
+            <Img name={d.image} alt="" sizes="104px" />
+            <span>
+              <h3>{d.name}</h3>
+              <p>{d.short}</p>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- New: practical advice, linking to the full article on the blog -->
+  <section class="section section--rose">
+    <div class="container">
+      <SectionHead title="Before You Choose" subtitle="Four things that shape the right wedding destination" />
+      <div class="cards">
+        {tips.map((t) => (
+          <div class="info-card" data-reveal>
+            <p class="info-card__num">{t.n}</p>
+            <h3>{t.title}</h3>
+            <p>{t.text}</p>
+          </div>
+        ))}
+      </div>
+      <p class="center" style="margin-top:40px">
+        <a class="btn btn--outline" href="/en/blog/how-to-choose-the-right-wedding-destination-in-greece">Read the full guide <Icon name="arrow" class="arrow" /></a>
+      </p>
+    </div>
+  </section>
+
+  <RequestCta />
+</Base>

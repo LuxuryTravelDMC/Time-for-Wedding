@@ -1,0 +1,33 @@
+---
+// A responsive photo. `name` is a photo from src/data/images.json
+// (made by `npm run images`); the browser picks the right width.
+import images from '../data/images.json';
+
+interface Props {
+  name: string;
+  alt: string;
+  sizes?: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  priority?: boolean;
+  style?: string;
+}
+const { name, alt, sizes = '100vw', class: cls, loading, priority = false, style } = Astro.props;
+const meta = (images as Record<string, { w: number; h: number; widths: number[] }>)[name];
+if (!meta) throw new Error(`Photo not found: ${name}. Run "npm run images".`);
+const srcset = meta.widths.map((w) => `/img/${name}-${w}.webp ${w}w`).join(', ');
+const fallback = meta.widths.find((w) => w >= 960) ?? meta.widths[meta.widths.length - 1];
+---
+<img
+  src={`/img/${name}-${fallback}.webp`}
+  srcset={srcset}
+  sizes={sizes}
+  width={meta.w}
+  height={meta.h}
+  alt={alt}
+  class={cls}
+  style={style}
+  loading={priority ? 'eager' : (loading ?? 'lazy')}
+  decoding={priority ? 'sync' : 'async'}
+  fetchpriority={priority ? 'high' : undefined}
+/>

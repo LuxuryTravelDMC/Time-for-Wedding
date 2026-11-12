@@ -1,0 +1,76 @@
+---
+// About us.
+// Changes from the review: on phones the text always sits on a solid background;
+// Irina's button says "Contact Irina" (it opens the form); the story at the end
+// is a normal section, not an accordion, and the "Draft:" labels are gone.
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { seo } from '../../lib/content';
+const s = seo['/en/about'];
+const path = [
+  { title: 'Our Path to ‘I Do’', img: 'about/about-path-santorini', alt: 'Blue-domed churches and whitewashed houses overlooking the caldera in Oia, Santorini.',
+    text: 'With more than 20 years of experience in hospitality, our multi-award-winning team has built its philosophy around the true essence of Greek hospitality and an understanding of what makes this country truly exceptional.' },
+  { title: 'A Wedding Story', img: 'about/about-path-wedding', alt: 'Bride and groom walking through a shower of rose petals on their wedding day.',
+    text: "Over the years, weddings have become a natural part of our journey. We create thoughtfully planned celebrations that reflect each couple's story, vision and sense of place." },
+  { title: 'Beyond the Wedding', img: 'about/about-path-boat', alt: 'Couple at the helm of a boat, looking out across the open sea.',
+    text: 'Our services extend far beyond the wedding day itself. From accommodation and private transfers to curated experiences, we bring every element together seamlessly.' },
+];
+---
+<Base title={s.title} description={s.description} image="about/about-hero">
+  <section>
+    <div class="container about-hero">
+      <div data-reveal>
+        <p class="kicker">About Us</p>
+        <h1 class="h1">Beyond Wedding Planning</h1>
+        <p class="lead">A team rooted in Greek hospitality, planning weddings across Greece with care, local knowledge and a network of trusted partners.</p>
+      </div>
+      <div class="about-hero__media"><div class="frame"><Img name="about/about-hero" alt="Bride in a lace wedding dress on a rocky Greek shoreline, her veil caught in the wind." sizes="(max-width: 860px) 92vw, 560px" priority style="object-position:40% 50%" /></div></div>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-label="Our story">
+    <div class="container path">
+      {path.map((p) => (
+        <article class="path__row" data-reveal>
+          <h2>{p.title}</h2>
+          <Img name={p.img} alt={p.alt} sizes="280px" />
+          <p>{p.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="planner" data-reveal>
+        <Img name="about/about-planner" alt="Irina Rud, Lead Wedding Planner at Wedding by Luxury Travel." sizes="(max-width: 860px) 100vw, 640px" />
+        <div class="planner__text">
+          <h2 class="h2" style="margin-bottom:0">Irina Rud</h2>
+          <p class="designer__role">Lead Wedding Planner</p>
+          <p>I'm Irina Rud, a wedding planner who approaches every couple with care, warmth, and a genuine desire to create not just a celebration, but a true story - through details, atmosphere, and emotion.</p>
+          <a class="btn" href="/en/contact#request">Contact Irina <Icon name="arrow" class="arrow" /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Was a closed accordion with "Draft:" before each paragraph -->
+  <section class="section section--rose">
+    <div class="container split" style="align-items:start">
+      <div class="prose" data-reveal>
+        <h2 class="h2">How Wedding by Luxury Travel Began</h2>
+        <p class="intro">Our story started long before the first ceremony we planned. Years in hospitality across Greece taught us what travellers remember most — warmth, place, and the feeling of being looked after without fuss.</p>
+        <p>Weddings became a natural extension of that work. Couples arrived seeking not only a beautiful setting, but a team who understood the islands, the seasons, and the quiet details that turn a celebration into something personal.</p>
+        <p>Today we still plan every wedding the same way: listen first, then shape the day around the couple's vision, the destination's character, and the guests who will share it with them.</p>
+      </div>
+      <div class="prose" data-reveal>
+        <h2 class="h2">What Guides Us</h2>
+        <p class="intro">We believe a wedding in Greece should feel considered from the first conversation to the last toast — clear advice, trusted local partners, and space for the moments that matter most.</p>
+        <p>Whether you already know your island or are still exploring options, we're here to help you find the path that feels right, then bring every part of the day together with care.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section"><div class="container"><CtaBand /></div></section>
+</Base>

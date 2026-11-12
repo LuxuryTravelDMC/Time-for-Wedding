@@ -1,0 +1,346 @@
+[
+ {
+  "slug": "accommodation",
+  "card_title": "Deluxe Accommodation",
+  "card_text": "Curated hotels & villas for your wedding",
+  "card_image": "services/services-hub-page-photos-and-graphics-deluxe-accomodation",
+  "h1": "Deluxe Accommodation",
+  "hero": "services/services-hub-page-photos-and-graphics-deluxe-accomodation",
+  "hero_alt": "Deluxe Accommodation",
+  "intro_title": "Rest in places as memorable as the day itself.",
+  "intro": "<p>From cliffside suites with caldera views to discreet private villas tucked among olive groves, we hand-select accommodation that matches the mood of your wedding — intimate, celebratory, or somewhere in between.</p> <p>Whether you need a romantic hideaway for two, connecting rooms for family, or an entire estate for your guests, our team coordinates availability, upgrades and logistics so everyone arrives settled and ready to celebrate.</p>",
+  "variations": {
+   "heading": "Accommodation",
+   "background": "services/deluxe-accomodation-2",
+   "tabs": [
+    {
+     "key": "couple",
+     "label": "FOR THE COUPLE",
+     "text": "Boutique hotels and exclusive suites chosen for atmosphere, privacy and that first morning as newlyweds — with preferred rooms held whenever possible.",
+     "image": "services/deluxe-accomodation-2"
+    },
+    {
+     "key": "guests",
+     "label": "FOR YOUR GUESTS",
+     "text": "Coordinated room blocks and nearby villas so friends and family stay close to the ceremony without the stress of booking separately.",
+     "image": "services/services-hub-page-photos-and-graphics-deluxe-accomodation"
+    }
+   ]
+  },
+  "dest_title": "Deluxe Wedding Accommodation",
+  "dest_subtitle": "Available at the following wedding destinations across Greece",
+  "destinations": [
+   "halkidiki",
+   "athens",
+   "corfu",
+   "crete",
+   "zakynthos",
+   "mykonos",
+   "santorini",
+   "rhodes"
+  ],
+  "title": "Deluxe Accommodation | Wedding by Luxury Travel",
+  "description": "Curated hotels and private villas for couples and wedding guests across Greece’s top wedding destinations."
+ },
+ {
+  "slug": "transport",
+  "card_title": "Premium Transport",
+  "card_text": "The perfect wedding deserves the perfect arrival! From luxury wedding cars to minibuses, we ensure your transportation reflects the elegance of your ceremony.",
+  "card_image": "services/services-hub-page-photos-and-graphics-premium-transportation-2",
+  "h1": "Premium Transportation",
+  "hero": "services/specific-service-hero-premium-transportation-2",
+  "hero_alt": "Premium Transportation",
+  "intro_title": "The perfect wedding deserves the perfect arrival!",
+  "intro": "<p>For wedding transportation in Greece, our planning team works closely with <a href=\"https://www.luxurytraveldmc.com/\">Luxury Travel DMC</a>, our parent company and the owner of one of the country's most advanced private transport fleets. Modern premium sedans, spacious minivans and comfortable minibuses are operated by professional, experienced drivers and selected to suit both the couple and their guests.</p> <p>For something more distinctive, our long-standing network of trusted partners gives us access to an even wider choice of vehicles. From luxury wedding cars to specific models requested by the couple, we can source and decorate the right vehicle to complement the style of the wedding and ensure every journey feels as carefully planned as the ceremony itself.</p>",
+  "variations": {
+   "heading": "Transportation",
+   "background": "services/specific-service-variations-ath-8913-copy",
+   "tabs": [
+    {
+     "key": "you",
+     "label": "FOR YOU",
+     "text": "Make an entrance worth remembering. From sleek sedans and elegant limousines to glamorous convertibles, we'll match you with a wedding car that feels every bit as special as the day itself.",
+     "image": "services/specific-service-variations-ath-8863-copy"
+    },
+    {
+     "key": "guests",
+     "label": "FOR YOUR GUESTS",
+     "text": "Keep everyone together and in good spirits. Premium minivans, comfortable minibuses and spacious coaches make travelling between hotels, ceremony and reception easy for family, friends and even the biggest guest lists.",
+     "image": "services/specific-service-variations-ath-8830-copy"
+    }
+   ]
+  },
+  "dest_title": "Premium Wedding Transportation",
+  "dest_subtitle": "Available at the following wedding destinations across Greece",
+  "destinations": [
+   "halkidiki",
+   "athens",
+   "corfu",
+   "crete",
+   "zakynthos",
+   "mykonos",
+   "santorini",
+   "rhodes"
+  ],
+  "title": "Premium Transportation | Wedding by Luxury Travel",
+  "description": "Premium wedding cars, minivans and minibuses with professional drivers — curated transport for your wedding in Greece."
+ },
+ {
+  "slug": "photography",
+  "card_title": "Wedding Photography & Videography",
+  "card_text": "Professional photography for every moment of your wedding",
+  "card_image": "services/services-hub-page-photos-and-graphics-beleon-tours-my-greek-wedding-ba",
+  "h1": "Wedding Photography & Videography",
+  "hero": "services/services-hub-page-photos-and-graphics-beleon-tours-my-greek-wedding-ba",
+  "hero_alt": "Wedding Photography & Videography",
+  "intro_title": "Every glance, vow and celebration — beautifully kept.",
+  "intro": "<p>Our photographers and videographers know the light, the venues and the pace of a Greek wedding day. From quiet getting-ready moments to the last dance, they work discreetly so you can stay present while every detail is captured.</p> <p>Choose stills, cinematic film, or a combined package — edited galleries and highlight films are delivered with the same care we bring to planning the day itself.</p>",
+  "variations": {
+   "heading": "Coverage",
+   "background": "services/services-hub-page-photos-and-graphics-beleon-tours-my-greek-wedding-ba",
+   "tabs": [
+    {
+     "key": "photo",
+     "label": "PHOTOGRAPHY",
+     "text": "Full-day or ceremony-focused coverage with natural, editorial storytelling — portraits, guest candids and the landscapes that made Greece your destination.",
+     "image": "services/services-hub-page-photos-and-graphics-beleon-tours-my-greek-wedding-ba"
+    },
+    {
+     "key": "video",
+     "label": "VIDEOGRAPHY",
+     "text": "Cinematic films that keep the voices, music and atmosphere of your wedding — from a short highlight reel to a full-length keepsake.",
+     "image": "services/dsc-3712"
+    }
+   ]
+  },
+  "dest_title": "Wedding Photography & Videography",
+  "dest_subtitle": "Available at the following wedding destinations across Greece",
+  "destinations": [
+   "halkidiki",
+   "athens",
+   "corfu",
+   "crete",
+   "zakynthos",
+   "mykonos",
+   "santorini",
+   "rhodes"
+  ],
+  "title": "Wedding Photography & Videography | Wedding by Luxury Travel",
+  "description": "Professional wedding photography and videography with trusted creatives across Greece’s wedding destinations."
+ },
+ {
+  "slug": "makeup",
+  "card_title": "Wedding Makeup",
+  "card_text": "Bridal beauty styling for your ceremony and celebration",
+  "card_image": "services/services-hub-page-photos-and-graphics-dsc03508-18",
+  "h1": "Wedding Makeup",
+  "hero": "services/services-hub-page-photos-and-graphics-dsc03508-18",
+  "hero_alt": "Wedding Makeup",
+  "intro_title": "Bridal beauty that feels like you — elevated for the day.",
+  "intro": "<p>On your wedding day, makeup should feel effortless in person and flawless in photographs. We work with trusted bridal artists who understand Mediterranean light, outdoor ceremonies and long celebrations.</p> <p>From classic elegance to soft modern glam, your look is planned around your dress, venue and schedule — with trials available where timing allows.</p>",
+  "variations": {
+   "heading": "Beauty",
+   "background": "services/services-hub-page-photos-and-graphics-dsc03508-18",
+   "tabs": [
+    {
+     "key": "bride",
+     "label": "FOR THE BRIDE",
+     "text": "Bridal makeup and optional hair styling timed to your ceremony, with touch-ups planned around portraits and the reception.",
+     "image": "services/services-hub-page-photos-and-graphics-dsc03508-18"
+    },
+    {
+     "key": "party",
+     "label": "BRIDAL PARTY",
+     "text": "Coordinated looks for mothers, bridesmaids and attendants so everyone feels polished without competing with the bride.",
+     "image": "services/dsc03108"
+    }
+   ]
+  },
+  "dest_title": "Wedding Makeup",
+  "dest_subtitle": "Available at the following wedding destinations across Greece",
+  "destinations": [
+   "halkidiki",
+   "athens",
+   "corfu",
+   "crete",
+   "zakynthos",
+   "mykonos",
+   "santorini",
+   "rhodes"
+  ],
+  "title": "Wedding Makeup | Wedding by Luxury Travel",
+  "description": "Professional bridal makeup and styling for your ceremony and celebration in Greece."
+ },
+ {
+  "slug": "tours",
+  "card_title": "Tailor-made Tours",
+  "card_text": "Tours for couples across Greece",
+  "card_image": "services/services-hub-page-photos-and-graphics-tailor-made-tours",
+  "h1": "Tailor-made Tours",
+  "hero": "services/services-hub-page-photos-and-graphics-tailor-made-tours",
+  "hero_alt": "Tailor-made Tours",
+  "intro_title": "Explore Greece together — before, after, or around the wedding.",
+  "intro": "<p>A wedding in Greece is also an invitation to discover the country. We design private tours around your interests — history, food, beaches, wineries or quiet villages — timed so they complement your wedding schedule rather than compete with it.</p> <p>Tours can be arranged for the couple alone, for close family, or as a shared experience for guests who want more than a hotel stay.</p>",
+  "variations": {
+   "heading": "Experiences",
+   "background": "services/tailor-made-tour",
+   "tabs": [
+    {
+     "key": "couple",
+     "label": "FOR COUPLES",
+     "text": "Intimate half-day or full-day itineraries — sunset drives, local tastings, hidden beaches — planned around your ceremony and photos.",
+     "image": "services/tailor-made-tour"
+    },
+    {
+     "key": "group",
+     "label": "FOR GUESTS",
+     "text": "Easy group outings that keep everyone entertained while you enjoy quiet time, with professional guides and comfortable transfers included.",
+     "image": "services/services-hub-page-photos-and-graphics-tailor-made-tours"
+    }
+   ]
+  },
+  "dest_title": "Tailor-made Tours",
+  "dest_subtitle": "Available at the following wedding destinations across Greece",
+  "destinations": [
+   "halkidiki",
+   "athens",
+   "corfu",
+   "crete",
+   "zakynthos",
+   "mykonos",
+   "santorini",
+   "rhodes"
+  ],
+  "title": "Tailor-made Tours | Wedding by Luxury Travel",
+  "description": "Private tailor-made tours for couples and wedding guests across Greece’s islands and mainland."
+ },
+ {
+  "slug": "concierge",
+  "card_title": "Concierge Service",
+  "card_text": "24/7 assistance with your wedding planning",
+  "card_image": "services/services-hub-page-photos-and-graphics-concirge-service-canaves-oia",
+  "h1": "Concierge Service",
+  "hero": "services/services-hub-page-photos-and-graphics-concirge-service-canaves-oia",
+  "hero_alt": "Concierge Service",
+  "intro_title": "A dedicated hand for every detail of your stay.",
+  "intro": "<p>From restaurant reservations and spa bookings to last-minute guest requests, our concierge team stays available so you never have to chase details yourself.</p> <p>Think of it as a local host for your wedding week — practical, discreet and ready to turn small wishes into arranged moments.</p>",
+  "variations": {
+   "heading": "Support",
+   "background": "services/concirge-service-canaves-oia",
+   "tabs": [
+    {
+     "key": "couple",
+     "label": "FOR THE COUPLE",
+     "text": "Personal assistance throughout your stay — dining, transfers, surprises and anything that makes the wedding week feel effortless.",
+     "image": "services/concirge-service-canaves-oia"
+    },
+    {
+     "key": "guests",
+     "label": "FOR YOUR GUESTS",
+     "text": "A clear point of contact for arrivals, questions and local tips, so guests feel looked after from the moment they land.",
+     "image": "services/services-hub-page-photos-and-graphics-concirge-service-canaves-oia"
+    }
+   ]
+  },
+  "dest_title": "Concierge Service",
+  "dest_subtitle": "Available at the following wedding destinations across Greece",
+  "destinations": [
+   "halkidiki",
+   "athens",
+   "corfu",
+   "crete",
+   "zakynthos",
+   "mykonos",
+   "santorini",
+   "rhodes"
+  ],
+  "title": "Concierge Service | Wedding by Luxury Travel",
+  "description": "24/7 wedding concierge assistance for couples and guests planning a wedding in Greece."
+ },
+ {
+  "slug": "yacht",
+  "card_title": "Yacht Rentals",
+  "card_text": "Private yacht experiences for two",
+  "card_image": "services/services-hub-page-photos-and-graphics-yacht-rentals-2",
+  "h1": "Yacht Rentals",
+  "hero": "services/services-hub-page-photos-and-graphics-yacht-rentals-2",
+  "hero_alt": "Yacht Rentals",
+  "intro_title": "Private sea time for two — or your closest circle.",
+  "intro": "<p>Arrive by sea, celebrate on deck, or steal a quiet afternoon between ceremony and reception. We arrange private yachts suited to your group size, destination and the feeling you want — romantic, celebratory or purely escapist.</p> <p>Crew, catering and photography timing can all be coordinated with your wedding day so the experience feels like a natural chapter of the celebration.</p>",
+  "variations": {
+   "heading": "Charters",
+   "background": "services/yacht-rental-2",
+   "tabs": [
+    {
+     "key": "couple",
+     "label": "FOR TWO",
+     "text": "Intimate sailing or motor-yacht experiences — champagne on deck, swimming stops and golden-hour views reserved just for you.",
+     "image": "services/yacht-rental-2"
+    },
+    {
+     "key": "celebration",
+     "label": "CELEBRATION AT SEA",
+     "text": "Larger charters for family and friends — welcome drinks, coastal cruising and a memorable setting for pre- or post-wedding gatherings.",
+     "image": "services/yacht-rentals"
+    }
+   ]
+  },
+  "dest_title": "Yacht Rentals",
+  "dest_subtitle": "Available at the following wedding destinations across Greece",
+  "destinations": [
+   "halkidiki",
+   "athens",
+   "corfu",
+   "crete",
+   "zakynthos",
+   "mykonos",
+   "santorini",
+   "rhodes"
+  ],
+  "title": "Yacht Rentals | Wedding by Luxury Travel",
+  "description": "Private yacht rentals for wedding couples and guests across Greece’s coastal destinations."
+ },
+ {
+  "slug": "banquets",
+  "card_title": "Wedding Banquets & Catering",
+  "card_text": "Celebratory dining crafted for your wedding day",
+  "card_image": "services/services-hub-page-photos-and-graphics-beleon-tours-my-greek-wedding-we",
+  "h1": "Wedding Banquets & Catering",
+  "hero": "services/services-hub-page-photos-and-graphics-beleon-tours-my-greek-wedding-we",
+  "hero_alt": "Wedding Banquets & Catering",
+  "intro_title": "From intimate dinners to joyful receptions.",
+  "intro": "<p>Food and hospitality shape how guests remember the day. We arrange menus that honour local flavours while matching your style — from elegant plated dinners to generous Greek feasts under the stars.</p> <p>Venue catering, private chefs and reception styling are coordinated with your ceremony timeline so service feels seamless from first toast to last dance.</p>",
+  "variations": {
+   "heading": "Dining",
+   "background": "services/services-hub-page-photos-and-graphics-beleon-tours-my-greek-wedding-we",
+   "tabs": [
+    {
+     "key": "intimate",
+     "label": "INTIMATE",
+     "text": "Private dinners for two or a close circle — carefully plated menus, soft lighting and a setting that feels personal rather than formal.",
+     "image": "services/services-hub-page-photos-and-graphics-beleon-tours-my-greek-wedding-we"
+    },
+    {
+     "key": "reception",
+     "label": "RECEPTION",
+     "text": "Full wedding banquets with seating plans, service teams and menus scaled for larger guest lists without losing warmth.",
+     "image": "services/dsc-3712"
+    }
+   ]
+  },
+  "dest_title": "Wedding Banquets & Catering",
+  "dest_subtitle": "Available at the following wedding destinations across Greece",
+  "destinations": [
+   "halkidiki",
+   "athens",
+   "corfu",
+   "crete",
+   "zakynthos",
+   "mykonos",
+   "santorini",
+   "rhodes"
+  ],
+  "title": "Wedding Banquets & Catering | Wedding by Luxury Travel",
+  "description": "Wedding banquets and catering — intimate dinners to large receptions — across Greece’s wedding destinations."
+ }
+]

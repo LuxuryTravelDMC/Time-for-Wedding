@@ -1,0 +1,15 @@
+---
+// "For one day, we make the world revolve around you" with the cut-out couple.
+// Kept from the old Wedding in Greece page, which the review liked.
+import Img from './Img.astro';
+import { cta } from '../data/site';
+---
+<section class="request-cta">
+  <div class="request-cta__bg"><Img name="wedding/wedding-request-background" alt="" sizes="100vw" /></div>
+  <Img name="wedding/wedding-in-greece-front" alt="" class="request-cta__front" sizes="100vw" />
+  <div class="request-cta__head" data-reveal>
+    <p class="request-cta__lead">For one day</p>
+    <h2 class="request-cta__title">We Make the World<br />Revolve Around You!</h2>
+    <a class="btn request-cta__btn" href={cta.href}>{cta.label}</a>
+  </div>
+</section>

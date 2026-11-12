@@ -1,0 +1,18 @@
+// Settings for Cloudflare: where the finished site is and how to serve it.
+// The name must match the project name in the Cloudflare dashboard.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "time-for-wedding",
+  "compatibility_date": "2026-11-12",
+  "assets": {
+    // Astro writes the finished site here (npm run build)
+    "directory": "./dist",
+    // Addresses without a slash at the end, like the old site: /en/about
+    "html_handling": "drop-trailing-slash",
+    // Show our own "Page not found" page for addresses that do not exist
+    "not_found_handling": "404-page"
+  },
+  // Branches other than main get a preview link through `wrangler preview`,
+  // which needs this block. Empty means previews use the settings above.
+  "previews": {}
+}
