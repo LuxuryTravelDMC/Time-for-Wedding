@@ -1,8 +1,9 @@
 ---
 // Portfolio.
-// Changes from the review: the hero shows less sky; the filter is "smart"
-// (an option that would give no results is greyed out); "See more" disappears
-// once every wedding is on the page.
+// The hero keeps the original idea: the word PORTFOLIO written upwards on a
+// beige strip beside the photo. Changes from the review: the photo is wider and
+// shows less sky; the filter is "smart" (an option that would give no results is
+// greyed out); once every wedding is on the page "See more" becomes "See less".
 import Base from '../../../layouts/Base.astro';
 import Img from '../../../components/Img.astro';
 import WeddingCard from '../../../components/WeddingCard.astro';
@@ -17,11 +18,10 @@ const PAGE = 12;
 ---
 <Base title={s.title} description={s.description} image={page.hero}>
   <section class="portfolio-hero">
-    <div class="portfolio-hero__media"><Img name={page.hero} alt="Bride and groom walking up stone steps at a wedding in Santorini" sizes="(max-width: 860px) 100vw, 55vw" priority /></div>
-    <div class="portfolio-hero__text">
-      <p class="kicker">Real weddings</p>
-      <h1 class="h1">Portfolio</h1>
-      <p class="lead" style="margin:0">{page.intro}</p>
+    <div class="portfolio-hero__stage">
+      <h1 class="portfolio-hero__title">Portfolio</h1>
+      <div class="portfolio-hero__media"><Img name={page.hero} alt="Bride and groom walking up stone steps at a wedding in Santorini" sizes="(max-width: 768px) 100vw, 86vw" priority /></div>
+      <p class="portfolio-hero__intro">{page.intro}</p>
     </div>
   </section>
 
@@ -78,7 +78,11 @@ const PAGE = 12;
       const hits = items.filter((el) => matches(el, f));
       items.forEach((el) => { el.hidden = true; });
       hits.slice(0, shown).forEach((el) => { el.hidden = false; });
-      more.hidden = hits.length <= shown;            // disappears when everything is shown
+      // "See more" while there are more; "See less" once all are shown; hidden if one page is enough
+      const canMore = hits.length > shown;
+      more.hidden = !canMore && hits.length <= step;
+      more.dataset.mode = canMore ? 'more' : 'less';
+      more.textContent = canMore ? 'See more' : 'See less';
       clear.hidden = !f.ceremony && !f.destination;
       count.textContent = `${hits.length} ${hits.length === 1 ? 'wedding' : 'weddings'}`;
       // smart filter: grey out options that would give no weddings with the other filter
@@ -97,7 +101,12 @@ const PAGE = 12;
       history.replaceState(null, '', q.toString() ? `?${q}` : location.pathname);
     }
     selects.forEach((s) => s.addEventListener('change', () => { shown = step; render(); }));
-    more.addEventListener('click', () => { shown += step; render(); });
+    more.addEventListener('click', () => {
+      if (more.dataset.mode === 'less') {
+        shown = step; render();
+        root.querySelector('.portfolio-grid')!.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      } else { shown += step; render(); }
+    });
     clear.addEventListener('click', () => { selects.forEach((s) => (s.value = '')); shown = step; render(); });
     render();
   }

@@ -1,8 +1,10 @@
 ---
 // Services hub.
-// Changes from the review: cards are plain links (no squeezed text flashing before
-// the page opens), equal heights on phones, and the "Additional touches" text is a
-// normal section instead of a hidden accordion.
+// Desktop keeps the original mosaic (two tall cards at the top, a tall Tours card
+// in the middle, Banquets across the full width). Changes from the review: on
+// phones every card is the same height and shows its text at once (no squeezed
+// text flashing on tap), and the "Additional touches" text is a normal section
+// instead of a hidden accordion.
 import Base from '../../../layouts/Base.astro';
 import Img from '../../../components/Img.astro';
 import Icon from '../../../components/Icon.astro';
@@ -10,32 +12,106 @@ import CtaBand from '../../../components/CtaBand.astro';
 import page from '../../../data/services_page.json';
 import { services, seo } from '../../../lib/content';
 const s = seo['/en/wedding/servicepackages'];
+const by = Object.fromEntries(services.map((sv) => [sv.slug, sv]));
+const short = (t: string) => (t.length > 110 ? t.slice(0, t.indexOf('!') + 1 || 110) : t);
+// sizes for each slot of the mosaic (phones: one column)
+const slots: Record<string, { cls: string; sizes: string; pos?: string }> = {
+  accommodation: { cls: 'svc--deluxe', sizes: '(max-width: 768px) 96vw, 50vw' },
+  transport: { cls: 'svc--transport', sizes: '(max-width: 768px) 96vw, 50vw' },
+  photography: { cls: '', sizes: '(max-width: 768px) 96vw, 66vw' },
+  makeup: { cls: '', sizes: '(max-width: 768px) 96vw, 66vw' },
+  tours: { cls: 'svc--tall', sizes: '(max-width: 768px) 96vw, 34vw', pos: '24% 50%' }, // the couple is on the left of the photo
+  concierge: { cls: '', sizes: '(max-width: 768px) 96vw, 50vw' },
+  yacht: { cls: '', sizes: '(max-width: 768px) 96vw, 50vw' },
+  banquets: { cls: 'svc--banquet', sizes: '(max-width: 768px) 96vw, 100vw' },
+};
 ---
 <Base title={s.title} description={s.description} image={services[0].card_image}>
-  <section class="page-intro">
-    <div class="container container--narrow">
-      <h1 class="h1">Tailored Services</h1>
-      <p class="lead">Everything around the ceremony, organised by the same team: where you stay, how you travel, who captures the day and how you celebrate it.</p>
-    </div>
-  </section>
-  <section class="section" style="padding-top:0">
-    <div class="container">
-      <div class="services-hub">
-        {services.map((sv, i) => (
-          <a class="photo-card" href={`/en/wedding/servicepackages/${sv.slug}`} data-reveal style={`transition-delay:${(i % 4) * 60}ms`}>
-            <Img name={sv.card_image} alt="" sizes="(max-width: 560px) 92vw, (max-width: 960px) 46vw, 600px" />
-            <span class="photo-card__body">
-              <span class="photo-card__title">{sv.card_title}</span>
-              <span class="photo-card__text" style="display:block">{sv.card_text.length > 110 ? sv.card_text.slice(0, sv.card_text.indexOf('!') + 1 || 110) : sv.card_text}</span>
-              <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
+  <section class="svc-mosaic" aria-labelledby="svc-title">
+    <div class="svc-mosaic__top">
+      <div class="svc-note svc-note--intro">
+        <h1 id="svc-title" class="svc-note__title">Tailored Services</h1>
+      </div>
+      {['accommodation', 'transport'].map((k) => {
+        const sv = by[k];
+        return (
+          <a class={`svc ${slots[k].cls}`} href={`/en/wedding/servicepackages/${sv.slug}`}>
+            <Img name={sv.card_image} alt="" sizes={slots[k].sizes} />
+            <span class="svc__body">
+              <span class="svc__title">{sv.card_title}</span>
+              <span class="svc__text">{short(sv.card_text)}</span>
+              <span class="svc__more">Explore <Icon name="arrow" class="arrow" /></span>
             </span>
           </a>
-        ))}
-      </div>
+        );
+      })}
+      <a class="svc-note svc-note--aside" href="#additional-touches">
+        <img src="/img/logos/wlogo.svg" alt="" width="30" height="20" />
+        <span class="svc-note__title">{page.aside_title}</span>
+        <img src="/img/logos/wlogo.svg" alt="" width="30" height="20" />
+      </a>
     </div>
+    <div class="svc-mosaic__mid">
+      <div class="svc-mosaic__stack">
+        {['photography', 'makeup'].map((k) => {
+          const sv = by[k];
+          return (
+            <a class="svc" href={`/en/wedding/servicepackages/${sv.slug}`}>
+              <Img name={sv.card_image} alt="" sizes={slots[k].sizes} />
+              <span class="svc__body">
+                <span class="svc__title">{sv.card_title}</span>
+                <span class="svc__text">{short(sv.card_text)}</span>
+                <span class="svc__more">Explore <Icon name="arrow" class="arrow" /></span>
+              </span>
+            </a>
+          );
+        })}
+      </div>
+      {['tours'].map((k) => {
+        const sv = by[k];
+        return (
+          <a class={`svc ${slots[k].cls}`} href={`/en/wedding/servicepackages/${sv.slug}`}>
+            <Img name={sv.card_image} alt="" sizes={slots[k].sizes} style={`object-position:${slots[k].pos}`} />
+            <span class="svc__body">
+              <span class="svc__title">{sv.card_title}</span>
+              <span class="svc__text">{short(sv.card_text)}</span>
+              <span class="svc__more">Explore <Icon name="arrow" class="arrow" /></span>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+    <div class="svc-mosaic__bottom">
+      {['concierge', 'yacht'].map((k) => {
+        const sv = by[k];
+        return (
+          <a class="svc" href={`/en/wedding/servicepackages/${sv.slug}`}>
+            <Img name={sv.card_image} alt="" sizes={slots[k].sizes} />
+            <span class="svc__body">
+              <span class="svc__title">{sv.card_title}</span>
+              <span class="svc__text">{short(sv.card_text)}</span>
+              <span class="svc__more">Explore <Icon name="arrow" class="arrow" /></span>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+    {['banquets'].map((k) => {
+      const sv = by[k];
+      return (
+        <a class={`svc ${slots[k].cls}`} href={`/en/wedding/servicepackages/${sv.slug}`}>
+          <Img name={sv.card_image} alt="" sizes={slots[k].sizes} />
+          <span class="svc__body">
+            <span class="svc__title">{sv.card_title}</span>
+            <span class="svc__text">{short(sv.card_text)}</span>
+            <span class="svc__more">Explore <Icon name="arrow" class="arrow" /></span>
+          </span>
+        </a>
+      );
+    })}
   </section>
   <!-- Was a hidden accordion; now a normal section anyone can read -->
-  <section class="section section--paper">
+  <section class="section section--paper" id="additional-touches">
     <div class="container split" style="align-items:start">
       <div data-reveal>
         <p class="kicker">Additional touches</p>

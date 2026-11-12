@@ -1,8 +1,10 @@
 ---
 // One service.
 // Changes from the review: the title sits under the photo (no more covered faces,
-// and its background always fits the text); a thin divider; the two options are
-// shown side by side instead of in tabs with vertical text.
+// and its background always fits the text) and a thin divider.
+// The two options keep the original presentation: a text panel with tabs and two
+// slanted photo panels (click a tab or a photo to switch). On phones the photos
+// sit side by side under the text, with their labels written across.
 import Base from '../../../../layouts/Base.astro';
 import Img from '../../../../components/Img.astro';
 import Icon from '../../../../components/Icon.astro';
@@ -32,20 +34,28 @@ const hero = s.hero || s.card_image;
   </section>
 
   {s.variations && (
-    <section class="section section--paper">
-      <div class="container">
-        <SectionHead title={s.variations.heading} />
-        <div class="options">
-          {s.variations.tabs.map((t) => (
-            <article class="option" data-reveal>
-              {t.image && <Img name={t.image} alt="" sizes="(max-width: 760px) 92vw, 600px" />}
-              <div class="option__body">
-                <h3>{t.label}</h3>
-                <p style="margin:0">{t.text}</p>
-              </div>
-            </article>
-          ))}
+    <section class="svc-var" data-var aria-labelledby="var-title">
+      <div class="svc-var__stage">
+        <div class="svc-var__copy">
+          <Img name={s.variations.background || s.variations.tabs[0].image} alt="" class="svc-var__bg" sizes="(max-width: 768px) 100vw, 40vw" />
+          <div class="svc-var__inner">
+            <h2 id="var-title" class="svc-var__heading">{s.variations.heading}</h2>
+            <div class="svc-var__tabs" role="tablist" aria-label={`${s.variations.heading} options`}>
+              {s.variations.tabs.map((t, i) => (
+                <button class={`svc-var__tab${i === 0 ? ' is-active' : ''}`} type="button" role="tab" id={`var-tab-${t.key}`} aria-controls={`var-text-${t.key}`} aria-selected={String(i === 0)} tabindex={i === 0 ? 0 : -1} data-var-key={t.key}>{t.label}</button>
+              ))}
+            </div>
+            {s.variations.tabs.map((t, i) => (
+              <p class={`svc-var__text${i === 0 ? ' is-active' : ''}`} role="tabpanel" id={`var-text-${t.key}`} aria-labelledby={`var-tab-${t.key}`} aria-hidden={String(i !== 0)} data-var-text data-var-key={t.key}>{t.text}</p>
+            ))}
+          </div>
         </div>
+        {s.variations.tabs.map((t, i, all) => (
+          <button class={`svc-var__panel${i === 0 ? ' is-active' : ''}${i === all.length - 1 ? ' is-trailing' : ''}`} type="button" tabindex="-1" aria-hidden="true" data-var-panel data-var-key={t.key} data-pos={i + 1}>
+            <Img name={t.image || s.variations.background} alt="" sizes="(max-width: 768px) 50vw, 34vw" />
+            <span class="svc-var__spine">{t.label}</span>
+          </button>
+        ))}
       </div>
     </section>
   )}

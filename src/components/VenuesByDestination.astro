@@ -1,13 +1,14 @@
 ---
 // Wedding venues grouped by destination. Destinations without venues are not
-// shown, and when a destination has two venues both cards are the same size.
+// shown. One or two venues: same-size cards, centred. Three or more: a carousel
+// (arrows on desktop, swipe on phones).
 import VenueCard from './VenueCard.astro';
 import Icon from './Icon.astro';
 import { venuesFor, DEST_NAMES, DESTINATIONS } from '../lib/content';
 interface Props { only?: string; limit?: number }
-const { only, limit = 6 } = Astro.props;
+const { only, limit = 12 } = Astro.props;
 const groups = DESTINATIONS.filter((d) => !only || d === only)
-  .map((d) => ({ slug: d, name: DEST_NAMES[d], venues: venuesFor(d) }))
+  .map((d) => ({ slug: d, name: DEST_NAMES[d], venues: venuesFor(d).slice(0, limit) }))
   .filter((g) => g.venues.length > 0);
 const first = groups[0]?.slug;
 ---
@@ -22,9 +23,22 @@ const first = groups[0]?.slug;
     )}
     {groups.map((g) => (
       <div data-tab-panel={g.slug} role="tabpanel" hidden={g.slug !== first}>
-        <div class="venues" data-count={Math.min(g.venues.length, 3)}>
-          {g.venues.slice(0, limit).map((v) => <VenueCard venue={v} />)}
-        </div>
+        {g.venues.length > 2 ? (
+          <div class="carousel" data-carousel>
+            <div class="carousel__track" data-carousel-track tabindex="0" role="group" aria-label={`Wedding venues in ${g.name}`}>
+              {g.venues.map((v) => <VenueCard venue={v} />)}
+            </div>
+            <div class="carousel__controls">
+              <button class="carousel__btn carousel__btn--prev" type="button" data-carousel-prev aria-label="Previous venues"><Icon name="arrow" class="arrow" /></button>
+              <span class="carousel__count" data-carousel-count aria-hidden="true"></span>
+              <button class="carousel__btn carousel__btn--next" type="button" data-carousel-next aria-label="Next venues"><Icon name="arrow" class="arrow" /></button>
+            </div>
+          </div>
+        ) : (
+          <div class="venues" data-count={g.venues.length}>
+            {g.venues.map((v) => <VenueCard venue={v} />)}
+          </div>
+        )}
         <p class="center" style="margin-top: 36px">
           <a class="btn btn--outline" href={`/en/wedding/places/${g.slug}`}>All venues in {g.name} <Icon name="arrow" class="arrow" /></a>
         </p>

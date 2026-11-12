@@ -5,10 +5,11 @@ import Img from './Img.astro';
 import Icon from './Icon.astro';
 import images from '../data/images.json';
 import { destinations } from '../lib/content';
+// top/left = the point of the pin, in % of the map (measured on the original site)
 const pins = [
-  { slug: 'mykonos', top: 56, left: 66 }, { slug: 'santorini', top: 70, left: 65 }, { slug: 'crete', top: 88, left: 63 },
-  { slug: 'corfu', top: 26, left: 4 }, { slug: 'rhodes', top: 76, left: 94 }, { slug: 'athens', top: 49, left: 45 },
-  { slug: 'skopelos', top: 33, left: 47 }, { slug: 'halkidiki', top: 20, left: 50 },
+  { slug: 'mykonos', top: 62, left: 66.4 }, { slug: 'santorini', top: 76, left: 66.4 }, { slug: 'crete', top: 94, left: 64.4 },
+  { slug: 'corfu', top: 30, left: 2.4 }, { slug: 'rhodes', top: 81, left: 96.4, side: 'left' }, { slug: 'athens', top: 54, left: 45.4 },
+  { slug: 'skopelos', top: 38, left: 47.4 }, { slug: 'halkidiki', top: 25, left: 50.4 },
 ];
 const meta = images as Record<string, { widths: number[] }>;
 const data = Object.fromEntries(pins.map((p) => {
@@ -24,7 +25,7 @@ const data = Object.fromEntries(pins.map((p) => {
 <div class="map" data-map>
   <img class="map__img" src="/img/homepage/greece-map-home.svg" alt="Map of Greece with our wedding destinations" width="647" height="666" loading="lazy" />
   {pins.map((p) => (
-    <button class="map__pin" type="button" style={`top:${p.top}%;left:${p.left}%`} data-pin={p.slug} aria-expanded="false" aria-label={`${data[p.slug].name}: show details`}>
+    <button class="map__pin" type="button" style={`top:${p.top}%;left:${p.left}%`} data-pin={p.slug} data-side={p.side} aria-expanded="false" aria-label={`${data[p.slug].name}: show details`}>
       <Icon name="map-pin" /><span>{data[p.slug].name}</span>
     </button>
   ))}

@@ -115,6 +115,68 @@ document.querySelectorAll<HTMLElement>('[data-slider]').forEach((root) => {
   start();
 });
 
+// ---------- Venue carousel: arrows move one card, the counter shows what is in view ----------
+document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
+  const track = c.querySelector<HTMLElement>('[data-carousel-track]')!;
+  const prev = c.querySelector<HTMLButtonElement>('[data-carousel-prev]')!;
+  const next = c.querySelector<HTMLButtonElement>('[data-carousel-next]')!;
+  const count = c.querySelector<HTMLElement>('[data-carousel-count]');
+  const total = track.children.length;
+  const step = () => {
+    const card = track.firstElementChild as HTMLElement | null;
+    return card ? card.getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 0) : track.clientWidth;
+  };
+  const update = () => {
+    if (!track.clientWidth) return; // hidden tab
+    const max = track.scrollWidth - track.clientWidth;
+    c.toggleAttribute('data-static', max < 4);
+    prev.disabled = track.scrollLeft < 4;
+    next.disabled = track.scrollLeft > max - 4;
+    if (count) {
+      const s = step();
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      const firstIn = Math.min(total, Math.round(track.scrollLeft / s) + 1);
+      const lastIn = Math.min(total, firstIn + Math.max(1, Math.floor((track.clientWidth + gap + 2) / s)) - 1);
+      count.textContent = firstIn === lastIn ? `${firstIn} / ${total}` : `${firstIn}–${lastIn} / ${total}`;
+    }
+  };
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
+  let raf = 0;
+  track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
+  new ResizeObserver(update).observe(track); // also runs when a hidden tab is shown
+  update();
+});
+
+// ---------- Service options (slanted panels): a tab or a photo switches the text ----------
+document.querySelectorAll<HTMLElement>('[data-var]').forEach((root) => {
+  const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+  const texts = [...root.querySelectorAll<HTMLElement>('[data-var-text]')];
+  const panels = [...root.querySelectorAll<HTMLElement>('[data-var-panel]')];
+  const activate = (key: string, focus = false) => {
+    tabs.forEach((t) => {
+      const on = t.dataset.varKey === key;
+      t.classList.toggle('is-active', on); t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+      if (on && focus) t.focus();
+    });
+    texts.forEach((p) => { const on = p.dataset.varKey === key; p.classList.toggle('is-active', on); p.setAttribute('aria-hidden', String(!on)); });
+    // the chosen photo moves next to the text; the last one gets the straight right edge
+    let pos = 2;
+    panels.forEach((p) => { const on = p.dataset.varKey === key; p.classList.toggle('is-active', on); p.dataset.pos = on ? '1' : String(pos++); });
+    panels.forEach((p) => p.classList.toggle('is-trailing', p.dataset.pos === String(panels.length)));
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => activate(t.dataset.varKey!));
+    t.addEventListener('keydown', (e) => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      activate(tabs[(i + d + tabs.length) % tabs.length].dataset.varKey!, true);
+    });
+  });
+  panels.forEach((p) => p.addEventListener('click', () => activate(p.dataset.varKey!)));
+});
+
 // ---------- Map of Greece: the card opens next to the pin, always inside the map ----------
 document.querySelectorAll<HTMLElement>('[data-map]').forEach((map) => {
   const card = map.querySelector<HTMLElement>('[data-map-card]')!;
