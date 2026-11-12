@@ -30,12 +30,15 @@ const path = [
     </div>
   </section>
 
-  <section class="section section--paper" aria-label="Our story">
+  <!-- Two-tone band from the Figma design: the darker shape waves around the photos
+       (out to the right around the first and last, out to the left around the middle) -->
+  <section class="about-path" aria-label="Our story">
+    <img class="about-path__shape" src="/img/about/about-path-shape.svg" alt="" width="1012" height="1276" />
     <div class="container path">
       {path.map((p) => (
         <article class="path__row" data-reveal>
           <h2>{p.title}</h2>
-          <Img name={p.img} alt={p.alt} sizes="280px" />
+          <Img name={p.img} alt={p.alt} sizes="(max-width: 860px) 220px, 380px" />
           <p>{p.text}</p>
         </article>
       ))}
