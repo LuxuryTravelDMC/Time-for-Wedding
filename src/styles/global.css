@@ -221,18 +221,15 @@ body.menu-open { overflow: hidden; }
 @keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 
 /* ---------- Home: "every love story is unique" with the W photo ---------- */
-/* The W photo is 30% bigger than before (about 724px wide instead of 557px on a laptop):
-   a wider column, and on wide screens it reaches a little into the right margin. */
-.story {
-  --bleed: min(57px, max(0px, calc((100vw - var(--container)) / 2 + var(--gutter) - 24px)));
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: clamp(32px, 3.4vw, 48px); align-items: center;
-}
-.story__w { overflow: hidden; margin-right: calc(-1 * var(--bleed)); }
-.story__w img { width: 100%; max-height: 70vh; object-fit: contain; will-change: transform; }
+/* The W photo is cropped tight around the W, so the W itself can be big:
+   about 527px wide on a laptop (1.7 times the first version). */
+.story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 3.4vw, 48px); align-items: center; }
+.story__w { padding-block: 32px; } /* room for the parallax movement */
+.story__w img { display: block; width: min(100%, 527px); height: auto; margin-inline: auto; will-change: transform; }
 @media (max-width: 860px) {
   .story { grid-template-columns: 1fr; }
-  .story__w { order: -1; margin-right: 0; }
-  .story__w img { max-height: 42vh; }
+  .story__w { order: -1; padding-block: 8px 0; }
+  .story__w img { width: min(100%, 330px); }
 }
 
 /* ---------- Wedding types (tabs + photo panel) ---------- */
@@ -320,7 +317,7 @@ body.menu-open { overflow: hidden; }
 /* Services grid: one tall card + four. On phones every card has the same height. */
 /* Homepage services, as on the original: a tall card, then two rows split unevenly
    (top: narrow + wide, bottom: wide + narrow). Phones: equal heights. */
-.services-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 5fr); gap: 18px; }
+.services-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 4.9fr); gap: 18px; } /* Tours card 10% wider than on the original */
 .services-grid__rows { display: grid; grid-template-rows: 260px 260px; gap: 18px; }
 .services-grid__row { display: grid; gap: 18px; min-height: 0; }
 .services-grid__row--top { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
@@ -338,18 +335,27 @@ body.menu-open { overflow: hidden; }
 }
 
 /* ---------- Testimonials (they rotate on their own) ---------- */
-.testimonials { position: relative; overflow: hidden; color: var(--white); isolation: isolate; }
-.testimonials__slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 1s var(--ease), visibility 1s; display: grid; place-items: center; }
-.testimonials__slide.is-active { position: relative; opacity: 1; visibility: visible; }
-.testimonials__slide > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-.testimonials__slide::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(76, 57, 43, 0.48); }
-.testimonials__inner { text-align: center; padding: clamp(80px, 11vw, 140px) var(--gutter); max-width: 860px; min-height: 520px; display: flex; flex-direction: column; justify-content: center; }
+/* Testimonials: the photos change behind one fixed text block. All quotes share one
+   grid cell, so the section keeps the height of the longest quote: the title never
+   moves and the photos always have the same height. */
+.testimonials { position: relative; overflow: hidden; color: var(--white); isolation: isolate; display: grid; justify-items: center; }
+.testimonials__slide { position: absolute; inset: 0; z-index: -2; opacity: 0; visibility: hidden; transition: opacity 1s var(--ease), visibility 1s; }
+.testimonials__slide.is-active { opacity: 1; visibility: visible; }
+.testimonials__slide > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.testimonials__slide::after { content: ""; position: absolute; inset: 0; background: rgba(76, 57, 43, 0.48); }
+.testimonials__inner { text-align: center; padding: clamp(80px, 11vw, 140px) var(--gutter); max-width: 860px; min-height: 560px; display: flex; flex-direction: column; justify-content: center; }
+.testimonials__quotes { display: grid; }
+.testimonials__item { grid-area: 1 / 1; margin: 0; display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.8s var(--ease), visibility 0.8s; }
+.testimonials__item.is-active { opacity: 1; visibility: visible; }
+.testimonials__item blockquote { margin: 0; }
 .testimonials__quote { font-family: var(--font-display); font-style: italic; font-size: clamp(1.35rem, 2.4vw, 1.9rem); line-height: 1.5; color: var(--white); margin: 18px 0 8px; }
 .testimonials__icon { width: 46px; margin: 0 auto; filter: brightness(0) invert(1); opacity: 0.85; }
 .testimonials__name { font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin: 0; color: var(--white); }
 .testimonials__place { color: var(--rose); margin: 0; font-size: 0.9375rem; }
 .testimonials .divider { color: var(--white); }
 .testimonials .divider img { filter: brightness(0) invert(1); }
+@media (prefers-reduced-motion: reduce) { .testimonials__slide, .testimonials__item { transition: none; } }
+@media (max-width: 600px) { .testimonials__inner { padding-bottom: 116px; } } /* room for the arrows under the names */
 .slider-controls { position: absolute; left: 0; right: 0; bottom: 28px; display: flex; justify-content: center; align-items: center; gap: 18px; z-index: 2; }
 .slider-arrow { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.6); background: transparent; color: var(--white); display: grid; place-items: center; }
 .slider-arrow svg { width: 18px; height: 18px; }
