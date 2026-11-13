@@ -5,8 +5,17 @@ import Icon from './Icon.astro';
 import { nav, cta, site } from '../data/site';
 interface Props { overlay?: boolean }
 const { overlay = false } = Astro.props;
-const current = Astro.url.pathname.replace(/\/$/, '');
-const isCurrent = (href: string) => current === href || (href !== '/en/wedding' && current.startsWith(href + '/'));
+const current = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, ''); // build.format 'file' gives /page.html
+// sub-pages that live under another address but belong to a menu item
+const sections: Record<string, string[]> = {
+  '/en/wedding': ['/en/wedding/ceremonytype'],
+  '/en/wedding/destinations': ['/en/wedding/places'],
+  '/en/wedding/portfolio': ['/en/wedding/couples'],
+};
+const isCurrent = (href: string) =>
+  current === href ||
+  (href !== '/en/wedding' && current.startsWith(href + '/')) ||
+  (sections[href] ?? []).some((p) => current === p || current.startsWith(p + '/'));
 ---
 <header class:list={['site-header', { 'site-header--overlay': overlay }]} data-header>
   <div class="site-header__inner">
@@ -32,7 +41,7 @@ const isCurrent = (href: string) => current === href || (href !== '/en/wedding' 
     <button class="mobile-menu__close" type="button" data-menu-close><Icon name="close" /><span class="sr-only">Close menu</span></button>
   </div>
   <ul>
-    {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+    {nav.map((item) => <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>)}
   </ul>
   <a class="btn" href={cta.href}>{cta.label}</a>
 </div>

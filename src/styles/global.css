@@ -134,6 +134,7 @@ h1, h2, h3, h4 { margin: 0 0 0.5em; font-weight: 700; line-height: 1.15; color: 
 }
 .nav__link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transition: transform 0.3s var(--ease); }
 .nav__link:hover::after, .nav__link[aria-current="page"]::after { transform: scaleX(1); }
+.nav__link[aria-current="page"], .mobile-menu a[aria-current="page"] { font-weight: 600; } /* the section you are in */
 /* Long and low: a slim outline bar, not a block */
 .nav__cta { min-height: 0; height: 34px; padding: 0 36px; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.16em; line-height: 1; white-space: nowrap; }
 .menu-toggle { display: none; background: none; border: 0; padding: 10px; margin-right: -10px; color: var(--brown); }
@@ -220,12 +221,17 @@ body.menu-open { overflow: hidden; }
 @keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 
 /* ---------- Home: "every love story is unique" with the W photo ---------- */
-.story { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
-.story__w { overflow: hidden; }
-.story__w img { width: 100%; max-height: 56vh; object-fit: contain; will-change: transform; }
+/* The W photo is 30% bigger than before (about 724px wide instead of 557px on a laptop):
+   a wider column, and on wide screens it reaches a little into the right margin. */
+.story {
+  --bleed: min(57px, max(0px, calc((100vw - var(--container)) / 2 + var(--gutter) - 24px)));
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: clamp(32px, 3.4vw, 48px); align-items: center;
+}
+.story__w { overflow: hidden; margin-right: calc(-1 * var(--bleed)); }
+.story__w img { width: 100%; max-height: 70vh; object-fit: contain; will-change: transform; }
 @media (max-width: 860px) {
   .story { grid-template-columns: 1fr; }
-  .story__w { order: -1; }
+  .story__w { order: -1; margin-right: 0; }
   .story__w img { max-height: 42vh; }
 }
 
@@ -312,10 +318,24 @@ body.menu-open { overflow: hidden; }
 .photo-card .link-arrow { color: var(--rose); font-size: 0.8125rem; }
 
 /* Services grid: one tall card + four. On phones every card has the same height. */
-.services-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 260px 260px; gap: 18px; }
-.services-grid .photo-card:first-child { grid-row: span 2; }
-@media (max-width: 860px) { .services-grid { grid-template-columns: 1fr 1fr; grid-template-rows: none; grid-auto-rows: 240px; } .services-grid .photo-card:first-child { grid-row: auto; } }
-@media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; } }
+/* Homepage services, as on the original: a tall card, then two rows split unevenly
+   (top: narrow + wide, bottom: wide + narrow). Phones: equal heights. */
+.services-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 5fr); gap: 18px; }
+.services-grid__rows { display: grid; grid-template-rows: 260px 260px; gap: 18px; }
+.services-grid__row { display: grid; gap: 18px; min-height: 0; }
+.services-grid__row--top { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
+.services-grid__row--bottom { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.services-grid .photo-card--tall { min-height: 538px; }
+@media (max-width: 860px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .services-grid__rows { grid-template-rows: none; }
+  .services-grid__row--top, .services-grid__row--bottom { grid-template-columns: 1fr 1fr; grid-auto-rows: 240px; }
+  .services-grid .photo-card--tall { min-height: 0; height: 240px; }
+}
+@media (max-width: 560px) {
+  .services-grid__row--top, .services-grid__row--bottom { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+  .services-grid .photo-card--tall { height: 220px; }
+}
 
 /* ---------- Testimonials (they rotate on their own) ---------- */
 .testimonials { position: relative; overflow: hidden; color: var(--white); isolation: isolate; }

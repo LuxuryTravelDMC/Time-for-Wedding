@@ -1,24 +1,44 @@
 ---
-// Five service cards. On phones every card has exactly the same height.
+// Five service cards, laid out as on the original homepage: a tall card on the
+// left, then two rows split unevenly (top: narrow + wide, bottom: wide + narrow).
+// On phones every card has exactly the same height.
 import Img from './Img.astro';
 import Icon from './Icon.astro';
-const cards = [
-  { href: '/en/wedding/servicepackages/tours', title: 'Tailor-made Tours', text: 'Tours for couples across Greece', img: 'services/tailor-made-tour' },
-  { href: '/en/wedding/servicepackages/concierge', title: 'Concierge Service', text: '24/7 assistance with your wedding planning', img: 'services/concirge-service-canaves-oia' },
-  { href: '/en/wedding/servicepackages/transport', title: 'Premium Transport', text: 'Top-tier wedding cars for your ceremony', img: 'services/premium-transportation' },
-  { href: '/en/wedding/servicepackages/accommodation', title: 'Deluxe Accommodation', text: 'Curated hotels & villas for your wedding', img: 'services/deluxe-accomodation' },
-  { href: '/en/wedding/servicepackages/yacht', title: 'Yacht Rentals', text: 'Private yacht experiences for two', img: 'services/yacht-rental' },
+const tall = { href: '/en/wedding/servicepackages/tours', title: 'Tailor-made Tours', text: 'Tours for couples across Greece', img: 'services/tailor-made-tour' };
+const rows = [
+  [
+    { href: '/en/wedding/servicepackages/concierge', title: 'Concierge Service', text: '24/7 assistance with your wedding planning', img: 'services/concirge-service-canaves-oia', sizes: '(max-width: 560px) 92vw, (max-width: 860px) 46vw, 330px' },
+    { href: '/en/wedding/servicepackages/transport', title: 'Premium Transport', text: 'Top-tier wedding cars for your ceremony', img: 'services/premium-transportation', sizes: '(max-width: 560px) 92vw, (max-width: 860px) 46vw, 640px' },
+  ],
+  [
+    { href: '/en/wedding/servicepackages/accommodation', title: 'Deluxe Accommodation', text: 'Curated hotels & villas for your wedding', img: 'services/deluxe-accomodation', sizes: '(max-width: 560px) 92vw, (max-width: 860px) 46vw, 560px' },
+    { href: '/en/wedding/servicepackages/yacht', title: 'Yacht Rentals', text: 'Private yacht experiences for two', img: 'services/yacht-rental', sizes: '(max-width: 560px) 92vw, (max-width: 860px) 46vw, 400px' },
+  ],
 ];
 ---
 <div class="services-grid">
-  {cards.map((c, i) => (
-    <a class="photo-card" href={c.href} data-reveal style={`transition-delay:${i * 70}ms`}>
-      <Img name={c.img} alt="" sizes={i === 0 ? '(max-width: 860px) 92vw, 420px' : '(max-width: 560px) 92vw, (max-width: 860px) 46vw, 420px'} />
-      <span class="photo-card__body">
-        <span class="photo-card__title">{c.title}</span>
-        <span class="photo-card__text" style="display:block">{c.text}</span>
-        <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
-      </span>
-    </a>
-  ))}
+  <a class="photo-card photo-card--tall" href={tall.href} data-reveal>
+    <Img name={tall.img} alt="" sizes="(max-width: 860px) 92vw, 260px" />
+    <span class="photo-card__body">
+      <span class="photo-card__title">{tall.title}</span>
+      <span class="photo-card__text" style="display:block">{tall.text}</span>
+      <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
+    </span>
+  </a>
+  <div class="services-grid__rows">
+    {rows.map((row, r) => (
+      <div class={`services-grid__row services-grid__row--${r === 0 ? 'top' : 'bottom'}`}>
+        {row.map((c, i) => (
+          <a class="photo-card" href={c.href} data-reveal style={`transition-delay:${(r * 2 + i + 1) * 70}ms`}>
+            <Img name={c.img} alt="" sizes={c.sizes} />
+            <span class="photo-card__body">
+              <span class="photo-card__title">{c.title}</span>
+              <span class="photo-card__text" style="display:block">{c.text}</span>
+              <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
+            </span>
+          </a>
+        ))}
+      </div>
+    ))}
+  </div>
 </div>
