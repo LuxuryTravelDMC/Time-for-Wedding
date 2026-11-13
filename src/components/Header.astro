@@ -40,8 +40,10 @@ const isCurrent = (href: string) =>
     <a href="/en"><img src="/img/logos/wlogo.svg" alt={site.name} width="58" height="38" /></a>
     <button class="mobile-menu__close" type="button" data-menu-close><Icon name="close" /><span class="sr-only">Close menu</span></button>
   </div>
-  <ul>
-    {nav.map((item) => <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>)}
-  </ul>
-  <a class="btn" href={cta.href}>{cta.label}</a>
+  <div class="mobile-menu__body">
+    <ul>
+      {nav.map((item) => <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>)}
+    </ul>
+    <a class="btn" href={cta.href}>{cta.label}</a>
+  </div>
 </div>
