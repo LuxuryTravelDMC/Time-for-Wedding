@@ -145,12 +145,15 @@ h1, h2, h3, h4 { margin: 0 0 0.5em; font-weight: 700; line-height: 1.15; color: 
 }
 .mobile-menu {
   position: fixed; inset: 0; z-index: 150; background: var(--cream);
-  display: flex; flex-direction: column; padding: 24px var(--gutter) 40px; overflow-y: auto;
+  display: flex; flex-direction: column; padding: 0 var(--gutter) 40px; overflow-y: auto;
   opacity: 0; visibility: hidden; transition: opacity 0.3s var(--ease), visibility 0.3s;
 }
 .mobile-menu.is-open { opacity: 1; visibility: visible; }
-.mobile-menu__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
-.mobile-menu__top img { height: 34px; width: auto; }
+/* The top of the open menu copies the menu bar exactly (same height, same logo size),
+   so the W stays put and the X appears where the three lines were. */
+.mobile-menu__top { flex: none; display: flex; justify-content: space-between; align-items: center; height: var(--header-h); margin-bottom: 24px; }
+.mobile-menu__top a { display: flex; align-items: center; }
+.mobile-menu__top img { height: 38px; width: auto; }
 .mobile-menu__close { background: none; border: 0; padding: 10px; margin-right: -10px; color: var(--brown); }
 .mobile-menu__close svg { width: 28px; height: 28px; display: block; }
 .mobile-menu ul { list-style: none; margin: 0 0 32px; padding: 0; }
