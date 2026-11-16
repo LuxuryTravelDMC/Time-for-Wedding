@@ -6,15 +6,19 @@
 // right as on the original, the brown layer and the plain rose kicker of the new one;
 // the first article rises only a little into the photo, so the photo stays visible;
 // the round triangle pattern from the logo peeks in from the right edge.
+// Article list ("stories", owner's choice): each article is a wide photo with a cream
+// card resting on its edge, alternating sides; the first article is the same idea at a
+// larger scale (panoramic photo, card at the bottom right, "Featured").
 import Base from '../../layouts/Base.astro';
 import Img from '../../components/Img.astro';
-import ArticleCard from '../../components/ArticleCard.astro';
+import Icon from '../../components/Icon.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import page from '../../data/blog_page.json';
-import { blog, seo } from '../../lib/content';
+import { blog, seo, plain } from '../../lib/content';
 const s = seo['/en/blog'];
 const featured = blog.find((b) => (b as any).featured) ?? blog[0];
 const rest = blog.filter((b) => b !== featured);
+const excerpt = (a: any) => a.excerpt || plain(a.body);
 ---
 <Base title={s.title} description={s.description} image={page.hero}>
   <section class="blog-hero">
@@ -30,9 +34,27 @@ const rest = blog.filter((b) => b !== featured);
   <section class="section blog-list">
     <img class="blog-list__deco" src="/img/logos/wlt-logoframe-bronze.svg" alt="" width="640" height="640" loading="lazy" />
     <div class="container">
-      <div class="article-grid">
-        <ArticleCard a={featured} featured />
-        {rest.map((a) => <ArticleCard a={a} />)}
+      <a class="blog-feature" href={`/en/blog/${featured.slug}`} data-reveal>
+        <div class="blog-feature__media"><Img name={featured.card_image || featured.hero} alt={featured.card_alt || featured.hero_alt || ''} sizes="(max-width: 860px) 100vw, 1160px" /></div>
+        <div class="blog-feature__card">
+          <span class="story__label">Featured</span>
+          <h2 class="blog-feature__title">{featured.h1}</h2>
+          <p class="story__text">{excerpt(featured)}</p>
+          <span class="story__link">Read the article <Icon name="arrow" class="arrow" /></span>
+        </div>
+      </a>
+      <div class="stories">
+        {rest.map((a, i) => (
+          <a class:list={['story', { 'story--right': i % 2 === 1 }]} href={`/en/blog/${a.slug}`} data-reveal>
+            <div class="story__media"><Img name={a.card_image || a.hero} alt={a.card_alt || a.hero_alt || ''} sizes="(max-width: 860px) 100vw, 840px" /></div>
+            <div class="story__card">
+              <span class="story__label">{String(i + 1).padStart(2, '0')}</span>
+              <h2 class="story__title">{a.h1}</h2>
+              <p class="story__text">{excerpt(a)}</p>
+              <span class="story__link">Read the article <Icon name="arrow" class="arrow" /></span>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </section>
