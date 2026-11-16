@@ -1,0 +1,25 @@
+---
+// A list of venue cards.
+// Phones: two or more venues are a slider (swipe with a finger, or use the arrows).
+// Larger screens: desktop="carousel" keeps a slider when more than 3 do not fit
+// (two venues sit side by side, same size); desktop="grid" shows them all in rows.
+import VenueCard from './VenueCard.astro';
+import Icon from './Icon.astro';
+interface Props { venues: any[]; label: string; desktop?: 'carousel' | 'grid' }
+const { venues, label, desktop = 'grid' } = Astro.props;
+const count = Math.min(venues.length, 3);
+---
+{venues.length === 1 ? (
+  <div class="venues" data-count="1"><VenueCard venue={venues[0]} /></div>
+) : (
+  <div class="carousel" data-carousel data-desktop={desktop} data-count={count}>
+    <div class="carousel__track" data-carousel-track tabindex="0" role="group" aria-label={label}>
+      {venues.map((v) => <VenueCard venue={v} />)}
+    </div>
+    <div class="carousel__controls">
+      <button class="carousel__btn carousel__btn--prev" type="button" data-carousel-prev aria-label="Previous venues"><Icon name="arrow" class="arrow" /></button>
+      <span class="carousel__count" data-carousel-count aria-hidden="true"></span>
+      <button class="carousel__btn carousel__btn--next" type="button" data-carousel-next aria-label="Next venues"><Icon name="arrow" class="arrow" /></button>
+    </div>
+  </div>
+)}

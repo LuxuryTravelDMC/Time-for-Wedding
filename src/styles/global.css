@@ -496,7 +496,7 @@ img.request-cta__front { z-index: 2; pointer-events: none; }
 @media (max-width: 600px) { .venues, .venues[data-count="2"], .venues[data-count="1"] { grid-template-columns: 1fr; } }
 [data-tab-panel][hidden] { display: none !important; }
 
-/* Venue carousel (3+ venues): 3 cards on desktop, 2 on tablets, one and a peek of the next on phones */
+/* Venue carousel: 3 cards on desktop, 2 on tablets, one and a peek of the next on phones */
 .carousel { --gap: 22px; }
 .carousel__track {
   display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 2 * var(--gap)) / 3); gap: var(--gap);
@@ -519,6 +519,16 @@ img.request-cta__front { z-index: 2; pointer-events: none; }
 .carousel__count { min-width: 6.5em; text-align: center; font-size: 0.875rem; letter-spacing: 0.12em; color: var(--brown-text); }
 @media (prefers-reduced-motion: reduce) { .carousel__track { scroll-behavior: auto; } }
 @media (max-width: 960px) { .carousel__track { grid-auto-columns: calc((100% - var(--gap)) / 2); } }
+@media (min-width: 601px) {
+  /* two venues: side by side, same size, centred (nothing to slide) */
+  .carousel[data-count="2"] .carousel__track { grid-auto-columns: minmax(0, 420px); justify-content: center; }
+  /* desktop="grid": on larger screens the cards wrap into rows, like a normal grid */
+  .carousel[data-desktop="grid"] .carousel__track { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; scroll-snap-type: none; padding: 0; margin: 0; }
+  .carousel[data-desktop="grid"][data-count="2"] .carousel__track { grid-template-columns: repeat(2, minmax(0, 420px)); }
+  .carousel[data-desktop="grid"] .carousel__controls { display: none; }
+}
+@media (min-width: 601px) and (max-width: 960px) { .carousel[data-desktop="grid"] .carousel__track, .carousel[data-desktop="grid"][data-count="2"] .carousel__track { grid-template-columns: 1fr 1fr; } .carousel[data-count="2"] .carousel__track { grid-auto-columns: calc((100% - var(--gap)) / 2); } }
+/* phones: every list of two or more venues is a slider, one card and a peek of the next */
 @media (max-width: 600px) { .carousel { --gap: 14px; } .carousel__track { grid-auto-columns: 84%; } }
 
 /* ---------- Article teaser (CTA to a blog article) ---------- */

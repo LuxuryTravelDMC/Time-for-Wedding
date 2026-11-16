@@ -18,7 +18,9 @@ function setMenu(open: boolean) {
   menu.classList.toggle('is-open', open);
   document.body.classList.toggle('menu-open', open);
   openBtn.setAttribute('aria-expanded', String(open));
-  if (open) closeBtn?.focus(); else openBtn.focus();
+  // preventScroll: the buttons sit in the sticky menu bar; without it the browser
+  // scrolled the page up to "show" them each time the menu opened or closed
+  if (open) closeBtn?.focus({ preventScroll: true }); else openBtn.focus({ preventScroll: true });
 }
 openBtn?.addEventListener('click', () => setMenu(true));
 closeBtn?.addEventListener('click', () => setMenu(false));
@@ -239,8 +241,8 @@ document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
     img.alt = items[i].querySelector('img')?.alt || '';
     count.textContent = `${i + 1} / ${items.length}`;
   };
-  const open = (n: number) => { last = document.activeElement as HTMLElement; show(n); box.classList.add('is-open'); document.body.classList.add('menu-open'); box.querySelector<HTMLElement>('[data-close]')!.focus(); };
-  const close = () => { box.classList.remove('is-open'); document.body.classList.remove('menu-open'); last?.focus(); };
+  const open = (n: number) => { last = document.activeElement as HTMLElement; show(n); box.classList.add('is-open'); document.body.classList.add('menu-open'); box.querySelector<HTMLElement>('[data-close]')!.focus({ preventScroll: true }); };
+  const close = () => { box.classList.remove('is-open'); document.body.classList.remove('menu-open'); last?.focus({ preventScroll: true }); };
   items.forEach((b, k) => b.addEventListener('click', () => open(k)));
   box.querySelector('[data-close]')!.addEventListener('click', close);
   box.querySelector('[data-prev]')!.addEventListener('click', () => show(i - 1));

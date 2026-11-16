@@ -3,7 +3,7 @@
 import Base from '../../../../../layouts/Base.astro';
 import SectionHead from '../../../../../components/SectionHead.astro';
 import TrioHero from '../../../../../components/TrioHero.astro';
-import VenueCard from '../../../../../components/VenueCard.astro';
+import VenueList from '../../../../../components/VenueList.astro';
 import WeddingCard from '../../../../../components/WeddingCard.astro';
 import ServicesGrid from '../../../../../components/ServicesGrid.astro';
 import Faq from '../../../../../components/Faq.astro';
@@ -33,7 +33,7 @@ const cta = `/en/contact?ceremony=${p.ceremony}&destination=${p.destination}#req
     <section class="section">
       <div class="container">
         <SectionHead title={`Wedding Venues in ${name}`} subtitle={p.venues_subtitle || undefined} />
-        <div class="venues" data-count={Math.min(venues.length, 3)}>{venues.slice(0, 6).map((v) => <VenueCard venue={v} />)}</div>
+        <VenueList venues={venues.slice(0, 6)} label={`Wedding venues in ${name}`} />
       </div>
     </section>
   )}

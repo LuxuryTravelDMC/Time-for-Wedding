@@ -6,7 +6,7 @@ import Base from '../../../../layouts/Base.astro';
 import Img from '../../../../components/Img.astro';
 import Icon from '../../../../components/Icon.astro';
 import SectionHead from '../../../../components/SectionHead.astro';
-import VenueCard from '../../../../components/VenueCard.astro';
+import VenueList from '../../../../components/VenueList.astro';
 import Lightbox from '../../../../components/Lightbox.astro';
 import CtaBand from '../../../../components/CtaBand.astro';
 import images from '../../../../data/images.json';
@@ -48,7 +48,7 @@ const ess = venue ? Object.entries(venue.essentials as Record<string, string | s
           <nav class="pills" aria-label="Venues by destination">
             {withVenues.map((d) => <a class="pill" href={`/en/wedding/places/${d}`} aria-current={d === dest ? 'page' : undefined}>{DEST_NAMES[d]}</a>)}
           </nav>
-          <div class="venues" data-count={Math.min(venuesFor(dest).length, 3)}>{venuesFor(dest).map((v) => <VenueCard venue={v} />)}</div>
+          <VenueList venues={venuesFor(dest)} label={`Wedding venues in ${DEST_NAMES[dest]}`} />
         </div>
       </section>
       <section class="section" style="padding-top:0"><div class="container"><CtaBand title={`Your wedding in ${DEST_NAMES[dest]}`} /></div></section>
@@ -97,9 +97,7 @@ const ess = venue ? Object.entries(venue.essentials as Record<string, string | s
         <section class="section">
           <div class="container">
             <SectionHead title={`More Venues in ${DEST_NAMES[venue.destination]}`} />
-            <div class="venues" data-count={Math.min(venuesFor(venue.destination).length - 1, 3)}>
-              {venuesFor(venue.destination).filter((v) => v.slug !== venue.slug).slice(0, 3).map((v) => <VenueCard venue={v} />)}
-            </div>
+            <VenueList venues={venuesFor(venue.destination).filter((v) => v.slug !== venue.slug).slice(0, 3)} label={`More venues in ${DEST_NAMES[venue.destination]}`} />
           </div>
         </section>
       )}
