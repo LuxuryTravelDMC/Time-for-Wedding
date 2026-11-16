@@ -758,12 +758,14 @@ a.svc-note:hover { background: #ecd0bd; }
   margin: 0; max-width: 600px; text-align: left;
   font-family: var(--font-display); font-style: italic; font-size: clamp(17px, 0.45vw + 15px, 22px); line-height: 1.55; color: var(--brown-text);
 }
+/* Phones, after the reference: a narrow strip (22%) with PORTFOLIO large and low,
+   reading upwards, and a tall photo beside it, cropped on the couple. */
 @media (max-width: 768px) {
-  .portfolio-hero__stage { grid-template-columns: 1fr; }
-  .portfolio-hero__title { grid-column: 1; justify-self: center; margin: 0; padding: 20px 0 16px; writing-mode: horizontal-tb; transform: none; text-align: center; letter-spacing: 0.22em; font-size: clamp(26px, 7vw, 34px); }
-  .portfolio-hero__media { grid-column: 1; grid-row: 2; height: auto; aspect-ratio: 4 / 3; }
-  .portfolio-hero__media img { object-position: 55% 75%; }
-  .portfolio-hero__band { grid-column: 1; grid-row: 3; justify-content: flex-start; border-top: 0; padding: 24px 20px 32px; }
+  .portfolio-hero__stage { grid-template-columns: 22% minmax(0, 1fr); }
+  .portfolio-hero__title { justify-self: center; align-self: end; margin: 0 0 clamp(24px, 6vh, 64px); font-size: clamp(30px, 12vw, 72px); letter-spacing: 0.06em; }
+  .portfolio-hero__media { height: clamp(460px, calc(100vh - var(--header-h)), 820px); height: clamp(460px, calc(100svh - var(--header-h)), 820px); }
+  .portfolio-hero__media img { object-position: 56% 50%; } /* bride and groom both in the frame */
+  .portfolio-hero__band { justify-content: flex-start; padding: 28px 20px 36px; }
   .portfolio-hero__intro { font-size: 17px; }
 }
 .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 36px; }
