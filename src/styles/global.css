@@ -735,31 +735,36 @@ a.svc-note:hover { background: #ecd0bd; }
 .lightbox__count { position: absolute; bottom: 18px; left: 50%; translate: -50% 0; color: rgba(255, 255, 255, 0.8); font-size: 0.875rem; letter-spacing: 0.1em; }
 
 /* ---------- Portfolio page ---------- */
-/* Portfolio hero: as on the original, PORTFOLIO is written upwards on a beige strip.
-   The photo is as tall as the word (it fills the row), so it is wide and shows little sky. */
+/* Portfolio hero, after the owner's reference (rattastudio.com/portfolio): a beige strip
+   from the left edge of the screen, about a quarter of the width, with PORTFOLIO written
+   upwards near its right side; the photo fills the screen height; below, under a thin
+   line across the whole width, the intro sits on the right. */
 .portfolio-hero { overflow-x: clip; }
-.portfolio-hero__stage {
-  display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; background: var(--beige, #f5e5d9);
-  margin-left: calc(max(0px, (100% - var(--container)) / 2) + var(--gutter));
-}
+.portfolio-hero__stage { display: grid; grid-template-columns: minmax(200px, 25%) minmax(0, 1fr); background: var(--beige, #f5e5d9); }
 .portfolio-hero__title {
-  grid-column: 1; grid-row: 1; writing-mode: vertical-rl; transform: rotate(180deg); margin: 0; padding: 52px 0 0 10px;
-  font-family: var(--font-body); font-style: normal; font-weight: 400; font-size: clamp(56px, 6.2vw, 110px); letter-spacing: 0.16em; line-height: 1;
+  grid-column: 1; grid-row: 1; justify-self: end; align-self: start;
+  margin: clamp(40px, 11vh, 130px) clamp(24px, 3.4vw, 56px) 0 0; padding: 0;
+  writing-mode: vertical-rl; transform: rotate(180deg); /* reads upwards; margins stay where they are */
+  font-family: var(--font-body); font-style: normal; font-weight: 400; font-size: clamp(40px, 3.8vw, 64px); letter-spacing: 0.14em; line-height: 1;
   text-transform: uppercase; color: var(--brown);
 }
-.portfolio-hero__media { grid-column: 2; grid-row: 1; position: relative; min-height: 360px; }
-.portfolio-hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 80%; }
+.portfolio-hero__media { grid-column: 2; grid-row: 1; position: relative; height: clamp(480px, calc(100vh - var(--header-h)), 860px); }
+.portfolio-hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
+.portfolio-hero__band {
+  grid-column: 1 / -1; grid-row: 2; display: flex; justify-content: flex-end;
+  border-top: 1px solid rgba(176, 93, 65, 0.22); padding: clamp(36px, 5vw, 64px) var(--gutter) clamp(44px, 6vw, 80px);
+}
 .portfolio-hero__intro {
-  grid-column: 2; grid-row: 2; width: min(576px, calc(100% - 40px)); margin: 26px auto 0; padding: 0 0 44px;
+  margin: 0; max-width: 600px; text-align: left;
   font-family: var(--font-display); font-style: italic; font-size: clamp(17px, 0.45vw + 15px, 22px); line-height: 1.55; color: var(--brown-text);
 }
-@media (max-width: 992px) { .portfolio-hero__stage { margin-left: 0; column-gap: 14px; } }
 @media (max-width: 768px) {
-  .portfolio-hero__stage { grid-template-columns: 1fr; column-gap: 0; }
-  .portfolio-hero__title { grid-column: 1; writing-mode: horizontal-tb; transform: none; padding: 20px 0 16px; text-align: center; letter-spacing: 0.22em; font-size: clamp(26px, 7vw, 34px); }
-  .portfolio-hero__media { grid-column: 1; grid-row: 2; min-height: 0; aspect-ratio: 4 / 3; }
+  .portfolio-hero__stage { grid-template-columns: 1fr; }
+  .portfolio-hero__title { grid-column: 1; justify-self: center; margin: 0; padding: 20px 0 16px; writing-mode: horizontal-tb; transform: none; text-align: center; letter-spacing: 0.22em; font-size: clamp(26px, 7vw, 34px); }
+  .portfolio-hero__media { grid-column: 1; grid-row: 2; height: auto; aspect-ratio: 4 / 3; }
   .portfolio-hero__media img { object-position: 55% 75%; }
-  .portfolio-hero__intro { grid-column: 1; grid-row: 3; padding-bottom: 32px; font-size: 17px; }
+  .portfolio-hero__band { grid-column: 1; grid-row: 3; justify-content: flex-start; border-top: 0; padding: 24px 20px 32px; }
+  .portfolio-hero__intro { font-size: 17px; }
 }
 .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 36px; }
 .select { position: relative; }
