@@ -2,6 +2,10 @@
 // Blog.
 // Changes from the review: one design for the article list, each article only
 // once; a call to action at the end.
+// Hero, mixing the original site and the new one (owner's choice): the title on the
+// right as on the original, the brown layer and the plain rose kicker of the new one;
+// the first article rises only a little into the photo, so the photo stays visible;
+// the round triangle pattern from the logo peeks in from the right edge.
 import Base from '../../layouts/Base.astro';
 import Img from '../../components/Img.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
@@ -23,7 +27,8 @@ const rest = blog.filter((b) => b !== featured);
     </div>
   </section>
 
-  <section class="section">
+  <section class="section blog-list">
+    <img class="blog-list__deco" src="/img/logos/wlt-logoframe-bronze.svg" alt="" width="640" height="640" loading="lazy" />
     <div class="container">
       <div class="article-grid">
         <ArticleCard a={featured} featured />
