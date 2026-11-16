@@ -284,11 +284,14 @@ body.menu-open { overflow: hidden; }
 .map__pin span {
   position: absolute; left: calc(100% + 3px); top: 3px; white-space: nowrap; line-height: 1.6;
   font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--brown-text);
-  background: rgba(249, 238, 232, 0.85); padding: 0 6px; border-radius: 2px; pointer-events: none;
+  background: rgba(249, 238, 232, 0.85); padding: 0 6px; border-radius: 2px; cursor: pointer;
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
 }
 .map__pin[data-side="left"] span { left: auto; right: calc(100% + 3px); }
 .map__pin:hover svg, .map__pin[aria-expanded="true"] svg { transform: scale(1.2); }
 .map__pin[aria-expanded="true"] svg { color: var(--ink); }
+/* The name is part of the button too: clicking it opens the same card */
+.map__pin:hover span, .map__pin:focus-visible span, .map__pin[aria-expanded="true"] span { background: var(--white); color: var(--ink); }
 .map__card {
   position: absolute; z-index: 5; width: min(300px, 86vw); background: var(--white); border-radius: var(--radius-card);
   box-shadow: 0 16px 40px rgba(76, 57, 43, 0.22); overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(8px);
@@ -805,30 +808,30 @@ a.svc-note:hover { background: #ecd0bd; }
    resting on its bottom-right corner */
 .blog-feature { position: relative; display: block; margin-top: calc(-1 * clamp(40px, 4vw, 60px)); padding-bottom: clamp(48px, 5vw, 80px); text-decoration: none; color: inherit; }
 .blog-feature__media { aspect-ratio: 21 / 9; overflow: hidden; border-radius: var(--radius-card); }
-.blog-feature__media img, .story__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
-.blog-feature:hover .blog-feature__media img, .story:hover .story__media img { transform: scale(1.03); }
+.blog-feature__media img, .post-story__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.blog-feature:hover .blog-feature__media img, .post-story:hover .post-story__media img { transform: scale(1.03); }
 .blog-feature__card { position: absolute; right: clamp(24px, 4vw, 64px); bottom: 0; width: min(46%, 540px); background: var(--paper); border-radius: var(--radius-card); padding: clamp(28px, 3.4vw, 52px); box-shadow: 0 24px 60px rgba(76, 57, 43, 0.12); }
 .blog-feature__title { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: clamp(1.8rem, 2.6vw, 2.6rem); line-height: 1.15; color: var(--brown); margin: 0 0 14px; }
 /* The other articles: wide photo with a cream card resting on its edge, alternating sides */
 .stories { display: grid; gap: clamp(64px, 8vw, 120px); margin-top: clamp(64px, 8vw, 120px); }
-.story { position: relative; display: block; min-height: clamp(380px, 38vw, 540px); text-decoration: none; color: inherit; }
-.story__media { position: absolute; top: 0; bottom: 0; left: 0; width: 72%; overflow: hidden; border-radius: var(--radius-card); }
-.story--right .story__media { left: auto; right: 0; }
-.story__card { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 40%; background: var(--paper); border-radius: var(--radius-card); padding: clamp(28px, 3.4vw, 52px); box-shadow: 0 24px 60px rgba(76, 57, 43, 0.12); }
-.story--right .story__card { right: auto; left: 0; }
-.story__label { display: block; font-size: 0.8125rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brown-text); margin-bottom: 10px; }
-.story__title { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: clamp(1.5rem, 2.2vw, 2.2rem); line-height: 1.2; color: var(--brown); margin: 0 0 14px; }
-.story__text { font-size: 0.9375rem; color: var(--text); margin: 0 0 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.story__link { display: inline-flex; gap: 8px; align-items: center; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brown-text); border-bottom: 1px solid rgba(176, 93, 65, 0.35); padding-bottom: 4px; }
-.story__link .arrow { width: 16px; height: 16px; }
-.blog-feature:hover .story__link, .story:hover .story__link { border-bottom-color: var(--brown); }
+.post-story { position: relative; display: block; min-height: clamp(380px, 38vw, 540px); text-decoration: none; color: inherit; }
+.post-story__media { position: absolute; top: 0; bottom: 0; left: 0; width: 72%; overflow: hidden; border-radius: var(--radius-card); }
+.post-story--right .post-story__media { left: auto; right: 0; }
+.post-story__card { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 40%; background: var(--paper); border-radius: var(--radius-card); padding: clamp(28px, 3.4vw, 52px); box-shadow: 0 24px 60px rgba(76, 57, 43, 0.12); }
+.post-story--right .post-story__card { right: auto; left: 0; }
+.post-story__label { display: block; font-size: 0.8125rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brown-text); margin-bottom: 10px; }
+.post-story__title { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: clamp(1.5rem, 2.2vw, 2.2rem); line-height: 1.2; color: var(--brown); margin: 0 0 14px; }
+.post-story__text { font-size: 0.9375rem; color: var(--text); margin: 0 0 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.post-story__link { display: inline-flex; gap: 8px; align-items: center; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brown-text); border-bottom: 1px solid rgba(176, 93, 65, 0.35); padding-bottom: 4px; }
+.post-story__link .arrow { width: 16px; height: 16px; }
+.blog-feature:hover .post-story__link, .post-story:hover .post-story__link { border-bottom-color: var(--brown); }
 @media (max-width: 860px) {
   .blog-feature { padding-bottom: 0; }
   .blog-feature__media { aspect-ratio: 4 / 3; }
   .blog-feature__card { position: relative; right: auto; bottom: auto; width: auto; margin: -48px 16px 0; }
-  .story { min-height: 0; }
-  .story__media, .story--right .story__media { position: relative; width: 100%; aspect-ratio: 4 / 3; }
-  .story__card, .story--right .story__card { position: relative; top: auto; left: auto; right: auto; transform: none; width: auto; margin: -48px 16px 0; }
+  .post-story { min-height: 0; }
+  .post-story__media, .post-story--right .post-story__media { position: relative; width: 100%; aspect-ratio: 4 / 3; }
+  .post-story__card, .post-story--right .post-story__card { position: relative; top: auto; left: auto; right: auto; transform: none; width: auto; margin: -48px 16px 0; }
   .stories { gap: 56px; margin-top: 56px; }
 }
 .blog-list__deco { position: absolute; z-index: 0; right: 0; top: 40px; width: min(640px, 70vw); height: auto; transform: translateX(50%); opacity: 0.55; pointer-events: none; } /* just under the photo, beside the first article */

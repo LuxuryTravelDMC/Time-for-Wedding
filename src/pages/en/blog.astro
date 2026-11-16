@@ -37,21 +37,21 @@ const excerpt = (a: any) => a.excerpt || plain(a.body);
       <a class="blog-feature" href={`/en/blog/${featured.slug}`} data-reveal>
         <div class="blog-feature__media"><Img name={featured.card_image || featured.hero} alt={featured.card_alt || featured.hero_alt || ''} sizes="(max-width: 860px) 100vw, 1160px" /></div>
         <div class="blog-feature__card">
-          <span class="story__label">Featured</span>
+          <span class="post-story__label">Featured</span>
           <h2 class="blog-feature__title">{featured.h1}</h2>
-          <p class="story__text">{excerpt(featured)}</p>
-          <span class="story__link">Read the article <Icon name="arrow" class="arrow" /></span>
+          <p class="post-story__text">{excerpt(featured)}</p>
+          <span class="post-story__link">Read the article <Icon name="arrow" class="arrow" /></span>
         </div>
       </a>
       <div class="stories">
         {rest.map((a, i) => (
-          <a class:list={['story', { 'story--right': i % 2 === 1 }]} href={`/en/blog/${a.slug}`} data-reveal>
-            <div class="story__media"><Img name={a.card_image || a.hero} alt={a.card_alt || a.hero_alt || ''} sizes="(max-width: 860px) 100vw, 840px" /></div>
-            <div class="story__card">
-              <span class="story__label">{String(i + 1).padStart(2, '0')}</span>
-              <h2 class="story__title">{a.h1}</h2>
-              <p class="story__text">{excerpt(a)}</p>
-              <span class="story__link">Read the article <Icon name="arrow" class="arrow" /></span>
+          <a class:list={['post-story', { 'post-story--right': i % 2 === 1 }]} href={`/en/blog/${a.slug}`} data-reveal>
+            <div class="post-story__media"><Img name={a.card_image || a.hero} alt={a.card_alt || a.hero_alt || ''} sizes="(max-width: 860px) 100vw, 840px" /></div>
+            <div class="post-story__card">
+              <span class="post-story__label">{String(i + 1).padStart(2, '0')}</span>
+              <h2 class="post-story__title">{a.h1}</h2>
+              <p class="post-story__text">{excerpt(a)}</p>
+              <span class="post-story__link">Read the article <Icon name="arrow" class="arrow" /></span>
             </div>
           </a>
         ))}
