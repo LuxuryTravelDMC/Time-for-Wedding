@@ -1,12 +1,17 @@
 ---
-// "For one day, we make the world revolve around you" with the cut-out couple.
-// Kept from the old Wedding in Greece page, which the review liked.
+// "For one day, we make the world revolve around you", framed as on the original site:
+// the photo is washed out (50% white) and the couple, a cut-out of the same photo, sits on
+// top in full colour. The photo is framed on the couple (head to hips); the title and
+// button sit in the sky above their heads, never on faces. On phones the text sits on
+// the cream above the photo and the whole couple shows below it.
 import Img from './Img.astro';
 import { cta } from '../data/site';
 ---
 <section class="request-cta">
-  <div class="request-cta__bg"><Img name="wedding/wedding-request-background" alt="" sizes="100vw" /></div>
-  <Img name="wedding/wedding-in-greece-front" alt="" class="request-cta__front" sizes="100vw" />
+  <div class="request-cta__media" aria-hidden="true">
+    <Img name="wedding/wedding-request-background" alt="" class="request-cta__bg" sizes="100vw" />
+    <Img name="wedding/wedding-in-greece-front" alt="" class="request-cta__front" sizes="100vw" />
+  </div>
   <div class="request-cta__head" data-reveal>
     <p class="request-cta__lead">For one day</p>
     <h2 class="request-cta__title">We Make the World<br />Revolve Around You!</h2>

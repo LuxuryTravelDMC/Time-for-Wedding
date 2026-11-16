@@ -17,6 +17,10 @@ const shapeImg: Record<string, string> = {
   civil: 'wedding/shapes-civil-wedding.svg', symbolic: 'wedding/shapes-symbolic-wedding.svg',
   church: 'wedding/shapes-church-wedding.svg', proposal: 'wedding/shapes-wedding-proposal.svg',
 };
+// The drawings are not in the middle of their strips (e.g. civil sits to the right).
+// How far to move each one, in % of the strip, so the figures sit in the centre
+// (measured on the drawings, without the long ground line).
+const shapeShift: Record<string, number> = { civil: -3.3, symbolic: 0.1, church: 4, proposal: 1.2 };
 // The proposal used to link to the request form; it has its own page.
 const shapeHref = (sh: { shape: string; href: string }) => (sh.shape === 'proposal' ? '/en/wedding/ceremonytype/proposal' : sh.href);
 const list = destinations.filter((d) => d.short);
@@ -38,11 +42,11 @@ const tips = [
     </div>
   </section>
 
-  <!-- Ceremony types. All texts share one fixed-height area (as tall as the longest
-       text), so the button below never moves and the page does not jump. -->
+  <!-- Ceremony types: the names are the only switch (no arrows). All texts share one
+       fixed-height area (as tall as the longest text), so the button never moves. -->
   <section class="section section--paper shapes" data-slider aria-label="Wedding ceremonies">
     <div class="shapes__film" data-slide-linked aria-hidden="true">
-      {shapes.map((sh, i) => <img class:list={[{ 'is-active': i === 0 }]} data-index={i} src={`/img/${shapeImg[sh.shape]}`} alt="" width="3264" height="556" loading="lazy" />)}
+      {shapes.map((sh, i) => <img class:list={[{ 'is-active': i === 0 }]} data-index={i} src={`/img/${shapeImg[sh.shape]}`} style={`--shift:${shapeShift[sh.shape] ?? 0}%`} alt="" width="3264" height="556" loading="lazy" />)}
     </div>
     <div class="container">
       <div class="pills" role="tablist" aria-label="Ceremony type" data-slide-linked>
@@ -62,10 +66,6 @@ const tips = [
         {shapes.map((sh, i) => (
           <a class:list={['btn', { 'is-active': i === 0 }]} data-slide href={shapeHref(sh)}>Explore {sh.title.replace(' in Greece', '')} <Icon name="arrow" class="arrow" /></a>
         ))}
-      </div>
-      <div class="shapes__nav">
-        <button class="slider-arrow" type="button" data-prev aria-label="Previous ceremony"><Icon name="arrow-left" /></button>
-        <button class="slider-arrow" type="button" data-next aria-label="Next ceremony"><Icon name="arrow" /></button>
       </div>
     </div>
   </section>
