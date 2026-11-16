@@ -19,20 +19,22 @@ const path = [
 ];
 ---
 <Base title={s.title} description={s.description} image="about/about-hero">
+  <!-- Hero, centred: title above (resting on the top edge of the photo), the photo with the
+       veil flying out of its frame (as on the original site), the short intro below like a
+       caption, and the original's large arc behind, in the soft cream of the cards. -->
   <section class="about-hero-wrap">
+    <div class="about-hero__arc" aria-hidden="true"></div>
     <div class="container about-hero">
-      <div data-reveal>
-        <p class="kicker">About Us</p>
-        <h1 class="h1">Beyond Wedding Planning</h1>
-        <p class="lead">A team rooted in Greek hospitality, planning weddings across Greece with care, local knowledge and a network of trusted partners.</p>
-      </div>
-      <!-- As on the original site: a rectangular frame, and on top a cut-out of the bride
-           whose veil flies out of the frame. Both photos have the same proportions and
-           are fitted by height and centred, so the cut-out sits exactly on the photo. -->
+      <p class="kicker">About Us</p>
+      <h1 class="h1 about-hero__title">Beyond Wedding Planning</h1>
+      <!-- A rectangular frame, and on top a cut-out of the bride whose veil flies out of
+           the frame. Both photos have the same proportions and are fitted by height and
+           centred, so the cut-out sits exactly on the photo. -->
       <div class="about-hero__media">
-        <div class="about-hero__frame"><Img name="about/about-hero" alt="Bride in a lace wedding dress on a rocky Greek shoreline, her veil caught in the wind." sizes="(max-width: 860px) 160vw, 920px" priority /></div>
-        <Img name="about/about-hero-front" alt="" class="about-hero__front" sizes="(max-width: 860px) 160vw, 920px" priority />
+        <div class="about-hero__frame"><Img name="about/about-hero" alt="Bride in a lace wedding dress on a rocky Greek shoreline, her veil caught in the wind." sizes="(max-width: 860px) 125vw, 1040px" priority /></div>
+        <Img name="about/about-hero-front" alt="" class="about-hero__front" sizes="(max-width: 860px) 125vw, 1040px" priority />
       </div>
+      <p class="about-hero__intro" data-reveal>A team rooted in Greek hospitality, planning weddings across Greece with care, local knowledge and a network of trusted partners.</p>
     </div>
   </section>
 
