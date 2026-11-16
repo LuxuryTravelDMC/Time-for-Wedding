@@ -388,7 +388,7 @@ body.menu-open { overflow: hidden; }
 
 /* ---------- Designer (Irina) ---------- */
 .designer { text-align: center; }
-.designer__photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 24px; box-shadow: var(--shadow-soft); }
+.designer__photo { width: 240px; height: 240px; border-radius: 50%; object-fit: cover; margin: 0 auto 24px; box-shadow: var(--shadow-soft); }
 .designer__name { font-family: var(--font-display); font-style: italic; font-size: clamp(2rem, 3vw, 2.5rem); margin-bottom: 0; }
 .designer__role { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 1.35rem; color: var(--brown-text); margin-bottom: 1rem; }
 .designer__bio { max-width: 640px; margin: 0 auto 2rem; }
