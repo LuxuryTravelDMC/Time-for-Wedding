@@ -705,20 +705,6 @@ a.svc-note:hover { background: #ecd0bd; }
 }
 
 /* ---------- Single service ---------- */
-/* Arched hero for places: the cream rises into the bottom of the photo in one soft arch
-   (a parabola drawn in an SVG that stretches with the screen), a thin brand line follows
-   it, and the title sits centred inside the arch. --rise is the height of the arch. */
-.arch-hero { --h: clamp(260px, 56vh, 620px); --rise: clamp(46px, 10vw, 150px); position: relative; }
-.arch-hero__media { position: relative; }
-.arch-hero__media img { display: block; width: 100%; height: var(--h); object-fit: cover; }
-.arch-hero__arch { position: absolute; left: 0; bottom: -1px; width: 100%; height: var(--rise); overflow: visible; }
-.arch-hero__fill { fill: var(--cream); }
-.arch-hero__line { fill: none; stroke: rgba(176, 93, 65, 0.45); stroke-width: 1.5px; }
-.arch-hero__head { position: relative; display: flex; justify-content: center; margin-top: calc(var(--rise) * -0.72); }
-.arch-hero__title { margin: 0; display: flex; flex-direction: column; align-items: center; text-align: center; font-family: var(--font-display); font-style: italic; line-height: 1.02; color: var(--brown); }
-.arch-hero__lead { font-weight: 400; font-size: clamp(1.5rem, 2.4vw, 2.5rem); }
-.arch-hero__name { font-weight: 700; font-size: clamp(2.6rem, 5vw, 5rem); }
-@media (max-width: 600px) { .arch-hero { --h: clamp(240px, 64vw, 380px); } .arch-hero__head { margin-top: calc(var(--rise) * -0.5); } }
 .media-hero { position: relative; }
 .media-hero img { width: 100%; height: clamp(300px, 64vh, 680px); object-fit: cover; }
 .title-band { background: var(--paper); text-align: center; padding: clamp(32px, 5vw, 56px) var(--gutter); }

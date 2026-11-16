@@ -18,35 +18,13 @@ const { d } = Astro.props;
 const venues = venuesFor(d.slug);
 const weddings = couples.filter((c) => c.destSlug === d.slug).slice(0, 6);
 const title = d.title || `Wedding in ${d.name} | Wedding by Luxury Travel`;
-// Trying the arched hero on Crete first; once approved it goes to every destination.
-const arched = d.slug === 'crete';
 ---
 <Base title={title} description={d.description || d.short} image={d.hero || d.image}>
-  <!-- Arched hero: the cream rises into the bottom of the photo in one soft arch (like
-       a Greek dome or archway), a thin brand line follows it, and the title sits centred
-       inside the arch. The shapes stretch with the screen; the line keeps its thickness. -->
-  {arched ? (
-    <section class="arch-hero">
-      <div class="arch-hero__media">
-        <Img name={d.hero || d.image} alt={`Wedding destination: ${d.name}, Greece`} sizes="100vw" priority />
-        <svg class="arch-hero__arch" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-          <path class="arch-hero__fill" d="M0,100 Q500,-100 1000,100 Z" />
-          <path class="arch-hero__line" d="M0,112 Q500,-88 1000,112" vector-effect="non-scaling-stroke" />
-        </svg>
-      </div>
-      <div class="container arch-hero__head">
-        <h1 class="arch-hero__title"><span class="arch-hero__lead">Wedding in</span> <span class="arch-hero__name">{d.name}</span></h1>
-      </div>
-    </section>
-  ) : (
-    <>
-      <section class="media-hero"><Img name={d.hero || d.image} alt={`Wedding destination: ${d.name}, Greece`} sizes="100vw" priority /></section>
-      <section class="title-band">
-        <p class="kicker">Wedding in</p>
-        <h1 class="h1">{d.name}</h1>
-      </section>
-    </>
-  )}
+  <section class="media-hero"><Img name={d.hero || d.image} alt={`Wedding destination: ${d.name}, Greece`} sizes="100vw" priority /></section>
+  <section class="title-band">
+    <p class="kicker">Wedding in</p>
+    <h1 class="h1">{d.name}</h1>
+  </section>
 
   {(d.intro || d.short) && (
     <section class="section section--tight">
