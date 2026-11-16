@@ -19,14 +19,20 @@ const path = [
 ];
 ---
 <Base title={s.title} description={s.description} image="about/about-hero">
-  <section>
+  <section class="about-hero-wrap">
     <div class="container about-hero">
       <div data-reveal>
         <p class="kicker">About Us</p>
         <h1 class="h1">Beyond Wedding Planning</h1>
         <p class="lead">A team rooted in Greek hospitality, planning weddings across Greece with care, local knowledge and a network of trusted partners.</p>
       </div>
-      <div class="about-hero__media"><div class="frame"><Img name="about/about-hero" alt="Bride in a lace wedding dress on a rocky Greek shoreline, her veil caught in the wind." sizes="(max-width: 860px) 92vw, 560px" priority style="object-position:40% 50%" /></div></div>
+      <!-- As on the original site: a rectangular frame, and on top a cut-out of the bride
+           whose veil flies out of the frame. Both photos have the same proportions and
+           are fitted by height and centred, so the cut-out sits exactly on the photo. -->
+      <div class="about-hero__media">
+        <div class="about-hero__frame"><Img name="about/about-hero" alt="Bride in a lace wedding dress on a rocky Greek shoreline, her veil caught in the wind." sizes="(max-width: 860px) 160vw, 920px" priority /></div>
+        <Img name="about/about-hero-front" alt="" class="about-hero__front" sizes="(max-width: 860px) 160vw, 920px" priority />
+      </div>
     </div>
   </section>
 

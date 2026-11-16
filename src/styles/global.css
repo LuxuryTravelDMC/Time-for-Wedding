@@ -865,10 +865,19 @@ a.svc-note:hover { background: #ecd0bd; }
 
 /* ---------- About ---------- */
 .about-hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(32px, 6vw, 96px); padding: clamp(48px, 7vw, 96px) 0; }
-.about-hero__media { position: relative; }
-.about-hero__media .frame { border-radius: 400px 400px 12px 12px; overflow: hidden; aspect-ratio: 4 / 5; }
-.about-hero__media .frame img { width: 100%; height: 100%; object-fit: cover; }
-@media (max-width: 860px) { .about-hero { grid-template-columns: 1fr; text-align: center; } .about-hero__media { max-width: 420px; margin: 0 auto; } }
+/* About hero photo, as on the original: a 3:4 frame; the bride cut-out on top is wider
+   than the frame, so the veil flies out of it to the right */
+.about-hero-wrap { overflow-x: clip; }
+/* the frame sits at the left of its column so the veil has room on the right;
+   on smaller screens the frame shrinks so the veil never reaches the screen edge */
+.about-hero__media { position: relative; justify-self: start; width: min(460px, 100%); aspect-ratio: 3 / 4; }
+@media (max-width: 1300px) { .about-hero__media { width: min(380px, 100%); } }
+@media (max-width: 1100px) { .about-hero__media { width: min(320px, 100%); } }
+@media (max-width: 960px) { .about-hero__media { width: min(280px, 100%); } }
+.about-hero__frame { position: absolute; inset: 0; overflow: hidden; }
+.about-hero__frame img, img.about-hero__front { position: absolute; top: 0; left: 50%; height: 100%; width: auto; max-width: none; transform: translateX(-50%); }
+img.about-hero__front { z-index: 1; pointer-events: none; }
+@media (max-width: 860px) { .about-hero { grid-template-columns: 1fr; text-align: center; } .about-hero__media { justify-self: center; width: min(320px, 64vw); left: -6vw; } }
 /* About: "our story" band. Shape and colours from the Figma file (node 116:99):
    the band is the brand brown at 15% over the cream, the shape the same brown at 25%.
    --r is the radius of each round wave; the photos sit on the wave centres. */
