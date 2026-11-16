@@ -420,6 +420,14 @@ img.request-cta__front { z-index: 2; pointer-events: none; }
 .split--reverse > :first-child { order: 2; }
 .split__media img { width: 100%; border-radius: var(--radius-card); object-fit: cover; }
 @media (max-width: 860px) { .split { grid-template-columns: 1fr; } .split--reverse > :first-child { order: 0; } }
+/* Blog, "What do I need to organize…": 20% less space above and below; the photo is as
+   tall as the text beside it, so photo and text are two equal halves */
+.blog-organize { padding: calc(var(--section-space) * 0.8) 0; }
+.blog-organize .split { align-items: stretch; }
+.blog-organize .split__media { display: flex; }
+.blog-organize .split__media img { height: 100%; min-height: 360px; }
+.blog-organize .prose { align-self: center; }
+@media (max-width: 860px) { .blog-organize .split__media img { height: auto; min-height: 0; aspect-ratio: 4 / 3; } }
 
 /* Page intro used above the fold on inner pages */
 .page-intro { padding: clamp(56px, 8vw, 104px) 0 clamp(40px, 6vw, 72px); text-align: center; }
