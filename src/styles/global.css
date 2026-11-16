@@ -705,6 +705,21 @@ a.svc-note:hover { background: #ecd0bd; }
 }
 
 /* ---------- Single service ---------- */
+/* Slanted hero for places: the photo is cut on one slant (lower on the left, higher on
+   the right), a thin brand line runs parallel under the cut, and the title sits in the
+   space the slant opens on the right. --drop is how much higher the right side is. */
+.slant-hero { --h: clamp(260px, 54vh, 600px); --drop: clamp(44px, 9vw, 140px); --gap: 14px; --line: 2px; position: relative; }
+.slant-hero__media img { display: block; width: 100%; height: var(--h); object-fit: cover; clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--drop)), 0 100%); }
+.slant-hero__line {
+  position: absolute; left: 0; right: 0; top: 0; height: calc(var(--h) + var(--gap) + var(--line)); pointer-events: none;
+  background: rgba(176, 93, 65, 0.35);
+  clip-path: polygon(0 calc(100% - var(--line)), 100% calc(100% - var(--line) - var(--drop)), 100% calc(100% - var(--drop)), 0 100%);
+}
+.slant-hero__head { position: relative; display: flex; justify-content: flex-end; margin-top: calc(var(--drop) * -0.55); }
+.slant-hero__title { margin: 0; display: flex; flex-direction: column; align-items: flex-end; text-align: right; font-family: var(--font-display); font-style: italic; line-height: 1.02; color: var(--brown); }
+.slant-hero__lead { font-weight: 400; font-size: clamp(1.8rem, 3.2vw, 3.2rem); }
+.slant-hero__name { font-weight: 700; font-size: clamp(2.6rem, 5.4vw, 5.4rem); }
+@media (max-width: 600px) { .slant-hero { --h: clamp(240px, 62vw, 380px); --gap: 10px; } .slant-hero__head { margin-top: calc(var(--drop) * -0.35); } }
 .media-hero { position: relative; }
 .media-hero img { width: 100%; height: clamp(300px, 64vh, 680px); object-fit: cover; }
 .title-band { background: var(--paper); text-align: center; padding: clamp(32px, 5vw, 56px) var(--gutter); }

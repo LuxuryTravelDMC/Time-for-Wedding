@@ -18,13 +18,29 @@ const { d } = Astro.props;
 const venues = venuesFor(d.slug);
 const weddings = couples.filter((c) => c.destSlug === d.slug).slice(0, 6);
 const title = d.title || `Wedding in ${d.name} | Wedding by Luxury Travel`;
+// Trying the slanted hero on Crete first; once approved it goes to every destination.
+const slanted = d.slug === 'crete';
 ---
 <Base title={title} description={d.description || d.short} image={d.hero || d.image}>
-  <section class="media-hero"><Img name={d.hero || d.image} alt={`Wedding destination: ${d.name}, Greece`} sizes="100vw" priority /></section>
-  <section class="title-band">
-    <p class="kicker">Wedding in</p>
-    <h1 class="h1">{d.name}</h1>
-  </section>
+  <!-- Slanted hero (the original site's idea, refined): one slanted cut into the cream,
+       a thin brand line parallel to it, and the title on the space the slant opens. -->
+  {slanted ? (
+    <section class="slant-hero">
+      <div class="slant-hero__media"><Img name={d.hero || d.image} alt={`Wedding destination: ${d.name}, Greece`} sizes="100vw" priority /></div>
+      <span class="slant-hero__line" aria-hidden="true"></span>
+      <div class="container slant-hero__head">
+        <h1 class="slant-hero__title"><span class="slant-hero__lead">Wedding in</span> <span class="slant-hero__name">{d.name}</span></h1>
+      </div>
+    </section>
+  ) : (
+    <>
+      <section class="media-hero"><Img name={d.hero || d.image} alt={`Wedding destination: ${d.name}, Greece`} sizes="100vw" priority /></section>
+      <section class="title-band">
+        <p class="kicker">Wedding in</p>
+        <h1 class="h1">{d.name}</h1>
+      </section>
+    </>
+  )}
 
   {(d.intro || d.short) && (
     <section class="section section--tight">
