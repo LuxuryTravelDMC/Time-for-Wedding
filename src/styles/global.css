@@ -735,38 +735,37 @@ a.svc-note:hover { background: #ecd0bd; }
 .lightbox__count { position: absolute; bottom: 18px; left: 50%; translate: -50% 0; color: rgba(255, 255, 255, 0.8); font-size: 0.875rem; letter-spacing: 0.1em; }
 
 /* ---------- Portfolio page ---------- */
-/* Portfolio hero, after the owner's reference (rattastudio.com/portfolio): a beige strip
-   from the left edge of the screen, about a quarter of the width, with PORTFOLIO written
-   upwards near its right side; the photo fills the screen height; below, under a thin
-   line across the whole width, the intro sits on the right. */
+/* Portfolio hero.
+   Desktop, as on the original site: PORTFOLIO written upwards on a beige strip that starts
+   at the content's left edge; the photo is as tall as the word (it fills the row), and the
+   intro sits under the photo.
+   Phones, after the owner's reference (rattastudio.com/portfolio): a narrow strip with
+   PORTFOLIO large and low beside a tall photo framed on the couple. No line anywhere. */
 .portfolio-hero { overflow-x: clip; }
-.portfolio-hero__stage { display: grid; grid-template-columns: minmax(200px, 25%) minmax(0, 1fr); background: var(--beige, #f5e5d9); }
+.portfolio-hero__stage {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; background: var(--beige, #f5e5d9);
+  margin-left: calc(max(0px, (100% - var(--container)) / 2) + var(--gutter));
+}
 .portfolio-hero__title {
-  grid-column: 1; grid-row: 1; justify-self: end; align-self: start;
-  margin: clamp(40px, 11vh, 130px) clamp(24px, 3.4vw, 56px) 0 0; padding: 0;
-  writing-mode: vertical-rl; transform: rotate(180deg); /* reads upwards; margins stay where they are */
-  font-family: var(--font-body); font-style: normal; font-weight: 400; font-size: clamp(40px, 3.8vw, 64px); letter-spacing: 0.14em; line-height: 1;
+  grid-column: 1; grid-row: 1; writing-mode: vertical-rl; transform: rotate(180deg); margin: 0; padding: 52px 0 0 10px;
+  font-family: var(--font-body); font-style: normal; font-weight: 400; font-size: clamp(56px, 6.2vw, 110px); letter-spacing: 0.16em; line-height: 1;
   text-transform: uppercase; color: var(--brown);
 }
-.portfolio-hero__media { grid-column: 2; grid-row: 1; position: relative; height: clamp(480px, calc(100vh - var(--header-h)), 860px); }
-.portfolio-hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
-.portfolio-hero__band {
-  grid-column: 1 / -1; grid-row: 2; display: flex; justify-content: flex-end;
-  border-top: 1px solid rgba(176, 93, 65, 0.22); padding: clamp(36px, 5vw, 64px) var(--gutter) clamp(44px, 6vw, 80px);
-}
+.portfolio-hero__media { grid-column: 2; grid-row: 1; position: relative; min-height: 360px; }
+.portfolio-hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 80%; }
+.portfolio-hero__band { grid-column: 2; grid-row: 2; }
 .portfolio-hero__intro {
-  margin: 0; max-width: 600px; text-align: left;
+  width: min(576px, calc(100% - 40px)); margin: 26px auto 0; padding: 0 0 44px;
   font-family: var(--font-display); font-style: italic; font-size: clamp(17px, 0.45vw + 15px, 22px); line-height: 1.55; color: var(--brown-text);
 }
-/* Phones, after the reference: a narrow strip (22%) with PORTFOLIO large and low,
-   reading upwards, and a tall photo beside it, cropped on the couple. */
+@media (max-width: 992px) { .portfolio-hero__stage { margin-left: 0; column-gap: 14px; } }
 @media (max-width: 768px) {
-  .portfolio-hero__stage { grid-template-columns: 22% minmax(0, 1fr); }
-  .portfolio-hero__title { justify-self: center; align-self: end; margin: 0 0 clamp(24px, 6vh, 64px); font-size: clamp(30px, 12vw, 72px); letter-spacing: 0.06em; }
-  .portfolio-hero__media { height: clamp(460px, calc(100vh - var(--header-h)), 820px); height: clamp(460px, calc(100svh - var(--header-h)), 820px); }
+  .portfolio-hero__stage { grid-template-columns: 22% minmax(0, 1fr); column-gap: 0; }
+  .portfolio-hero__title { justify-self: center; align-self: end; margin: 0 0 clamp(24px, 6vh, 64px); padding: 0; font-size: clamp(30px, 12vw, 72px); letter-spacing: 0.06em; }
+  .portfolio-hero__media { min-height: 0; height: clamp(460px, calc(100vh - var(--header-h)), 820px); height: clamp(460px, calc(100svh - var(--header-h)), 820px); }
   .portfolio-hero__media img { object-position: 56% 50%; } /* bride and groom both in the frame */
-  .portfolio-hero__band { justify-content: flex-start; padding: 28px 20px 36px; }
-  .portfolio-hero__intro { font-size: 17px; }
+  .portfolio-hero__band { grid-column: 1 / -1; }
+  .portfolio-hero__intro { width: auto; margin: 0; padding: 28px 20px 36px; font-size: 17px; }
 }
 .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 36px; }
 .select { position: relative; }

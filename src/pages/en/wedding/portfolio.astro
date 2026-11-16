@@ -1,9 +1,8 @@
 ---
 // Portfolio.
-// The hero follows the owner's reference (rattastudio.com/portfolio): a beige strip
-// from the left edge of the screen (a quarter of the width) with PORTFOLIO written
-// upwards near the photo, the photo filling the screen height, and the intro on the
-// right of a band below, under a thin line. Changes from the review: the photo is wider and
+// The hero keeps the original site's idea on desktop (PORTFOLIO written upwards on a
+// beige strip beside the photo); on phones it follows the owner's reference
+// (rattastudio.com/portfolio): a narrow strip with the word large and low, tall photo. Changes from the review: the photo is wider and
 // shows less sky; the filter is "smart" (an option that would give no results is
 // greyed out); once every wedding is on the page "See more" becomes "See less".
 import Base from '../../../layouts/Base.astro';
@@ -22,7 +21,7 @@ const PAGE = 12;
   <section class="portfolio-hero">
     <div class="portfolio-hero__stage">
       <h1 class="portfolio-hero__title">Portfolio</h1>
-      <div class="portfolio-hero__media"><Img name={page.hero} alt="Bride and groom walking up stone steps at a wedding in Santorini" sizes="(max-width: 768px) 160vh, 80vw" priority /></div>
+      <div class="portfolio-hero__media"><Img name={page.hero} alt="Bride and groom walking up stone steps at a wedding in Santorini" sizes="(max-width: 768px) 160vh, 86vw" priority /></div>
       <div class="portfolio-hero__band"><p class="portfolio-hero__intro">{page.intro}</p></div>
     </div>
   </section>
