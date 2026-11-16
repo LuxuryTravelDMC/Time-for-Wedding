@@ -1,0 +1,19 @@
+---
+// A row of cards that slides: swipe with a finger or use the arrows; the counter
+// shows which cards are in view. Phones: one card and a peek of the next.
+// Larger screens: desktop="carousel" shows 3 at a time (2 cards sit side by side,
+// same size, nothing to slide); desktop="grid" wraps the cards into rows instead.
+import Icon from './Icon.astro';
+interface Props { label: string; count: number; desktop?: 'carousel' | 'grid'; item?: string }
+const { label, count, desktop = 'carousel', item = 'cards' } = Astro.props;
+---
+<div class="carousel" data-carousel data-desktop={desktop} data-count={Math.min(count, 3)}>
+  <div class="carousel__track" data-carousel-track tabindex="0" role="group" aria-label={label}>
+    <slot />
+  </div>
+  <div class="carousel__controls">
+    <button class="carousel__btn carousel__btn--prev" type="button" data-carousel-prev aria-label={`Previous ${item}`}><Icon name="arrow" class="arrow" /></button>
+    <span class="carousel__count" data-carousel-count aria-hidden="true"></span>
+    <button class="carousel__btn carousel__btn--next" type="button" data-carousel-next aria-label={`Next ${item}`}><Icon name="arrow" class="arrow" /></button>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import Icon from '../../../../components/Icon.astro';
 import SectionHead from '../../../../components/SectionHead.astro';
 import VenuesByDestination from '../../../../components/VenuesByDestination.astro';
 import WeddingCard from '../../../../components/WeddingCard.astro';
+import Carousel from '../../../../components/Carousel.astro';
 import Designer from '../../../../components/Designer.astro';
 import CtaBand from '../../../../components/CtaBand.astro';
 import { destinations, venuesFor, couples, CEREMONY_NAMES } from '../../../../lib/content';
@@ -64,7 +65,13 @@ const title = d.title || `Wedding in ${d.name} | Wedding by Luxury Travel`;
     <section class="section section--paper">
       <div class="container">
         <SectionHead title={`Weddings in ${d.name}`} subtitle="Love stories, beautifully brought to life by our team" />
-        <div class="portfolio-grid">{weddings.map((c) => <div data-reveal><WeddingCard couple={c} /></div>)}</div>
+        {weddings.length === 1 ? (
+          <div class="portfolio-grid"><WeddingCard couple={weddings[0]} /></div>
+        ) : (
+          <Carousel label={`Weddings in ${d.name}`} count={weddings.length} item="weddings">
+            {weddings.map((c) => <WeddingCard couple={c} />)}
+          </Carousel>
+        )}
         <p class="center" style="margin-top:40px"><a class="btn btn--outline" href={`/en/wedding/portfolio?destination=${d.slug}`}>All weddings in {d.name} <Icon name="arrow" class="arrow" /></a></p>
       </div>
     </section>
