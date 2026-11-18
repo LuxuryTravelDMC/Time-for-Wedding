@@ -1,7 +1,7 @@
 ---
 // About us.
 // Changes from the review: on phones the text always sits on a solid background;
-// Irina's button says "Contact Irina" (it opens the form); the story at the end
+// Irina appears once, in the card at the end (her separate section was removed); the story at the end
 // is a normal section, not an accordion, and the "Draft:" labels are gone.
 import Base from '../../layouts/Base.astro';
 import Img from '../../components/Img.astro';
@@ -50,20 +50,6 @@ const path = [
           <p>{p.text}</p>
         </article>
       ))}
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="planner" data-reveal>
-        <Img name="about/about-planner" alt="Irina Rud, Lead Wedding Planner at Wedding by Luxury Travel." sizes="(max-width: 860px) 100vw, 640px" />
-        <div class="planner__text">
-          <h2 class="h2" style="margin-bottom:0">Irina Rud</h2>
-          <p class="designer__role">Lead Wedding Planner</p>
-          <p>I'm Irina Rud, a wedding planner who approaches every couple with care, warmth, and a genuine desire to create not just a celebration, but a true story - through details, atmosphere, and emotion.</p>
-          <a class="btn" href="/en/contact#request">Contact Irina <Icon name="arrow" class="arrow" /></a>
-        </div>
-      </div>
     </div>
   </section>
 
