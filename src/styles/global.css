@@ -724,6 +724,22 @@ a.svc-note:hover { background: #ecd0bd; }
 .thin-rule { width: 72px; height: 1px; background: var(--brown); opacity: 0.6; border: 0; margin: 22px auto; }
 .dest-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; }
 
+/* Destination pages: hero and title as on the old site */
+.dest-hero { position: relative; margin-bottom: 0.25rem; overflow: hidden; }
+.dest-hero__frame { position: absolute; inset: 0; background: var(--white); clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%); }
+.dest-hero__img { position: relative; z-index: 1; display: block; width: 100%; height: clamp(340px, 52vw, 680px); object-fit: cover; clip-path: polygon(0 0, 100% 0, 100% 80%, 0 96%); }
+.dest-title { margin-top: 30px; }
+.dest-title .container { position: relative; z-index: 2; display: flex; justify-content: flex-end; margin-top: clamp(-88px, -5.2vw, -36px); }
+.dest-title__h1 { display: flex; flex-direction: column; align-items: flex-end; margin: 0; text-align: right; line-height: 1.05; color: var(--brown); font-family: var(--font-display); font-style: italic; }
+.dest-title__lead { font-weight: 400; font-size: clamp(2.25rem, calc(4.5vw + 0.75rem), 80px); }
+.dest-title__name { font-weight: 700; font-size: clamp(2.75rem, calc(5.5vw + 1rem), 100px); }
+@media (max-width: 768px) {
+  .dest-hero__img { height: clamp(260px, 70vw, 440px); }
+  .dest-title .container { margin-top: clamp(-88px, -16vw, -32px); }
+  .dest-title__lead { font-size: clamp(1.75rem, 9vw, 2.5rem); }
+  .dest-title__name { font-size: clamp(2.1rem, 11vw, 3rem); }
+}
+
 /* Service pages: title tag hanging from the top of the photo, then the zig-zag intro */
 .svc-hero { position: relative; }
 .svc-hero > img { display: block; width: 100%; height: clamp(320px, 66vh, 700px); object-fit: cover; }

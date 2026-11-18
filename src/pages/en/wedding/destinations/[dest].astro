@@ -20,10 +20,15 @@ const weddings = couples.filter((c) => c.destSlug === d.slug).slice(0, 6);
 const title = d.title || `Wedding in ${d.name} | Wedding by Luxury Travel`;
 ---
 <Base title={title} description={d.description || d.short} image={d.hero || d.image}>
-  <section class="media-hero"><Img name={d.hero || d.image} alt={`Wedding destination: ${d.name}, Greece`} sizes="100vw" priority /></section>
-  <section class="title-band">
-    <p class="kicker">Wedding in</p>
-    <h1 class="h1">{d.name}</h1>
+  {/* As on the old site: the photo ends in a slant over a white edge, and the title sits on the right, rising into the slant */}
+  <section class="dest-hero">
+    <div class="dest-hero__frame" aria-hidden="true"></div>
+    <Img name={d.hero || d.image} alt={`Wedding destination: ${d.name}, Greece`} class="dest-hero__img" sizes="100vw" priority />
+  </section>
+  <section class="dest-title">
+    <div class="container">
+      <h1 class="dest-title__h1"><span class="dest-title__lead">Wedding in</span> <span class="dest-title__name">{d.name}</span></h1>
+    </div>
   </section>
 
   {(d.intro || d.short) && (
