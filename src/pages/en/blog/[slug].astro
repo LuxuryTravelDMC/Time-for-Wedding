@@ -27,13 +27,13 @@ const more = blog.filter((b) => b.slug !== a.slug).slice(0, 3);
       {a.images.map((im) => <figure><Img name={im.src} alt={im.alt} sizes="(max-width: 860px) 92vw, 780px" /></figure>)}
     </div>
   </article>
-  <section class="section" style="padding-top:0">
-    <div class="container"><CtaBand title="Planning your wedding in Greece?" text="Tell us about the day you imagine. We will help you choose the destination and the venue, and take care of every detail." /></div>
-  </section>
   <section class="section section--paper">
     <div class="container">
       <h2 class="h2 center" style="margin-bottom:36px">More from the Blog</h2>
       <div class="article-grid">{more.map((m) => <ArticleCard a={m} />)}</div>
     </div>
+  </section>
+  <section class="section">
+    <div class="container"><CtaBand title="Planning your wedding in Greece?" text="Tell me about the day you imagine: I will help you choose the destination and the venue, and take care of every detail." /></div>
   </section>
 </Base>
