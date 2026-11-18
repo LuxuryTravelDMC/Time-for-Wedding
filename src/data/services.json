@@ -255,7 +255,8 @@
    "rhodes"
   ],
   "title": "Concierge Service | Wedding by Luxury Travel",
-  "description": "24/7 wedding concierge assistance for couples and guests planning a wedding in Greece."
+  "description": "24/7 wedding concierge assistance for couples and guests planning a wedding in Greece.",
+  "hero_pos": "50% 85%"
  },
  {
   "slug": "yacht",
@@ -298,7 +299,8 @@
    "rhodes"
   ],
   "title": "Yacht Rentals | Wedding by Luxury Travel",
-  "description": "Private yacht rentals for wedding couples and guests across Greece’s coastal destinations."
+  "description": "Private yacht rentals for wedding couples and guests across Greece’s coastal destinations.",
+  "hero_pos": "78% 50%"
  },
  {
   "slug": "banquets",

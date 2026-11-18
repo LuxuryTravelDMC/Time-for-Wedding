@@ -1,7 +1,9 @@
 ---
 // One service.
-// Changes from the review: the title sits under the photo (no more covered faces,
-// and its background always fits the text) and a thin divider.
+// The title hangs from the top of the photo like a tag, as on the old site (the
+// photos keep the top centre free of faces). Under it the slogan and the text
+// keep the old zig-zag (a line from the left edge, the text on the right, a line
+// from the right edge), with thin lines and left-aligned text so it reads easily.
 // The two options keep the original presentation: a text panel with tabs and two
 // slanted photo panels (click a tab or a photo to switch). On phones the photos
 // sit side by side under the text, with their labels written across.
@@ -28,15 +30,16 @@ const others = services.filter((x) => x.slug !== s.slug); // every other service
 const hero = s.hero || s.card_image;
 ---
 <Base title={s.title} description={s.description || s.card_text} image={hero}>
-  <section class="media-hero"><Img name={hero} alt={s.hero_alt || s.h1} sizes="100vw" priority style="object-position:50% 40%" /></section>
-  <section class="title-band">
-    <h1 class="h1">{s.h1}</h1>
-    <hr class="thin-rule" />
-    {s.intro_title && <p class="slogan" style="margin:0 auto;max-width:760px">{s.intro_title}</p>}
+  <section class="svc-hero">
+    <Img name={hero} alt={s.hero_alt || s.h1} sizes="100vw" priority style={`object-position:${s.hero_pos || '50% 40%'}`} />
+    <div class="svc-hero__tab"><h1 class="h1">{s.h1}</h1></div>
   </section>
 
-  <section class="section section--tight">
-    <div class="container container--narrow prose lead" data-reveal set:html={s.intro} />
+  <section class="svc-intro">
+    <div class="container">
+      {s.intro_title && <p class="svc-intro__title slogan">{s.intro_title}</p>}
+      <div class="svc-intro__copy prose" data-reveal set:html={s.intro} />
+    </div>
   </section>
 
   {s.variations && (
