@@ -8,7 +8,6 @@ import VenuesByDestination from '../../../../components/VenuesByDestination.astr
 import WeddingCard from '../../../../components/WeddingCard.astro';
 import Carousel from '../../../../components/Carousel.astro';
 import Designer from '../../../../components/Designer.astro';
-import CtaBand from '../../../../components/CtaBand.astro';
 import { destinations, venuesFor, couples, CEREMONY_NAMES } from '../../../../lib/content';
 
 export function getStaticPaths() {
@@ -82,8 +81,5 @@ const title = d.title || `Wedding in ${d.name} | Wedding by Luxury Travel`;
     </section>
   )}
 
-  {venues.length === 0 && d.pins.length === 0 && (
-    <section class="section"><div class="container"><CtaBand title={`Dreaming of a wedding in ${d.name}?`} /></div></section>
-  )}
   <Designer />
 </Base>

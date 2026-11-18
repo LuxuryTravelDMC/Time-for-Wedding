@@ -1,10 +1,22 @@
 ---
-import { cta } from '../data/site';
+// End-of-page sign-off: a compact version of Irina's section (photo beside the
+// text, one line, "Contact Irina"). It replaced the brown "Ready to plan…" band,
+// which repeated the request field of the footer. Pages that show Irina's full
+// section don't use it. `title` can fit the page ("Dreaming of a wedding in Crete?").
+import Img from './Img.astro';
+import Icon from './Icon.astro';
 interface Props { title?: string; text?: string }
-const { title = 'Ready to plan your wedding in Greece?', text = 'Tell us how you imagine the day. We will advise you on the destination, the venue and every detail, and take care of the rest.' } = Astro.props;
+const {
+  title = 'Ready to plan your wedding in Greece?',
+  text = "I'm Irina Rud, your wedding designer. Tell me how you imagine the day: I will advise you on the destination, the venue and every detail, and take care of the rest.",
+} = Astro.props;
 ---
-<div class="cta-band" data-reveal>
-  <h2 class="h2">{title}</h2>
-  <p>{text}</p>
-  <a class="btn" href={cta.href}>{cta.label}</a>
+<div class="irina-card" data-reveal>
+  <Img name="homepage/t4w-irina-whitened" alt="Irina Rud, Lead Wedding Planner at Wedding by Luxury Travel" class="irina-card__photo" sizes="180px" />
+  <div class="irina-card__body">
+    <p class="kicker">Your Wedding Designer</p>
+    <h2 class="irina-card__title">{title}</h2>
+    <p class="irina-card__text">{text}</p>
+    <a class="btn btn--outline" href="/en/contact#request">Contact Irina <Icon name="arrow" class="arrow" /></a>
+  </div>
 </div>
