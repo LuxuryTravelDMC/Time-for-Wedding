@@ -9,6 +9,7 @@ import SectionHead from '../../../../components/SectionHead.astro';
 import VenueList from '../../../../components/VenueList.astro';
 import Lightbox from '../../../../components/Lightbox.astro';
 import CtaBand from '../../../../components/CtaBand.astro';
+import Designer from '../../../../components/Designer.astro';
 import images from '../../../../data/images.json';
 import { venues, venuesFor, destinations, DEST_NAMES, DESTINATIONS, seo } from '../../../../lib/content';
 
@@ -118,6 +119,7 @@ const ess = venue ? Object.entries(venue.essentials as Record<string, string | s
           </div>
         </div>
       </section>
+      <Designer />
       <Lightbox />
     </>
   )}
