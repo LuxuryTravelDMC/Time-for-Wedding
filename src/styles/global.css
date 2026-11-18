@@ -388,13 +388,17 @@ body.menu-open { overflow: hidden; }
 
 /* ---------- Designer (Irina) ---------- */
 /* End-of-page sign-off with Irina (CtaBand.astro) */
-.irina-card { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: center; max-width: 920px; margin: 0 auto; padding: clamp(28px, 3.6vw, 48px) clamp(24px, 4vw, 56px); background: var(--paper); border-radius: var(--radius-card); box-shadow: var(--shadow-soft); }
+.irina-card { display: grid; grid-template-columns: 290px minmax(0, 1fr); text-align: left; gap: clamp(28px, 4vw, 56px); align-items: center; max-width: 920px; margin: 0 auto; padding: clamp(28px, 3.6vw, 48px) clamp(24px, 4vw, 56px); background: var(--paper); border-radius: var(--radius-card); box-shadow: var(--shadow-soft); }
+.irina-card__who { margin: 0; text-align: center; }
 .irina-card__photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; }
+.irina-card__name { margin-top: 14px; white-space: nowrap; font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 1.1rem; color: var(--brown); line-height: 1.3; }
+.irina-card__role { font-weight: 400; color: var(--brown-text); }
 .irina-card__body .kicker { margin-bottom: 0.4rem; }
 .irina-card__title { font-family: var(--font-display); font-style: italic; font-weight: 700; color: var(--brown); font-size: clamp(1.6rem, 2.4vw, 2.1rem); line-height: 1.2; margin: 0 0 0.6rem; }
 .irina-card__text { margin: 0 0 1.4rem; max-width: 34em; }
-@media (max-width: 680px) {
+@media (max-width: 900px) {
   .irina-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .irina-card__name { white-space: normal; }
   .irina-card__photo { width: 140px; height: 140px; }
 }
 .designer { text-align: center; }

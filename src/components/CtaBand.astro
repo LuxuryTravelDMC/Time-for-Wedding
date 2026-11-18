@@ -2,17 +2,20 @@
 // End-of-page sign-off: a compact version of Irina's section (photo beside the
 // text, one line, "Contact Irina"). It replaced the brown "Ready to plan…" band,
 // which repeated the request field of the footer. Pages that show Irina's full
-// section don't use it. `title` can fit the page ("Dreaming of a wedding in Crete?").
+// section don't use it. Since the card became the only version, Designer.astro uses it too. `title` can fit the page ("Dreaming of a wedding in Crete?").
 import Img from './Img.astro';
 import Icon from './Icon.astro';
 interface Props { title?: string; text?: string }
 const {
   title = 'Ready to plan your wedding in Greece?',
-  text = "I'm Irina Rud, your wedding designer. Tell me how you imagine the day: I will advise you on the destination, the venue and every detail, and take care of the rest.",
+  text = "Tell me how you imagine the day: I will advise you on the destination, the venue and every detail, and take care of the rest.",
 } = Astro.props;
 ---
 <div class="irina-card" data-reveal>
-  <Img name="homepage/t4w-irina-whitened" alt="Irina Rud, Lead Wedding Planner at Wedding by Luxury Travel" class="irina-card__photo" sizes="180px" />
+  <figure class="irina-card__who">
+    <Img name="homepage/t4w-irina-whitened" alt="Irina Rud, Lead Wedding Planner at Wedding by Luxury Travel" class="irina-card__photo" sizes="180px" />
+    <figcaption class="irina-card__name">Irina Rud <span aria-hidden="true">·</span> <span class="irina-card__role">Lead Wedding Planner</span></figcaption>
+  </figure>
   <div class="irina-card__body">
     <p class="kicker">Your Wedding Designer</p>
     <h2 class="irina-card__title">{title}</h2>
