@@ -10,6 +10,8 @@ import Img from '../../../../components/Img.astro';
 import Icon from '../../../../components/Icon.astro';
 import SectionHead from '../../../../components/SectionHead.astro';
 import CtaBand from '../../../../components/CtaBand.astro';
+import Carousel from '../../../../components/Carousel.astro';
+import DestinationMark from '../../../../components/DestinationMark.astro';
 import { services, destinations, DEST_NAMES } from '../../../../lib/content';
 
 export function getStaticPaths() {
@@ -17,8 +19,12 @@ export function getStaticPaths() {
 }
 const { s } = Astro.props;
 const destPages = new Set(destinations.map((d) => d.slug));
-const dests = s.destinations.filter((d) => destPages.has(d)); // drop links to pages that do not exist (zakynthos)
-const others = services.filter((x) => x.slug !== s.slug).slice(0, 3);
+// All destinations of the service, as on the old site; one without a page (Zakynthos) gets no link
+const dests = s.destinations.map((d) => ({
+  name: DEST_NAMES[d] ?? d.charAt(0).toUpperCase() + d.slice(1),
+  href: destPages.has(d) ? `/en/wedding/destinations/${d}` : undefined,
+}));
+const others = services.filter((x) => x.slug !== s.slug); // every other service
 const hero = s.hero || s.card_image;
 ---
 <Base title={s.title} description={s.description || s.card_text} image={hero}>
@@ -64,9 +70,7 @@ const hero = s.hero || s.card_image;
     <section class="section">
       <div class="container">
         <SectionHead title={s.dest_title || s.h1} subtitle={s.dest_subtitle || undefined} />
-        <nav class="dest-links" aria-label="Destinations">
-          {dests.map((d) => <a class="pill" href={`/en/wedding/destinations/${d}`}>{DEST_NAMES[d]}</a>)}
-        </nav>
+        <DestinationMark dests={dests} />
       </div>
     </section>
   )}
@@ -74,17 +78,18 @@ const hero = s.hero || s.card_image;
   <section class="section section--rose">
     <div class="container">
       <SectionHead title="More for Your Wedding" subtitle="Discover our other services" />
-      <div class="venues">
+      <Carousel label="Other wedding services" count={others.length} item="services">
         {others.map((o) => (
-          <a class="photo-card" href={`/en/wedding/servicepackages/${o.slug}`} style="height:280px">
-            <Img name={o.card_image} alt="" sizes="(max-width: 600px) 92vw, 400px" />
+          <a class="photo-card more-card" href={`/en/wedding/servicepackages/${o.slug}`}>
+            <Img name={o.card_image} alt="" sizes="(max-width: 600px) 84vw, (max-width: 960px) 46vw, 400px" />
             <span class="photo-card__body">
               <span class="photo-card__title">{o.card_title}</span>
+              {o.card_text && <span class="photo-card__text">{o.card_text}</span>}
               <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
             </span>
           </a>
         ))}
-      </div>
+      </Carousel>
     </div>
   </section>
   <section class="section"><div class="container"><CtaBand /></div></section>

@@ -724,6 +724,19 @@ a.svc-note:hover { background: #ecd0bd; }
 .thin-rule { width: 72px; height: 1px; background: var(--brown); opacity: 0.6; border: 0; margin: 22px auto; }
 .dest-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; }
 
+/* Service pages: the destinations written inside the W of the logo (DestinationMark.astro) */
+.dest-mark { width: min(100%, 680px); margin: clamp(28px, 4vw, 48px) auto 0; }
+.dest-mark svg { display: block; width: 100%; height: auto; overflow: visible; }
+.dest-mark__shape { fill: var(--rose); }
+.dest-mark text { font-family: var(--font-display); font-style: italic; font-weight: 700; letter-spacing: 0.06em; fill: var(--brown); transition: fill 0.25s var(--ease); }
+.dest-mark a { cursor: pointer; }
+.dest-mark a:hover text, .dest-mark a:focus-visible text { fill: var(--ink); }
+.dest-mark a:focus-visible { outline: 2px solid var(--brown); outline-offset: 3px; }
+/* "More for Your Wedding": every other service, in the shared carousel */
+.more-card { height: 100%; min-height: 340px; }
+.more-card::after { background: linear-gradient(180deg, rgba(76, 57, 43, 0) 20%, rgba(76, 57, 43, 0.55) 50%, rgba(76, 57, 43, 0.85) 100%); }
+.more-card .photo-card__text { display: block; }
+
 /* ---------- Couple gallery ---------- */
 .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--brown); }
 .trio img { width: 100%; height: min(72vh, 640px); object-fit: cover; object-position: 50% 30%; }
