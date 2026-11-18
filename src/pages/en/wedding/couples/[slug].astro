@@ -11,6 +11,7 @@ import TrioHero from '../../../../components/TrioHero.astro';
 import WeddingCard from '../../../../components/WeddingCard.astro';
 import SectionHead from '../../../../components/SectionHead.astro';
 import Lightbox from '../../../../components/Lightbox.astro';
+import Designer from '../../../../components/Designer.astro';
 import images from '../../../../data/images.json';
 import { couples, CEREMONY_NAMES, DEST_NAMES } from '../../../../lib/content';
 
@@ -58,5 +59,6 @@ const cta = `/en/contact?ceremony=${c.ceremony}&destination=${c.destSlug}#reques
       </div>
     </section>
   )}
+  <Designer />
   <Lightbox />
 </Base>
