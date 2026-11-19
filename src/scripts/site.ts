@@ -88,10 +88,10 @@ document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
         const side = card.dataset.side;
         const ease = 'cubic-bezier(.22,.61,.36,1)';
         if (side === 'center' || !side) {
-          card.animate([{ opacity: 0, scale: side ? '0.86' : '0.96' }, { opacity: 1, scale: '1' }], { duration: 560, easing: ease });
+          card.animate([{ opacity: 0, scale: side ? '0.8' : '0.92' }, { opacity: 1, scale: '1' }], { duration: 950, easing: ease });
         } else {
-          const dx = side === 'left' ? '70px' : '-70px';
-          card.animate([{ opacity: 0, translate: `${dx} 0` }, { opacity: 0.72, translate: '0 0' }], { duration: 560, delay: 120, easing: ease, fill: 'backwards' });
+          const dx = side === 'left' ? '110px' : '-110px';
+          card.animate([{ opacity: 0, translate: `${dx} 0` }, { opacity: 0.72, translate: '0 0' }], { duration: 950, delay: 220, easing: ease, fill: 'backwards' });
         }
       });
     }
@@ -105,12 +105,16 @@ document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
         tabs.forEach((t) => { const on = t.dataset.tab === key; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
         moveMarker();
         clearTimeout(busy);
-        old.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 180, easing: 'ease-out' });
+        // the old cards sink back (shrink and fade) before the new ones come forward
+        old.querySelectorAll<HTMLElement>('.carousel__track > *, .venues > *').forEach((card) =>
+          card.animate([{ scale: getComputedStyle(card).scale === 'none' ? '1' : getComputedStyle(card).scale, opacity: getComputedStyle(card).opacity }, { scale: '0.7', opacity: 0 }], { duration: 380, easing: 'cubic-bezier(.55,0,.75,.4)', fill: 'forwards' }));
+        old.animate([{ opacity: 1 }, { opacity: 1, offset: 0.8 }, { opacity: 0 }], { duration: 400 });
         busy = window.setTimeout(() => {
           panels.forEach((p) => { p.hidden = p !== next; });
+          old.querySelectorAll<HTMLElement>('.carousel__track > *, .venues > *').forEach((card) => card.getAnimations().forEach((a) => a.cancel()));
           dealIn(next);
           root.dispatchEvent(new CustomEvent('tabchange', { detail: key }));
-        }, 170);
+        }, 390);
         return;
       }
     }

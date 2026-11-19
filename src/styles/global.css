@@ -507,7 +507,7 @@ img.request-cta__front { z-index: 2; pointer-events: none; }
 .pill:hover { border-color: var(--brown); }
 /* Gliding pill (venues by destination): one brown pill slides to the chosen name */
 .pills--glide { position: relative; }
-.pills__marker { position: absolute; left: 0; top: 0; z-index: 0; border-radius: 40px; background: var(--brown); pointer-events: none; transition: transform 0.45s cubic-bezier(.22,.61,.36,1), width 0.45s cubic-bezier(.22,.61,.36,1), height 0.45s; }
+.pills__marker { position: absolute; left: 0; top: 0; z-index: 0; border-radius: 40px; background: var(--brown); pointer-events: none; transition: transform 0.7s cubic-bezier(.22,.61,.36,1), width 0.7s cubic-bezier(.22,.61,.36,1), height 0.7s; }
 .pills--glide .pill { position: relative; z-index: 1; transition: color 0.3s, border-color 0.3s; }
 .pills--glide .pill[aria-selected="true"] { background: transparent; }
 .pill[aria-selected="true"], .pill[aria-current="page"] { background: var(--brown); border-color: var(--brown); color: var(--white); }
