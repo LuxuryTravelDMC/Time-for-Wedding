@@ -575,6 +575,7 @@ img.request-cta__front { z-index: 2; pointer-events: none; }
 .carousel[data-center] .carousel__track > :not(.is-center) { cursor: pointer; }
 .carousel[data-center] .carousel__controls { display: flex; }
 @media (prefers-reduced-motion: reduce) { .carousel[data-center] .carousel__track > * { transition: none; } }
+.carousel[data-center] .carousel__track.is-jumping > * { transition: none; } /* the invisible jump of the endless loop */
 /* phones: every list of two or more venues is a slider, one card and a peek of the next */
 @media (max-width: 600px) { .carousel { --gap: 14px; } .carousel__track { grid-auto-columns: 84%; } .carousel[data-center] { --gap: 4px; } .carousel[data-center] .carousel__track { grid-auto-columns: var(--cw); } }
 

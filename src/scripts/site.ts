@@ -183,6 +183,14 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
   const count = c.querySelector<HTMLElement>('[data-carousel-count]');
   const total = track.children.length;
   const centred = c.hasAttribute('data-center');
+  // Centred carousels loop: a copy of the cards sits before and after the real ones, and when
+  // a copy reaches the middle the row jumps (invisibly) to the same card in the real set
+  if (centred) {
+    const originals = [...track.children] as HTMLElement[];
+    const copy = (el: HTMLElement) => { const k = el.cloneNode(true) as HTMLElement; k.setAttribute('aria-hidden', 'true'); k.tabIndex = -1; k.dataset.copy = ''; return k; };
+    track.prepend(...originals.map(copy));
+    track.append(...originals.map(copy));
+  }
   const cards = [...track.children] as HTMLElement[];
   const step = () => {
     const card = track.firstElementChild as HTMLElement | null;
@@ -192,7 +200,7 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
   // shrink towards it. A click on a side card brings it to the middle instead of opening it.
   let current = 0;
   const centreOn = (i: number, smooth = true) => {
-    const card = cards[Math.max(0, Math.min(total - 1, i))];
+    const card = cards[Math.max(0, Math.min(cards.length - 1, i))];
     if (!card) return;
     track.scrollTo({ left: card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2, behavior: smooth && !reduceMotion ? 'smooth' : 'instant' });
   };
@@ -202,9 +210,16 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
     cards.forEach((card, i) => { const d = Math.abs(card.offsetLeft + card.offsetWidth / 2 - mid); if (d < dist) { dist = d; best = i; } });
     current = best;
     cards.forEach((card, i) => { card.classList.toggle('is-center', i === best); card.dataset.side = i < best ? 'left' : i > best ? 'right' : 'center'; });
-    prev.disabled = best === 0;
-    next.disabled = best === total - 1;
-    if (count) count.textContent = `${best + 1} / ${total}`;
+    if (count) count.textContent = `${(best % total) + 1} / ${total}`;
+  };
+  // when a copy is in the middle, move to the same card in the real (middle) set without any motion
+  const loopJump = () => {
+    if (current >= total && current < 2 * total) return;
+    const target = total + (current % total);
+    track.classList.add('is-jumping');
+    track.scrollTo({ left: track.scrollLeft + cards[target].offsetLeft - cards[current].offsetLeft, behavior: 'instant' });
+    updateCentre();
+    requestAnimationFrame(() => requestAnimationFrame(() => track.classList.remove('is-jumping')));
   };
   if (centred) {
     cards.forEach((card, i) => card.addEventListener('click', (e) => {
@@ -217,7 +232,7 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
       settle = window.setTimeout(() => {
         const card = cards[current];
         const off = card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2 - track.scrollLeft;
-        if (Math.abs(off) > 2) centreOn(current);
+        if (Math.abs(off) > 2) centreOn(current); else loopJump();
       }, 140);
     };
     track.addEventListener('scroll', settleSoon, { passive: true });
@@ -244,7 +259,7 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
   let started = false;
   const refresh = () => {
     // centred mode starts with the second card in the middle, so there is a card on each side
-    if (centred && !started && track.clientWidth) { started = true; centreOn(1, false); }
+    if (centred && !started && track.clientWidth) { started = true; centreOn(total + 1, false); }
     update();
   };
   new ResizeObserver(refresh).observe(track); // also runs when a hidden tab is shown
