@@ -45,7 +45,7 @@ const tips = [
 
   <!-- Ceremony types: the names are the only switch (no arrows). All texts share one
        fixed-height area (as tall as the longest text), so the button never moves. -->
-  <section class="section section--paper shapes" data-slider aria-label="Wedding ceremonies">
+  <section class="section section--paper shapes" data-slider data-interval="6000" aria-label="Wedding ceremonies">
     <div class="shapes__film" data-slide-linked aria-hidden="true">
       {shapes.map((sh, i) => <img class:list={[{ 'is-active': i === 0 }]} data-index={i} src={`/img/${shapeImg[sh.shape]}`} style={`--shift:${shapeShift[sh.shape] ?? 0}%`} alt="" width="3264" height="556" loading="lazy" />)}
     </div>

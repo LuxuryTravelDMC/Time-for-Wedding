@@ -183,7 +183,9 @@ document.querySelectorAll<HTMLElement>('[data-slider]').forEach((root) => {
   root.addEventListener('focusin', stop);
   root.addEventListener('focusout', start);
   show(0);
-  start();
+  // rotate only while the section is on screen, so a visitor always meets it from the start of a turn
+  if (interval) new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), { threshold: 0.35 }).observe(root);
+  else start();
 });
 
 // ---------- Venue carousel: arrows move one card, the counter shows what is in view ----------
