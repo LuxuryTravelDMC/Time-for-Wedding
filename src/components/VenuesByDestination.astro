@@ -1,6 +1,7 @@
 ---
 // Wedding venues grouped by destination. Destinations without venues are not
-// shown. Desktop: two venues side by side, three or more in a carousel.
+// shown, except the ones in SOON (e.g. Thessaloniki, our home city), which get one
+// card asking for venue ideas until their venues are added. Desktop: two venues side by side, three or more in a carousel.
 // Phones: two or more venues are a slider (swipe or arrows).
 // Switching destination: the brown pill glides to the new name, the old cards fade
 // out and the new ones are dealt from the middle (data-tabs-anim, site.ts).
@@ -9,9 +10,10 @@ import Icon from './Icon.astro';
 import { venuesFor, DEST_NAMES, DESTINATIONS } from '../lib/content';
 interface Props { only?: string; limit?: number }
 const { only, limit = 12 } = Astro.props;
+const SOON = ['thessaloniki'];
 const groups = DESTINATIONS.filter((d) => !only || d === only)
   .map((d) => ({ slug: d, name: DEST_NAMES[d], venues: venuesFor(d).slice(0, limit) }))
-  .filter((g) => g.venues.length > 0);
+  .filter((g) => g.venues.length > 0 || (!only && SOON.includes(g.slug)));
 const first = groups[0]?.slug;
 ---
 {groups.length > 0 && (
@@ -25,10 +27,25 @@ const first = groups[0]?.slug;
     )}
     {groups.map((g) => (
       <div data-tab-panel={g.slug} role="tabpanel" hidden={g.slug !== first}>
-        <VenueList venues={g.venues} label={`Wedding venues in ${g.name}`} desktop="carousel" />
-        <p class="center" style="margin-top: 36px">
-          <a class="btn btn--outline" href={`/en/wedding/places/${g.slug}`}>All venues in {g.name} <Icon name="arrow" class="arrow" /></a>
-        </p>
+        {g.venues.length > 0 ? (
+          <>
+            <VenueList venues={g.venues} label={`Wedding venues in ${g.name}`} desktop="carousel" />
+            <p class="center" style="margin-top: 36px">
+              <a class="btn btn--outline" href={`/en/wedding/places/${g.slug}`}>All venues in {g.name} <Icon name="arrow" class="arrow" /></a>
+            </p>
+          </>
+        ) : (
+          <div class="venues" data-count="1">
+            <a class="venue-card venue-card--soon" href={`/en/contact?destination=${g.slug}#request`}>
+              <div class="venue-card__media"><img src="/img/logos/wlogo.svg" alt="" width="120" height="79" /></div>
+              <div class="venue-card__body">
+                <h3 class="venue-card__name">Venues in {g.name}</h3>
+                <p class="venue-card__types">Our selection is on its way. Tell us what you have in mind and we will send you personal venue ideas.</p>
+                <span class="link-arrow">Ask for venue ideas <Icon name="arrow" class="arrow" /></span>
+              </div>
+            </a>
+          </div>
+        )}
       </div>
     ))}
   </div>
