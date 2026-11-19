@@ -84,8 +84,15 @@ document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
     panel.querySelectorAll('[data-carousel]').forEach((c) => c.dispatchEvent(new Event('carousel:refresh')));
     {
       const cards = [...panel.querySelectorAll<HTMLElement>('.carousel__track > *, .venues > *')];
-      cards.forEach((card) => {
+      const mid = cards.findIndex((c) => c.dataset.side === 'center');
+      cards.forEach((card, i) => {
         const side = card.dataset.side;
+        // only the centre card and its two neighbours take part; the cards further out stay
+        // hidden until the deal is over, so nothing peeks in at the edges
+        if (side && Math.abs(i - mid) > 1) {
+          card.animate([{ opacity: 0 }, { opacity: 0 }], { duration: 1170 });
+          return;
+        }
         const ease = 'cubic-bezier(.22,.61,.36,1)';
         if (side === 'center' || !side) {
           card.animate([{ opacity: 0, scale: side ? '0.8' : '0.92' }, { opacity: 1, scale: '1' }], { duration: 950, easing: ease });
