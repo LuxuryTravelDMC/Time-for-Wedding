@@ -482,9 +482,11 @@ img.request-cta__front { z-index: 2; pointer-events: none; }
   transition: flex-grow 0.7s var(--ease); background: var(--brown-dark); isolation: isolate;
 }
 .book__panel > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-.book__panel::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(76, 57, 43, 0.45); transition: background 0.5s; }
+.book__panel::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(76, 57, 43, 0.135); transition: background 0.5s; } /* brown filter, 70% lighter than before (owner) */
 .book__panel.is-active { flex-grow: 14; } /* about 2/3 of the width, as on the old site; closed panels about 53px */
-.book__panel.is-active::after { background: linear-gradient(90deg, rgba(76, 57, 43, 0.75), rgba(76, 57, 43, 0.15)); }
+.book__panel.is-active::after { background: linear-gradient(to top, rgba(76, 57, 43, 0.6) 0%, rgba(76, 57, 43, 0.22) 38%, rgba(76, 57, 43, 0) 62%), linear-gradient(90deg, rgba(76, 57, 43, 0.225), rgba(76, 57, 43, 0.045)); } /* + a soft shade only behind the text at the bottom */
+/* With a lighter filter, a soft shadow keeps the white names and text readable on bright photos */
+.book__spine, .book__body { text-shadow: 0 1px 12px rgba(40, 28, 20, 0.55), 0 0 2px rgba(40, 28, 20, 0.35); }
 .book__spine { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%) rotate(180deg); writing-mode: vertical-rl; letter-spacing: 0.24em; font-weight: 600; font-size: 0.875rem; transition: opacity 0.3s; }
 .book__panel.is-active .book__spine { opacity: 0; }
 .book__body { position: absolute; left: 0; bottom: 0; width: min(520px, 100%); padding: clamp(24px, 4vw, 48px); opacity: 0; transform: translateY(12px); transition: opacity 0.5s 0.2s, transform 0.5s 0.2s; pointer-events: none; }
