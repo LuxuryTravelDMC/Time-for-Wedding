@@ -178,8 +178,8 @@ document.querySelectorAll<HTMLElement>('[data-slider]').forEach((root) => {
   root.querySelector('[data-next]')?.addEventListener('click', () => { show(i + 1); start(); });
   dots.forEach((d, k) => d.addEventListener('click', () => { show(k); start(); }));
   root.querySelectorAll<HTMLElement>('[data-goto]').forEach((b) => b.addEventListener('click', () => { show(Number(b.dataset.goto)); start(); }));
-  root.addEventListener('mouseenter', stop);
-  root.addEventListener('mouseleave', start);
+  // No pause on hover: these sections fill the width of the page, so the mouse is nearly
+  // always over them and they would never turn. Keyboard focus still pauses them.
   root.addEventListener('focusin', stop);
   root.addEventListener('focusout', start);
   show(0);
