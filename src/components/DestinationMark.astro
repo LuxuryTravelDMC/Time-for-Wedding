@@ -1,7 +1,7 @@
 ---
-// The destinations written inside the W of the logo, as on the old site, but with
-// every name placed inside a stroke of the W instead of floating over its edges.
-// Each of the two slanted strokes holds two lines of names that run along it.
+// The destinations written along the W of the logo, as on the old site: one line of
+// names inside each slanted stroke and one in each gap between the shapes (owner's
+// choice, option A), so the names alternate shape / space / shape / space.
 // The names are measured with the letter widths of Philosopher Bold Italic, spread
 // over the four lines so the lines come out about equally full, and spaced evenly
 // inside each line. Everything is one SVG, so it scales the same on every screen.
@@ -15,43 +15,28 @@ const PATH = 'M60.82,0H1.54C.69,0,0,.69,0,1.54v2.71c0,.85.69,1.55,1.54,1.55h19.3
 
 // Letter widths of Philosopher Bold Italic (share of the font size) + the 0.06em tracking
 const GLYPH: Record<string, number> = { A: .647, B: .646, C: .68, D: .737, E: .602, F: .542, G: .734, H: .723, I: .307, J: .28, K: .694, L: .567, M: .869, N: .695, O: .735, P: .58, Q: .737, R: .616, S: .562, T: .577, U: .697, V: .637, W: .905, X: .645, Y: .639, Z: .599, ' ': .25 };
-const TRACK = 0.06, CAP = 0.66;
+const TRACK = 0.06;
 const textWidth = (s: string, f: number) => [...s].reduce((w, ch) => w + (GLYPH[ch] ?? 0.65), 0) * f + TRACK * f * (s.length - 1);
 
-// The two strokes run at 62° (direction d); n points across a stroke, from its left edge to its right edge.
+// All lines run at 62°, the angle of the strokes (direction d). n points across them. Every
+// line is placed by its distance v from the left edge of the left stroke (P0) and by how far
+// along it the text may run (t0..t1): one line inside each stroke and one in each gap
+// between the shapes (left stroke | gap | middle stroke | gap before the heart). The lengths
+// were measured on the shape itself for names 13.5 units high, with a small margin from every edge.
 const len = Math.hypot(86.19, 162.08);
 const d = [86.19 / len, 162.08 / len], n = [d[1], -d[0]];
 const ANGLE = (Math.atan2(d[1], d[0]) * 180) / Math.PI;
-const WIDTH = 37.97; // width of a stroke
-// Left edge start of each stroke, and the cut at its foot (where it meets the next stroke of the W)
-const STROKES = [
-  { p: [89.34, 2.27], foot: [[200.46, 131.48], [180.57, 168.7]] }, // middle stroke
-  { p: [22.25, 6.62], foot: [[131.05, 131.48], [111.16, 168.7]] }, // left stroke
+const P0 = [22.25, 6.62];
+const LANES = [ // reading order: right to left
+  { v: 104, t0: 60, t1: 235.5 },  // gap between the middle stroke and the heart
+  { v: 75.5, t0: 41, t1: 202.5 }, // inside the middle stroke
+  { v: 45.2, t0: 25, t1: 204.5 }, // gap between the two strokes
+  { v: 14, t0: 8, t1: 170 },      // inside the left stroke
 ];
-const TOP = 4, FOOT = 3, GAP = 1.6; // free space above the names, before the foot, and between the two lines (× the edge margin)
-
-// The part of a line (baseline at v from the stroke's left edge) that stays inside the stroke
-function span(s: typeof STROKES[number], v: number, cap: number) {
-  const [[ax, ay], [bx, by]] = s.foot;
-  const el = Math.hypot(bx - ax, by - ay), fx = (by - ay) / el, fy = -(bx - ax) / el;
-  const inside = Math.sign((s.p[0] + 20 * d[0] + (WIDTH / 2) * n[0] - ax) * fx + (s.p[1] + 20 * d[1] + (WIDTH / 2) * n[1] - ay) * fy);
-  let t0 = -Infinity, t1 = Infinity;
-  for (const w of [v, v + cap]) {
-    const x = s.p[0] + w * n[0], y = s.p[1] + w * n[1];
-    t0 = Math.max(t0, (TOP - y) / d[1]);
-    const base = inside * ((x - ax) * fx + (y - ay) * fy), slope = inside * (d[0] * fx + d[1] * fy);
-    t1 = Math.min(t1, (FOOT - base) / slope);
-  }
-  return [t0, t1];
-}
+const INSET = 2;
 
 function layout(f: number) {
-  const cap = CAP * f, margin = (WIDTH - 2 * cap) / (2 + GAP);
-  // Reading order: right line of the middle stroke, its left line, then the same for the left stroke
-  const lines = STROKES.flatMap((s) => [WIDTH - margin - cap, margin].map((v) => {
-    const [t0, t1] = span(s, v, cap);
-    return { s, v, t0, t1, items: [] as number[] };
-  }));
+  const lines = LANES.map((l) => ({ ...l, items: [] as number[] }));
   const names = dests.map((x) => x.name.toUpperCase());
   const room = (l: typeof lines[number], extra = 0) => l.t1 - l.t0 - l.items.reduce((w, i) => w + textWidth(names[i], f) + f, 0) - extra;
   // Longest names first, each into the line that keeps the most room
@@ -63,11 +48,11 @@ function layout(f: number) {
   const placed = lines.flatMap((l) => {
     l.items.sort((a, b) => a - b);
     const used = l.items.reduce((w, i) => w + textWidth(names[i], f), 0);
-    const e = (l.t1 - l.t0 - used) / (2 * Math.max(1, l.items.length)); // equal space around every name
-    if (l.items.length && e < 0.6 * f) fits = false;
-    let t = l.t0 + e;
+    const e = (l.t1 - l.t0 - 2 * INSET - used) / (2 * Math.max(1, l.items.length)); // equal space around every name
+    if (l.items.length && e < 0.5 * f) fits = false;
+    let t = l.t0 + INSET + e;
     return l.items.map((i) => {
-      const x = l.s.p[0] + l.v * n[0] + t * d[0], y = l.s.p[1] + l.v * n[1] + t * d[1];
+      const x = P0[0] + l.v * n[0] + t * d[0], y = P0[1] + l.v * n[1] + t * d[1];
       t += textWidth(names[i], f) + 2 * e;
       return { ...dests[i], text: names[i], x: +x.toFixed(2), y: +y.toFixed(2) };
     });
@@ -75,8 +60,8 @@ function layout(f: number) {
   return { fits, placed };
 }
 
-// The largest size (in steps of 0.25) at which every line keeps its spacing
-let size = 15, result = layout(size);
+// 13.5 units at most (the size the lanes were measured for); smaller only if the names don't fit
+let size = 13.5, result = layout(size);
 while (!result.fits && size > 8) { size -= 0.25; result = layout(size); }
 const placed = result.placed;
 ---
