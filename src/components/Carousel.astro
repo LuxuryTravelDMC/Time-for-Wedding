@@ -5,11 +5,12 @@
 // same size, nothing to slide); desktop="grid" wraps the cards into rows instead.
 // center: the card in the middle is always the largest (30% bigger than its
 // neighbours) and the cards grow and shrink as they slide through the centre.
+// loop: the row never ends (after the last card comes the first again).
 import Icon from './Icon.astro';
-interface Props { label: string; count: number; desktop?: 'carousel' | 'grid'; item?: string; center?: boolean }
-const { label, count, desktop = 'carousel', item = 'cards', center = false } = Astro.props;
+interface Props { label: string; count: number; desktop?: 'carousel' | 'grid'; item?: string; center?: boolean; loop?: boolean }
+const { label, count, desktop = 'carousel', item = 'cards', center = false, loop = false } = Astro.props;
 ---
-<div class="carousel" data-carousel data-desktop={center ? 'carousel' : desktop} data-count={Math.min(count, 3)} data-center={center ? '' : undefined}>
+<div class="carousel" data-carousel data-desktop={center ? 'carousel' : desktop} data-count={Math.min(count, 3)} data-center={center ? '' : undefined} data-loop={loop ? '' : undefined}>
   <div class="carousel__track" data-carousel-track tabindex="0" role="group" aria-label={label}>
     <slot />
   </div>

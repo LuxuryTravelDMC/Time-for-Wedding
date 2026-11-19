@@ -81,7 +81,7 @@ const hero = s.hero || s.card_image;
   <section class="section section--rose">
     <div class="container">
       <SectionHead title="More for Your Wedding" subtitle="Discover our other services" />
-      <Carousel label="Other wedding services" count={others.length} item="services">
+      <Carousel label="Other wedding services" count={others.length} item="services" loop>
         {others.map((o) => (
           <a class="photo-card more-card" href={`/en/wedding/servicepackages/${o.slug}`}>
             <Img name={o.card_image} alt="" sizes="(max-width: 600px) 84vw, (max-width: 960px) 46vw, 400px" />

@@ -194,9 +194,11 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
   const count = c.querySelector<HTMLElement>('[data-carousel-count]');
   const total = track.children.length;
   const centred = c.hasAttribute('data-center');
-  // Centred carousels loop: a copy of the cards sits before and after the real ones, and when
-  // a copy reaches the middle the row jumps (invisibly) to the same card in the real set
-  if (centred) {
+  // Looping carousels (data-loop; every centred one): a copy of the cards sits before and after
+  // the real ones, and when a copy comes into place the row jumps (invisibly) to the same card
+  // in the real set, so the row never ends
+  const loop = centred || (c.hasAttribute('data-loop') && total > 1);
+  if (loop) {
     const originals = [...track.children] as HTMLElement[];
     const copy = (el: HTMLElement) => { const k = el.cloneNode(true) as HTMLElement; k.setAttribute('aria-hidden', 'true'); k.tabIndex = -1; k.dataset.copy = ''; return k; };
     track.prepend(...originals.map(copy));
@@ -274,9 +276,25 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
     };
     track.addEventListener('scroll', settleSoon, { passive: true });
   }
+  // plain looping row: after it settles, a copy in first place jumps back to the real set
+  let loopTimer = 0;
+  const loopSettle = () => {
+    const s = step(), i = Math.round(track.scrollLeft / s);
+    if (i < total || i >= 2 * total) {
+      const j = total + (((i % total) + total) % total);
+      track.scrollTo({ left: track.scrollLeft + (j - i) * s, behavior: 'instant' });
+    }
+  };
   const update = () => {
     if (!track.clientWidth) return; // hidden tab
     if (centred) { updateCentre(); return; }
+    if (loop) {
+      c.removeAttribute('data-static');
+      const s = step(), first = ((Math.round(track.scrollLeft / s) % total) + total) % total;
+      if (count) count.textContent = `${first + 1} / ${total}`;
+      clearTimeout(loopTimer); loopTimer = window.setTimeout(loopSettle, 160);
+      return;
+    }
     const max = track.scrollWidth - track.clientWidth;
     c.toggleAttribute('data-static', max < 4);
     prev.disabled = track.scrollLeft < 4;
@@ -297,6 +315,7 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
   const refresh = () => {
     // centred mode starts with the second card in the middle, so there is a card on each side
     if (centred && !started && track.clientWidth) { started = true; centreOn(total + 1, false); }
+    else if (loop && !started && track.clientWidth) { started = true; track.scrollTo({ left: total * step(), behavior: 'instant' }); }
     update();
   };
   new ResizeObserver(refresh).observe(track); // also runs when a hidden tab is shown
