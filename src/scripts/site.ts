@@ -199,17 +199,43 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
   // Centred mode: the card nearest the middle is the big one; cards left and right of it
   // shrink towards it. A click on a side card brings it to the middle instead of opening it.
   let current = 0;
+  // Our own glide (ease-in-out) instead of the browser's smooth scroll, so the start and the
+  // stop are soft and the cards' size follows the movement frame by frame
+  let glide = 0;
   const centreOn = (i: number, smooth = true) => {
     const card = cards[Math.max(0, Math.min(cards.length - 1, i))];
     if (!card) return;
-    track.scrollTo({ left: card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2, behavior: smooth && !reduceMotion ? 'smooth' : 'instant' });
+    const to = card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2;
+    cancelAnimationFrame(glide);
+    if (!smooth || reduceMotion) { track.scrollLeft = to; return; }
+    const from = track.scrollLeft, dist = to - from, start = performance.now();
+    const dur = Math.min(900, 520 + Math.abs(dist) * 0.25);
+    const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / dur);
+      track.scrollLeft = from + dist * ease(t);
+      if (t < 1) glide = requestAnimationFrame(tick);
+    };
+    glide = requestAnimationFrame(tick);
   };
   const updateCentre = () => {
     const mid = track.scrollLeft + track.clientWidth / 2;
     let best = 0, dist = Infinity;
     cards.forEach((card, i) => { const d = Math.abs(card.offsetLeft + card.offsetWidth / 2 - mid); if (d < dist) { dist = d; best = i; } });
     current = best;
-    cards.forEach((card, i) => { card.classList.toggle('is-center', i === best); card.dataset.side = i < best ? 'left' : i > best ? 'right' : 'center'; });
+    // size and fade follow the distance from the middle continuously (1 in the middle, 0.77 one card away)
+    const stepW = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : track.clientWidth;
+    cards.forEach((card, i) => {
+      card.classList.toggle('is-center', i === best);
+      card.dataset.side = i < best ? 'left' : i > best ? 'right' : 'center';
+      const off = card.offsetLeft + card.offsetWidth / 2 - mid;
+      const d = Math.min(1, Math.abs(off) / stepW);
+      const sc = 1 - 0.23 * d;
+      card.style.scale = String(sc);
+      card.style.opacity = String(1 - 0.28 * d);
+      // a smaller card moves towards the middle so the gaps stay even (no jump when the centre changes)
+      card.style.translate = `${(-Math.sign(off) * card.offsetWidth * (1 - sc)) / 2}px 0`;
+    });
     if (count) count.textContent = `${(best % total) + 1} / ${total}`;
   };
   // when a copy is in the middle, move to the same card in the real (middle) set without any motion
