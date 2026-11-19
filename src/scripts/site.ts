@@ -90,8 +90,12 @@ document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
         if (side === 'center' || !side) {
           card.animate([{ opacity: 0, scale: side ? '0.8' : '0.92' }, { opacity: 1, scale: '1' }], { duration: 950, easing: ease });
         } else {
-          const dx = side === 'left' ? '110px' : '-110px';
-          card.animate([{ opacity: 0, translate: `${dx} 0` }, { opacity: 0.72, translate: '0 0' }], { duration: 950, delay: 220, easing: ease, fill: 'backwards' });
+          // slide out from behind the centre card to the card's own resting place (its
+          // translate/opacity are set by the carousel), so it never overshoots and snaps back
+          const restX = parseFloat(card.style.translate) || 0;
+          const restO = card.style.opacity || '0.72';
+          const dx = side === 'left' ? 110 : -110;
+          card.animate([{ opacity: 0, translate: `${restX + dx}px 0` }, { opacity: restO, translate: `${restX}px 0` }], { duration: 950, delay: 220, easing: ease, fill: 'backwards' });
         }
       });
     }
