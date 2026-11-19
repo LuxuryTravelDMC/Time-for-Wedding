@@ -84,7 +84,7 @@ const ess = venue ? Object.entries(venue.essentials as Record<string, string | s
         <section class="section section--paper">
           <div class="container">
             <SectionHead title="Gallery" subtitle={venue.name} />
-            <div class="masonry" data-gallery>
+            <div class="masonry" data-gallery data-gallery-title={venue.name} data-gallery-meta={`Wedding venue · ${DEST_NAMES[venue.destination] ?? venue.destination}`}>
               {venue.photos.map((ph: string, i: number) => (
                 <button type="button" data-full={big(ph)} aria-label={`Open photo ${i + 1} of ${venue.photos.length}`}>
                   <Img name={ph} alt={`${venue.name}, photo ${i + 1}`} sizes="(max-width: 700px) 92vw, 400px" />

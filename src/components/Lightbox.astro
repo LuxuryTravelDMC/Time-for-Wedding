@@ -1,10 +1,23 @@
 ---
+// Photo viewer for the galleries (couples and venues).
+// Custom look from the second review: the brand's dark brown, the couple's name and
+// ceremony at the top, the W in the middle, thin line arrows, a framed photo,
+// "03 / 06" in the display font and a strip of thumbnails at the bottom.
 import Icon from './Icon.astro';
 ---
 <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Photo viewer">
-  <img src="" alt="" />
-  <button class="lightbox__btn lightbox__close" type="button" data-close aria-label="Close"><Icon name="close" /></button>
-  <button class="lightbox__btn lightbox__prev" type="button" data-prev aria-label="Previous photo"><Icon name="arrow-left" /></button>
-  <button class="lightbox__btn lightbox__next" type="button" data-next aria-label="Next photo"><Icon name="arrow" /></button>
-  <p class="lightbox__count" data-count></p>
+  <div class="lightbox__top">
+    <div class="lightbox__title"><p class="lightbox__name" data-lb-title></p><p class="lightbox__meta" data-lb-meta></p></div>
+    <img class="lightbox__logo" src="/img/logos/wlogo.svg" alt="" width="58" height="38" />
+    <button class="lightbox__close" type="button" data-close>Close <Icon name="close" /></button>
+  </div>
+  <div class="lightbox__stage">
+    <button class="lightbox__nav lightbox__prev" type="button" data-prev aria-label="Previous photo"><Icon name="arrow-left" /></button>
+    <figure class="lightbox__frame"><img src="" alt="" data-lb-img /></figure>
+    <button class="lightbox__nav lightbox__next" type="button" data-next aria-label="Next photo"><Icon name="arrow" /></button>
+  </div>
+  <div class="lightbox__bottom">
+    <p class="lightbox__count" data-count aria-live="polite"></p>
+    <div class="lightbox__thumbs" data-thumbs></div>
+  </div>
 </div>

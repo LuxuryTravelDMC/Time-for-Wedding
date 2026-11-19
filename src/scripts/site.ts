@@ -411,22 +411,55 @@ document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
   const items = [...gallery.querySelectorAll<HTMLButtonElement>('[data-full]')];
   const box = document.querySelector<HTMLElement>('[data-lightbox]');
   if (!box || !items.length) return;
-  const img = box.querySelector('img')!;
+  const img = box.querySelector<HTMLImageElement>('[data-lb-img]')!;
   const count = box.querySelector('[data-count]')!;
+  const thumbs = box.querySelector<HTMLElement>('[data-thumbs]')!;
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let i = 0; let last: HTMLElement | null = null;
-  const show = (n: number) => {
-    i = (n + items.length) % items.length;
-    img.src = items[i].dataset.full!;
-    img.alt = items[i].querySelector('img')?.alt || '';
-    count.textContent = `${i + 1} / ${items.length}`;
+  const buildThumbs = () => {
+    thumbs.innerHTML = '';
+    items.forEach((it, k) => {
+      const src = it.querySelector('img');
+      const t = document.createElement('button');
+      t.type = 'button'; t.className = 'lightbox__thumb';
+      t.setAttribute('aria-label', `Photo ${k + 1}`);
+      const ti = document.createElement('img');
+      ti.src = src?.currentSrc || src?.src || ''; ti.alt = ''; ti.loading = 'lazy';
+      t.append(ti); t.addEventListener('click', () => show(k)); thumbs.append(t);
+    });
   };
-  const open = (n: number) => { last = document.activeElement as HTMLElement; show(n); box.classList.add('is-open'); document.body.classList.add('menu-open'); box.querySelector<HTMLElement>('[data-close]')!.focus({ preventScroll: true }); };
+  const show = (n: number, first = false) => {
+    const dir = n > i ? 1 : -1;
+    i = (n + items.length) % items.length;
+    const next = items[i].dataset.full!;
+    const alt = items[i].querySelector('img')?.alt || '';
+    if (first || still) { img.src = next; img.alt = alt; }
+    else {
+      img.animate([{ opacity: 1, translate: '0 0' }, { opacity: 0, translate: `${-dir * 24}px 0` }], { duration: 180, easing: 'ease-in', fill: 'forwards' }).finished.then(() => {
+        img.src = next; img.alt = alt;
+        const go = () => img.animate([{ opacity: 0, translate: `${dir * 24}px 0` }, { opacity: 1, translate: '0 0' }], { duration: 420, easing: 'cubic-bezier(0.22,0.61,0.36,1)', fill: 'forwards' });
+        img.complete ? go() : img.addEventListener('load', go, { once: true });
+      });
+    }
+    count.innerHTML = `<span>${pad(i + 1)}</span> / ${pad(items.length)}`;
+    [...thumbs.children].forEach((t, k) => { t.classList.toggle('is-on', k === i); if (k === i) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current'); });
+    (thumbs.children[i] as HTMLElement | undefined)?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: still ? 'auto' : 'smooth' });
+  };
+  const open = (n: number) => {
+    last = document.activeElement as HTMLElement;
+    box.querySelector('[data-lb-title]')!.textContent = gallery.dataset.galleryTitle || '';
+    box.querySelector('[data-lb-meta]')!.textContent = gallery.dataset.galleryMeta || '';
+    buildThumbs(); show(n, true);
+    box.classList.add('is-open'); document.body.classList.add('menu-open');
+    box.querySelector<HTMLElement>('[data-close]')!.focus({ preventScroll: true });
+  };
   const close = () => { box.classList.remove('is-open'); document.body.classList.remove('menu-open'); last?.focus({ preventScroll: true }); };
   items.forEach((b, k) => b.addEventListener('click', () => open(k)));
   box.querySelector('[data-close]')!.addEventListener('click', close);
   box.querySelector('[data-prev]')!.addEventListener('click', () => show(i - 1));
   box.querySelector('[data-next]')!.addEventListener('click', () => show(i + 1));
-  box.addEventListener('click', (e) => { if (e.target === box) close(); });
+  box.addEventListener('click', (e) => { const t = e.target as HTMLElement; if (t === box || t.classList.contains('lightbox__stage')) close(); });
   document.addEventListener('keydown', (e) => {
     if (!box.classList.contains('is-open')) return;
     if (e.key === 'Escape') close();
@@ -435,5 +468,6 @@ document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
   });
   let x0 = 0;
   box.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
-  box.addEventListener('touchend', (e) => { const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1)); });
+  box.addEventListener('touchend', (e) => { if ((e.target as HTMLElement).closest('[data-thumbs]')) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1)); });
 });
+

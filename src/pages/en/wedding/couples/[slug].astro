@@ -40,7 +40,7 @@ const cta = `/en/contact?ceremony=${c.ceremony}&destination=${c.destSlug}#reques
   <section class="section section--tight">
     <div class="container">
       <SectionHead title="Gallery" subtitle={c.subtitle ? c.subtitle.charAt(0).toUpperCase() + c.subtitle.slice(1) : undefined} />
-      <div class="masonry" data-gallery>
+      <div class="masonry" data-gallery data-gallery-title={c.name} data-gallery-meta={`${CEREMONY_NAMES[c.ceremony]} · ${dest}`}>
         {c.photos.map((ph, i) => (
           <button type="button" data-full={big(ph)} aria-label={`Open photo ${i + 1} of ${c.photos.length}`}>
             <Img name={ph} alt={`${c.name}, photo ${i + 1}`} sizes="(max-width: 700px) 92vw, 400px" />
