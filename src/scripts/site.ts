@@ -59,7 +59,61 @@ document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
   const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-tab]')];
   const panels = [...root.querySelectorAll<HTMLElement>('[data-tab-panel]')];
   const activeClass = root.dataset.activeClass;
+  const anim = root.hasAttribute('data-tabs-anim') && !reduceMotion;
+  // A brown pill that glides to the chosen tab (instead of switching colour in place)
+  const pills = root.querySelector<HTMLElement>('.pills');
+  let marker: HTMLElement | null = null;
+  const moveMarker = (instant = false) => {
+    if (!marker || !pills) return;
+    const t = tabs.find((x) => x.getAttribute('aria-selected') === 'true');
+    if (!t || !t.offsetWidth) return;
+    if (instant) marker.style.transition = 'none';
+    marker.style.width = `${t.offsetWidth}px`; marker.style.height = `${t.offsetHeight}px`;
+    marker.style.transform = `translate(${t.offsetLeft}px, ${t.offsetTop}px)`;
+    if (instant) { void marker.offsetWidth; marker.style.transition = ''; }
+  };
+  if (anim && pills) {
+    marker = document.createElement('span');
+    marker.className = 'pills__marker'; marker.setAttribute('aria-hidden', 'true');
+    pills.prepend(marker); pills.classList.add('pills--glide');
+    new ResizeObserver(() => moveMarker(true)).observe(pills);
+  }
+  // The new destination's cards are dealt from the middle: the centre card grows into
+  // place, the cards beside it slide out from behind it a moment later
+  const dealIn = (panel: HTMLElement) => {
+    panel.querySelectorAll('[data-carousel]').forEach((c) => c.dispatchEvent(new Event('carousel:refresh')));
+    {
+      const cards = [...panel.querySelectorAll<HTMLElement>('.carousel__track > *, .venues > *')];
+      cards.forEach((card) => {
+        const side = card.dataset.side;
+        const ease = 'cubic-bezier(.22,.61,.36,1)';
+        if (side === 'center' || !side) {
+          card.animate([{ opacity: 0, scale: side ? '0.86' : '0.96' }, { opacity: 1, scale: '1' }], { duration: 560, easing: ease });
+        } else {
+          const dx = side === 'left' ? '70px' : '-70px';
+          card.animate([{ opacity: 0, translate: `${dx} 0` }, { opacity: 0.72, translate: '0 0' }], { duration: 560, delay: 120, easing: ease, fill: 'backwards' });
+        }
+      });
+    }
+  };
+  let busy = 0;
   const select = (key: string, focus = false) => {
+    if (anim) {
+      const old = panels.find((p) => !p.hidden);
+      const next = panels.find((p) => p.dataset.tabPanel === key);
+      if (old && next && old !== next) {
+        tabs.forEach((t) => { const on = t.dataset.tab === key; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
+        moveMarker();
+        clearTimeout(busy);
+        old.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 180, easing: 'ease-out' });
+        busy = window.setTimeout(() => {
+          panels.forEach((p) => { p.hidden = p !== next; });
+          dealIn(next);
+          root.dispatchEvent(new CustomEvent('tabchange', { detail: key }));
+        }, 170);
+        return;
+      }
+    }
     tabs.forEach((t) => {
       const on = t.dataset.tab === key;
       t.setAttribute('aria-selected', String(on));
@@ -136,7 +190,7 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
   const centreOn = (i: number, smooth = true) => {
     const card = cards[Math.max(0, Math.min(total - 1, i))];
     if (!card) return;
-    track.scrollTo({ left: card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2, behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
+    track.scrollTo({ left: card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2, behavior: smooth && !reduceMotion ? 'smooth' : 'instant' });
   };
   const updateCentre = () => {
     const mid = track.scrollLeft + track.clientWidth / 2;
@@ -184,11 +238,13 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
   let raf = 0;
   track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
   let started = false;
-  new ResizeObserver(() => {
+  const refresh = () => {
     // centred mode starts with the second card in the middle, so there is a card on each side
     if (centred && !started && track.clientWidth) { started = true; centreOn(1, false); }
     update();
-  }).observe(track); // also runs when a hidden tab is shown
+  };
+  new ResizeObserver(refresh).observe(track); // also runs when a hidden tab is shown
+  c.addEventListener('carousel:refresh', refresh); // a tab just showed this carousel: set it up now
   update();
 });
 

@@ -2,6 +2,8 @@
 // Wedding venues grouped by destination. Destinations without venues are not
 // shown. Desktop: two venues side by side, three or more in a carousel.
 // Phones: two or more venues are a slider (swipe or arrows).
+// Switching destination: the brown pill glides to the new name, the old cards fade
+// out and the new ones are dealt from the middle (data-tabs-anim, site.ts).
 import VenueList from './VenueList.astro';
 import Icon from './Icon.astro';
 import { venuesFor, DEST_NAMES, DESTINATIONS } from '../lib/content';
@@ -13,7 +15,7 @@ const groups = DESTINATIONS.filter((d) => !only || d === only)
 const first = groups[0]?.slug;
 ---
 {groups.length > 0 && (
-  <div data-tabs>
+  <div data-tabs data-tabs-anim>
     {groups.length > 1 && (
       <div class="pills" role="tablist" aria-label="Destination">
         {groups.map((g) => (
