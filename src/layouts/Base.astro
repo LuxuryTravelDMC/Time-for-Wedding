@@ -19,7 +19,7 @@ interface Props {
   preload?: string;        // photo name of the first big photo, loaded first
 }
 const { title, description, image, overlayHeader = false, preload } = Astro.props;
-const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/en', site.url).href;
+const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/en', site.url).href;
 const imgMeta = (n?: string) => (n ? (images as Record<string, { widths: number[] }>)[n] : undefined);
 const share = image && imgMeta(image) ? new URL(`/img/${image}-${imgMeta(image)!.widths.find((w) => w >= 960) ?? imgMeta(image)!.widths.at(-1)}.webp`, site.url).href : undefined;
 const pre = imgMeta(preload);
