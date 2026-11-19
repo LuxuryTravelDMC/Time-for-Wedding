@@ -848,7 +848,7 @@ html:has(.lightbox.is-open) { background: var(--ink); } /* the reserved scrollba
 .lightbox__close:hover svg { rotate: 90deg; }
 .lightbox__stage { position: relative; min-height: 0; display: grid; grid-template-columns: 72px minmax(0, 1fr) 72px; align-items: center; gap: clamp(8px, 2vw, 28px); padding: clamp(14px, 3vh, 32px) clamp(10px, 3vw, 40px); }
 .lightbox__frame { margin: 0; min-height: 0; height: 100%; display: flex; align-items: center; justify-content: center; padding: 14px; box-sizing: border-box; } /* room for the outline frame */
-.lightbox__frame img { max-width: 100%; max-height: calc(100dvh - 330px); /* top bar + number + thumbnails + frame never overlap */ width: auto; height: auto; object-fit: contain; border-radius: 2px; outline: 1px solid color-mix(in srgb, var(--gold) 60%, transparent); outline-offset: 10px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35); }
+.lightbox__frame img { max-width: 100%; max-height: calc((100dvh - 330px) * 1.1); /* +10% from the review */ /* top bar + number + thumbnails + frame never overlap */ width: auto; height: auto; object-fit: contain; border-radius: 2px; outline: 1px solid color-mix(in srgb, var(--gold) 60%, transparent); outline-offset: 10px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35); }
 .lightbox__nav { justify-self: center; display: grid; place-items: center; width: 72px; height: 72px; border: 0; background: none; color: var(--cream); cursor: pointer; opacity: 0.75; transition: opacity 0.3s, translate 0.4s var(--ease); }
 .lightbox__nav svg { width: 40px; height: 40px; stroke-width: 1; }
 .lightbox__nav:hover { opacity: 1; color: var(--rose); }
