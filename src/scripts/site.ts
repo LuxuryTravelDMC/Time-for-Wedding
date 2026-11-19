@@ -309,36 +309,21 @@ document.querySelectorAll<HTMLElement>('[data-var]').forEach((root) => {
   const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
   const texts = [...root.querySelectorAll<HTMLElement>('[data-var-text]')];
   const panels = [...root.querySelectorAll<HTMLElement>('[data-var-panel]')];
-  const ease = 'cubic-bezier(.22,.61,.36,1)';
-  let busy = 0;
-  // the chosen photo moves next to the text; the last one gets the straight right edge
-  const reorder = (key: string) => {
-    let pos = 2;
-    panels.forEach((p) => { const on = p.dataset.varKey === key; p.classList.toggle('is-active', on); p.dataset.pos = on ? '1' : String(pos++); });
-    panels.forEach((p) => p.classList.toggle('is-trailing', p.dataset.pos === String(panels.length)));
-  };
+  // The photos keep their places: the chosen one widens and the other narrows (owner's choice
+  // of effect, the stage's columns glide in CSS); the text fades in
+  const stage = root.querySelector<HTMLElement>('.svc-var__stage');
   const activate = (key: string, focus = false) => {
-    const current = panels.find((p) => p.classList.contains('is-active'))?.dataset.varKey;
+    const index = panels.findIndex((p) => p.dataset.varKey === key);
+    if (index < 0 || panels[index].classList.contains('is-active')) return;
     tabs.forEach((t) => {
       const on = t.dataset.varKey === key;
       t.classList.toggle('is-active', on); t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
       if (on && focus) t.focus();
     });
     texts.forEach((p) => { const on = p.dataset.varKey === key; p.classList.toggle('is-active', on); p.setAttribute('aria-hidden', String(!on)); });
-    if (reduceMotion || key === current) { reorder(key); return; }
-    // Same effect as the venues by destination: the photos sink back (shrink and fade),
-    // then the chosen one comes forward next to the text and the other slides in behind it
-    texts.find((p) => p.dataset.varKey === key)?.animate([{ opacity: 0, translate: '0 8px' }, { opacity: 1, translate: '0 0' }], { duration: 700, delay: 200, easing: ease, fill: 'backwards' });
-    clearTimeout(busy);
-    panels.forEach((p) => { p.getAnimations().forEach((a) => a.cancel()); p.animate([{ scale: '1', opacity: 1 }, { scale: '0.7', opacity: 0 }], { duration: 380, easing: 'cubic-bezier(.55,0,.75,.4)', fill: 'forwards' }); });
-    busy = window.setTimeout(() => {
-      reorder(key);
-      panels.forEach((p) => {
-        p.getAnimations().forEach((a) => a.cancel());
-        if (p.dataset.pos === '1') p.animate([{ opacity: 0, scale: '0.8' }, { opacity: 1, scale: '1' }], { duration: 950, easing: ease });
-        else p.animate([{ opacity: 0, translate: '-110px 0' }, { opacity: 1, translate: '0 0' }], { duration: 950, delay: 220, easing: ease, fill: 'backwards' });
-      });
-    }, 390);
+    panels.forEach((p, i) => p.classList.toggle('is-active', i === index));
+    if (stage) stage.dataset.active = String(index);
+    if (!reduceMotion) texts.find((p) => p.dataset.varKey === key)?.animate([{ opacity: 0, translate: '0 8px' }, { opacity: 1, translate: '0 0' }], { duration: 700, delay: 150, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'backwards' });
   };
   tabs.forEach((t, i) => {
     t.addEventListener('click', () => activate(t.dataset.varKey!));

@@ -692,6 +692,11 @@ a.svc-note:hover { background: #ecd0bd; }
   display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr); height: var(--h); overflow: hidden; background: #2a1c16;
 }
 @media (min-width: 1600px) { .svc-var__stage { --h: clamp(520px, 52vh, 780px); --skew: calc(var(--h) * 0.16); --angle: -80.91deg; } }
+/* The chosen photo is the wide one; switching makes the columns glide (owner's choice: "expand") */
+.svc-var__stage { transition: grid-template-columns 0.9s cubic-bezier(.22,.61,.36,1); }
+.svc-var__stage[data-active="0"] { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.45fr) minmax(0, 0.55fr); }
+.svc-var__stage[data-active="1"] { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.55fr) minmax(0, 1.45fr); }
+@media (prefers-reduced-motion: reduce) { .svc-var__stage { transition: none; } }
 .svc-var__copy {
   position: relative; z-index: 3; order: 0; display: flex; align-items: center; justify-content: flex-end; overflow: hidden; color: var(--white);
   background: #2a1c16; clip-path: polygon(0 0, 100% 0, calc(100% - var(--skew)) 100%, 0 100%);
@@ -736,6 +741,8 @@ a.svc-note:hover { background: #ecd0bd; }
 /* Phones: text on top, the two photos side by side below with their names written across */
 @media (max-width: 768px) {
   .svc-var__stage { --skew: 0px; grid-template-columns: 1fr 1fr; height: auto; }
+  .svc-var__stage[data-active="0"] { grid-template-columns: 1.4fr 0.6fr; }
+  .svc-var__stage[data-active="1"] { grid-template-columns: 0.6fr 1.4fr; }
   .svc-var__copy { grid-column: 1 / -1; justify-content: center; clip-path: none; }
   .svc-var__inner { width: 100%; margin: 0; padding: 40px 20px; text-align: center; }
   .svc-var__heading, .svc-var__text { text-align: center; margin-left: auto; margin-right: auto; }
