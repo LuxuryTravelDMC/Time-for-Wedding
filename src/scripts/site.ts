@@ -124,12 +124,49 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
   const next = c.querySelector<HTMLButtonElement>('[data-carousel-next]')!;
   const count = c.querySelector<HTMLElement>('[data-carousel-count]');
   const total = track.children.length;
+  const centred = c.hasAttribute('data-center');
+  const cards = [...track.children] as HTMLElement[];
   const step = () => {
     const card = track.firstElementChild as HTMLElement | null;
     return card ? card.getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 0) : track.clientWidth;
   };
+  // Centred mode: the card nearest the middle is the big one; cards left and right of it
+  // shrink towards it. A click on a side card brings it to the middle instead of opening it.
+  let current = 0;
+  const centreOn = (i: number, smooth = true) => {
+    const card = cards[Math.max(0, Math.min(total - 1, i))];
+    if (!card) return;
+    track.scrollTo({ left: card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2, behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
+  };
+  const updateCentre = () => {
+    const mid = track.scrollLeft + track.clientWidth / 2;
+    let best = 0, dist = Infinity;
+    cards.forEach((card, i) => { const d = Math.abs(card.offsetLeft + card.offsetWidth / 2 - mid); if (d < dist) { dist = d; best = i; } });
+    current = best;
+    cards.forEach((card, i) => { card.classList.toggle('is-center', i === best); card.dataset.side = i < best ? 'left' : i > best ? 'right' : 'center'; });
+    prev.disabled = best === 0;
+    next.disabled = best === total - 1;
+    if (count) count.textContent = `${best + 1} / ${total}`;
+  };
+  if (centred) {
+    cards.forEach((card, i) => card.addEventListener('click', (e) => {
+      if (i !== current) { e.preventDefault(); centreOn(i); }
+    }));
+    // after a swipe or a wheel scroll, glide the nearest card to the middle
+    let settle = 0;
+    const settleSoon = () => {
+      clearTimeout(settle);
+      settle = window.setTimeout(() => {
+        const card = cards[current];
+        const off = card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2 - track.scrollLeft;
+        if (Math.abs(off) > 2) centreOn(current);
+      }, 140);
+    };
+    track.addEventListener('scroll', settleSoon, { passive: true });
+  }
   const update = () => {
     if (!track.clientWidth) return; // hidden tab
+    if (centred) { updateCentre(); return; }
     const max = track.scrollWidth - track.clientWidth;
     c.toggleAttribute('data-static', max < 4);
     prev.disabled = track.scrollLeft < 4;
@@ -142,11 +179,16 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((c) => {
       count.textContent = firstIn === lastIn ? `${firstIn} / ${total}` : `${firstIn}–${lastIn} / ${total}`;
     }
   };
-  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
-  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
+  prev.addEventListener('click', () => centred ? centreOn(current - 1) : track.scrollBy({ left: -step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
+  next.addEventListener('click', () => centred ? centreOn(current + 1) : track.scrollBy({ left: step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
   let raf = 0;
   track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
-  new ResizeObserver(update).observe(track); // also runs when a hidden tab is shown
+  let started = false;
+  new ResizeObserver(() => {
+    // centred mode starts with the second card in the middle, so there is a card on each side
+    if (centred && !started && track.clientWidth) { started = true; centreOn(1, false); }
+    update();
+  }).observe(track); // also runs when a hidden tab is shown
   update();
 });
 

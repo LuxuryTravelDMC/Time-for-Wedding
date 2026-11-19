@@ -1,6 +1,7 @@
 ---
 // A list of venue cards. Phones: two or more venues are a slider (swipe or arrows).
-// Larger screens: desktop="carousel" slides when more than 3; desktop="grid" shows rows.
+// Three venues or more: a centred carousel on every screen, the middle card always
+// the largest. Two venues: side by side on larger screens, a slider on phones.
 import VenueCard from './VenueCard.astro';
 import Carousel from './Carousel.astro';
 interface Props { venues: any[]; label: string; desktop?: 'carousel' | 'grid' }
@@ -9,7 +10,7 @@ const { venues, label, desktop = 'grid' } = Astro.props;
 {venues.length === 1 ? (
   <div class="venues" data-count="1"><VenueCard venue={venues[0]} /></div>
 ) : (
-  <Carousel label={label} count={venues.length} desktop={desktop} item="venues">
+  <Carousel label={label} count={venues.length} desktop={desktop} item="venues" center={venues.length >= 3}>
     {venues.map((v) => <VenueCard venue={v} />)}
   </Carousel>
 )}

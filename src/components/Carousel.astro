@@ -3,11 +3,13 @@
 // shows which cards are in view. Phones: one card and a peek of the next.
 // Larger screens: desktop="carousel" shows 3 at a time (2 cards sit side by side,
 // same size, nothing to slide); desktop="grid" wraps the cards into rows instead.
+// center: the card in the middle is always the largest (30% bigger than its
+// neighbours) and the cards grow and shrink as they slide through the centre.
 import Icon from './Icon.astro';
-interface Props { label: string; count: number; desktop?: 'carousel' | 'grid'; item?: string }
-const { label, count, desktop = 'carousel', item = 'cards' } = Astro.props;
+interface Props { label: string; count: number; desktop?: 'carousel' | 'grid'; item?: string; center?: boolean }
+const { label, count, desktop = 'carousel', item = 'cards', center = false } = Astro.props;
 ---
-<div class="carousel" data-carousel data-desktop={desktop} data-count={Math.min(count, 3)}>
+<div class="carousel" data-carousel data-desktop={center ? 'carousel' : desktop} data-count={Math.min(count, 3)} data-center={center ? '' : undefined}>
   <div class="carousel__track" data-carousel-track tabindex="0" role="group" aria-label={label}>
     <slot />
   </div>
