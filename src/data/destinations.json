@@ -328,6 +328,18 @@
   "description": "Fine beaches, luxury resorts and picturesque Byzantine chapels make Halkidiki a standout choice for destination weddings in northern Greece."
  },
  {
+  "slug": "thessaloniki",
+  "name": "Thessaloniki",
+  "image": "destinations/thessaloniki",
+  "short": "Thessaloniki is our home city, and few places in Greece combine history and city life so naturally. UNESCO-listed Byzantine churches, the old walls of the Upper Town and the long seafront promenade to the White Tower create a setting that feels both grand and relaxed. A wedding in Thessaloniki suits couples who love food, culture and an easy urban rhythm, with an international airport minutes away and the beaches of Halkidiki about an hour's drive. From a church ceremony in a centuries-old chapel to a rooftop reception overlooking the Thermaic Gulf, we plan every detail with the local knowledge that only a team based in the city can offer.",
+  "hero": "destinations/thessaloniki",
+  "intro": "",
+  "map": null,
+  "pins": [],
+  "title": "Wedding in Thessaloniki | Wedding by Luxury Travel",
+  "description": "Our home city: Byzantine churches, the Upper Town and the seafront promenade make Thessaloniki a relaxed, elegant setting for your wedding in Greece."
+ },
+ {
   "slug": "cyprus",
   "name": "Cyprus",
   "image": "destinations/peloponnes",

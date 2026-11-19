@@ -355,6 +355,16 @@
    2000
   ]
  },
+ "destinations/thessaloniki": {
+  "w": 2400,
+  "h": 1600,
+  "widths": [
+   480,
+   960,
+   1600,
+   2000
+  ]
+ },
  "destinations/zakinthos": {
   "w": 1600,
   "h": 944,

@@ -14,12 +14,13 @@ import { destinations, seo } from '../../../lib/content';
 const s = seo['/en/wedding/destinations'];
 const book = destinations.filter((d) => d.short);
 const active = 'santorini';
+const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'];
 ---
 <Base title={s.title} description={s.description} image={book[0].image}>
   <section class="page-intro" style="padding-bottom: 32px">
     <div class="container container--narrow">
       <h1 class="h1">{page.intro_h1}</h1>
-      <p class="subheading">Nine places, one wedding planner who knows each of them inside out.</p>
+      <p class="subheading">{WORDS[book.length] ?? book.length} places, one wedding planner who knows each of them inside out.</p>
     </div>
   </section>
 
