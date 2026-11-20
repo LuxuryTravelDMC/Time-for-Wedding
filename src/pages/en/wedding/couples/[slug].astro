@@ -1,13 +1,13 @@
 ---
 // One couple's gallery.
-// Changes from the review: instead of one wide slide that cut off heads, three
-// photos side by side at the top; the gallery keeps every photo whole (no
+// Changes from the review: the top shows three photos one at a time in a looping
+// slider (landscape photos first, so heads are not cut off); the gallery keeps every photo whole (no
 // cropping) and opens large in a viewer. Small light photos load first, so the
 // page no longer gets stuck.
 import Base from '../../../../layouts/Base.astro';
 import Img from '../../../../components/Img.astro';
 import Icon from '../../../../components/Icon.astro';
-import TrioHero from '../../../../components/TrioHero.astro';
+import HeroSlider from '../../../../components/HeroSlider.astro';
 import WeddingCard from '../../../../components/WeddingCard.astro';
 import SectionHead from '../../../../components/SectionHead.astro';
 import Lightbox from '../../../../components/Lightbox.astro';
@@ -20,16 +20,16 @@ export function getStaticPaths() {
 }
 const { c } = Astro.props;
 const big = (n: string) => { const w = (images as any)[n].widths; return `/img/${n}-${w[w.length - 1]}.webp`; };
-// choose portrait photos first for the top row: they keep faces in frame
+// the top slider is full width, so landscape photos come first: they fill it without cutting heads
 const meta = images as Record<string, { w: number; h: number }>;
-const portraits = c.photos.filter((p) => meta[p].h > meta[p].w);
-const top = [...portraits, ...c.photos.filter((p) => !portraits.includes(p))].slice(0, 3);
+const wide = c.photos.filter((p) => meta[p].w > meta[p].h);
+const top = [...wide, ...c.photos.filter((p) => !wide.includes(p))].slice(0, 3);
 const dest = DEST_NAMES[c.destSlug] ?? c.destination;
 const related = couples.filter((x) => x.slug !== c.slug && (x.destSlug === c.destSlug || x.ceremony === c.ceremony)).slice(0, 3);
 const cta = `/en/contact?ceremony=${c.ceremony}&destination=${c.destSlug}#request`;
 ---
 <Base title={c.title || `${c.name} | Wedding by Luxury Travel`} description={c.description || c.story} image={c.photos[0]}>
-  <TrioHero photos={top} alt={c.name} />
+  <HeroSlider photos={top} alt={c.name} />
   <section class="title-band">
     <h1 class="h1">{c.name}</h1>
     <p class="couple-meta"><span>{CEREMONY_NAMES[c.ceremony]}</span><span>{dest}</span>{c.when && <span>{c.when}</span>}</p>

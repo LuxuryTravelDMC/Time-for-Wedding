@@ -182,6 +182,10 @@ document.querySelectorAll<HTMLElement>('[data-slider]').forEach((root) => {
   // always over them and they would never turn. Keyboard focus still pauses them.
   root.addEventListener('focusin', stop);
   root.addEventListener('focusout', start);
+  // swipe on phones
+  let x0 = 0;
+  root.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  root.addEventListener('touchend', (e) => { const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) { show(i + (dx < 0 ? 1 : -1)); start(); } });
   show(0);
   // rotate only while the section is on screen, so a visitor always meets it from the start of a turn
   if (interval) new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), { threshold: 0.35 }).observe(root);
