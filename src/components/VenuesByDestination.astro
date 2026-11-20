@@ -1,6 +1,6 @@
 ---
 // Wedding venues grouped by destination. Destinations without venues are not
-// shown, except the ones in SOON (e.g. Thessaloniki, our home city), which get one
+// shown, except the ones in SOON (Santorini, Thessaloniki), which get one
 // card asking for venue ideas until their venues are added. Desktop: two venues side by side, three or more in a carousel.
 // Phones: two or more venues are a slider (swipe or arrows).
 // Switching destination: the brown pill glides to the new name, the old cards fade
@@ -10,7 +10,7 @@ import Icon from './Icon.astro';
 import { venuesFor, DEST_NAMES, DESTINATIONS } from '../lib/content';
 interface Props { only?: string; limit?: number }
 const { only, limit = 12 } = Astro.props;
-const SOON = ['thessaloniki'];
+const SOON = ['santorini', 'thessaloniki'];
 const groups = DESTINATIONS.filter((d) => !only || d === only)
   .map((d) => ({ slug: d, name: DEST_NAMES[d], venues: venuesFor(d).slice(0, limit) }))
   .filter((g) => g.venues.length > 0 || (!only && SOON.includes(g.slug)));
