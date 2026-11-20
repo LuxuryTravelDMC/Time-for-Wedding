@@ -1118,7 +1118,7 @@ img.about-hero__front { z-index: 1; pointer-events: none; }
 .contact-map { border-radius: var(--radius-card); overflow: hidden; min-height: 360px; box-shadow: var(--shadow-soft); }
 .contact-map iframe { width: 100%; height: 100%; min-height: 360px; border: 0; display: block; }
 @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
-.form { background: color-mix(in srgb, var(--paper) 90%, var(--ink)); /* 10% darker than the cards, at the owner's request */ border-radius: var(--radius-card); padding: clamp(24px, 5vw, 56px); box-shadow: var(--shadow-soft); }
+.form { background: color-mix(in srgb, var(--paper) 86%, var(--brown)); /* a darker, pinker card (owner's request) */ border-radius: var(--radius-card); padding: clamp(24px, 5vw, 56px); box-shadow: var(--shadow-soft); }
 .form__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 22px; }
 .form__grid .field--full { grid-column: 1 / -1; }
 .field label { display: block; font-size: 0.9375rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
@@ -1128,7 +1128,7 @@ img.about-hero__front { z-index: 1; pointer-events: none; }
 .field .error { color: #a3352b; font-size: 0.875rem; margin-top: 4px; display: none; }
 .field.has-error .error { display: block; }
 .field.has-error input, .field.has-error select { border-color: #a3352b; }
-.form__notice { font-size: 0.9375rem; margin: 24px 0; padding: 16px 18px; background: var(--beige); border-radius: 8px; }
+.form__notice { font-size: 0.9375rem; margin: 24px 0; padding: 16px 18px; background: var(--paper); border-radius: 8px; }
 .form__actions { text-align: center; }
 .form__status { margin-top: 18px; text-align: center; font-weight: 600; color: var(--brown-dark); }
 @media (max-width: 640px) { .form__grid { grid-template-columns: 1fr; } }
