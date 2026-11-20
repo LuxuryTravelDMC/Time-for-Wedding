@@ -1125,10 +1125,6 @@ img.about-hero__front { z-index: 1; pointer-events: none; }
 .contact-map { border-radius: var(--radius-card); overflow: hidden; min-height: 360px; box-shadow: var(--shadow-soft); }
 .contact-map iframe { width: 100%; height: 100%; min-height: 360px; border: 0; display: block; }
 @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
-/* Office and map together in one card, so they read as their own section (owner's request) */
-.contact-card { gap: 0; max-width: 1100px; margin: 0 auto; background: var(--paper); border-radius: var(--radius-card); box-shadow: var(--shadow-soft); overflow: hidden; }
-.contact-card__info { padding: clamp(28px, 4vw, 56px); align-self: center; }
-.contact-card .contact-map { border-radius: 0; box-shadow: none; }
 .form { background: var(--cream); /* owner's choice */ border-radius: var(--radius-card); padding: clamp(24px, 5vw, 56px); box-shadow: var(--shadow-soft); }
 .form__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 22px; }
 .form__grid .field--full { grid-column: 1 / -1; }

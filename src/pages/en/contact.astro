@@ -26,10 +26,9 @@ const budgets = ['Approximately €1,500', '€2,000 – €2,500', '€3,000 �
     </div>
   </section>
 
-  <section class="section" style="padding-top:24px">
-    <div class="container">
-    <div class="contact-grid contact-card" data-reveal>
-      <div class="contact-card__info">
+  <section class="section" style="padding-top:0">
+    <div class="container contact-grid">
+      <div data-reveal>
         <h2 class="h3">Our Office</h2>
         <ul class="contact-list">
           <li><a href={site.phoneHref}><Icon name="phone" />{site.phoneDisplay}</a></li>
@@ -38,10 +37,9 @@ const budgets = ['Approximately €1,500', '€2,000 – €2,500', '€3,000 �
         </ul>
         <a class="link-arrow" href={site.mapsUrl} rel="noopener">Open in Google Maps <Icon name="arrow" class="arrow" /></a>
       </div>
-      <div class="contact-map">
+      <div class="contact-map" data-reveal>
         <iframe src="https://maps.google.com/maps?q=Danaidon%209%2C%2054626%20Thessaloniki%2C%20Greece&z=16&output=embed" title="Map: Danaidon 9, Thessaloniki" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
-    </div>
     </div>
   </section>
 
