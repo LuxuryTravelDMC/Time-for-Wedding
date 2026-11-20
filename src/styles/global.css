@@ -851,8 +851,9 @@ a.svc-note:hover { background: #ecd0bd; }
 .hero-slider { position: relative; display: grid; overflow: hidden; height: min(78vh, 720px); background: var(--ink); }
 .hero-slider__slide { grid-area: 1 / 1; opacity: 0; transition: opacity 1.4s ease; }
 .hero-slider__slide.is-active { opacity: 1; }
-.hero-slider__slide img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; display: block; transform: scale(1.0); transition: transform 7s linear; }
-.hero-slider__slide.is-active img { transform: scale(1.06); }
+.hero-slider__slide { position: relative; display: grid; place-items: center; overflow: hidden; }
+.hero-slider__bg { position: absolute; inset: -40px; width: calc(100% + 80px); height: calc(100% + 80px); object-fit: cover; filter: blur(28px) brightness(0.8) saturate(1.1); }
+.hero-slider__img { position: relative; display: block; max-width: 100%; max-height: 100%; width: auto; height: 100%; object-fit: contain; box-shadow: 0 0 60px rgba(0, 0, 0, 0.25); }
 .hero-slider::after { content: ""; position: absolute; inset: auto 0 0 0; height: 120px; background: linear-gradient(to top, rgba(76, 57, 43, 0.35), transparent); pointer-events: none; }
 .hero-slider__nav { position: absolute; top: 50%; z-index: 2; translate: 0 -50%; display: grid; place-items: center; width: 64px; height: 64px; border: 0; background: none; color: var(--white); cursor: pointer; opacity: 0.8; filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.35)); transition: opacity 0.3s, translate 0.4s var(--ease); }
 .hero-slider__nav svg { width: 38px; height: 38px; stroke-width: 1; }
@@ -866,9 +867,9 @@ a.svc-note:hover { background: #ecd0bd; }
 .hero-slider__dots button::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: rgba(255, 255, 255, 0.55); transition: background 0.3s, width 0.3s; }
 .hero-slider__dots button[aria-current="true"]::before { width: 30px; background: var(--white); }
 .hero-slider :focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
-@media (prefers-reduced-motion: reduce) { .hero-slider__slide, .hero-slider__slide img { transition: none; } .hero-slider__slide.is-active img { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-slider__slide { transition: none; } }
 @media (max-width: 700px) {
-  .hero-slider { height: auto; aspect-ratio: 1 / 1; } /* square: landscape photos keep both faces in frame */
+  .hero-slider { height: auto; aspect-ratio: 3 / 2; } /* the shape of the landscape photos, so they fill it */
   .hero-slider__nav { width: 48px; height: 48px; }
   .hero-slider__nav svg { width: 28px; height: 28px; }
 }

@@ -1,6 +1,7 @@
 ---
 // Couple pages: the top photos one at a time, full width, changing by themselves
-// every 5 seconds in an endless loop (soft cross-fade with a slow zoom). Arrows, dots
+// every 5 seconds in an endless loop (soft cross-fade). The whole photo is shown (no
+// tight crop): it sits in the middle over a blurred copy of itself that fills the sides. Arrows, dots
 // and swipe change them by hand. Uses the shared [data-slider] script.
 import Img from './Img.astro';
 import Icon from './Icon.astro';
@@ -11,7 +12,8 @@ const list = photos.slice(0, 3);
 <section class="hero-slider" data-slider data-interval="5000" aria-roledescription="carousel" aria-label={`${alt}, photos`}>
   {list.map((p, i) => (
     <div class:list={['hero-slider__slide', { 'is-active': i === 0 }]} data-slide aria-roledescription="slide" aria-label={`${i + 1} of ${list.length}`}>
-      <Img name={p} alt={`${alt}, photo ${i + 1}`} sizes="100vw" priority={i === 0} loading="eager" />
+      <Img name={p} alt="" class="hero-slider__bg" sizes="50vw" loading="eager" />
+      <Img name={p} alt={`${alt}, photo ${i + 1}`} class="hero-slider__img" sizes="(max-width: 700px) 100vw, 1100px" priority={i === 0} loading="eager" />
     </div>
   ))}
   {list.length > 1 && (
