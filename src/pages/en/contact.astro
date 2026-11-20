@@ -2,6 +2,7 @@
 // Contact and the "Plan Your Wedding" form.
 // Changes from the review: icons in the brand colour (not orange); "Choose
 // location" instead of "Choose resort"; the euro sign before the amount.
+// Second review: a warmer opening text (approved by the owner) instead of a bare "Contact".
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import { site } from '../../data/site';
@@ -15,10 +16,13 @@ const guests = ['2 guests', '3–5 guests', '5–15 guests', '15–50 guests', '
 const budgets = ['Approximately €1,500', '€2,000 – €2,500', '€3,000 – €5,000', '€6,000 – €10,000', '€10,000 – €20,000', '€20,000 and more'];
 ---
 <Base title={s.title} description={s.description}>
-  <section class="page-intro" style="padding-bottom:40px">
+  <section class="page-intro contact-intro">
     <div class="container container--narrow">
-      <h1 class="h1">Contact</h1>
-      <p class="lead">Tell us about your celebration and we will take care of the rest.</p>
+      <h1 class="kicker">Contact Us</h1>
+      <p class="contact-intro__statement">Tell us about the wedding <em>you are dreaming of</em>, and let&rsquo;s start <em>planning it together</em>.</p>
+      <p>Whether you already know the destination, the date and the guest list, or you are only starting to imagine your day in Greece, we would love to hear from you. Fill in the form below with as much as you know, or simply write to us. We reply to every request within two working days.</p>
+      <p>Our team will guide you through every choice: the place, the ceremony, the venue and every detail in between.</p>
+      <p class="contact-intro__links"><a href={`mailto:${site.email}`}>{site.email}</a> <span aria-hidden="true">·</span> <a href={site.phoneHref}>{site.phoneDisplay}</a></p>
     </div>
   </section>
 

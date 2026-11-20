@@ -1104,6 +1104,15 @@ img.about-hero__front { z-index: 1; pointer-events: none; }
 @media (max-width: 860px) { .planner { grid-template-columns: 1fr; } .planner img { min-height: 0; height: 360px; } }
 
 /* ---------- Contact ---------- */
+/* Opening: "Contact Us" as a small H1 above a large statement; the accents in bold brown */
+.contact-intro { padding-bottom: 40px; }
+.contact-intro .kicker { margin: 0 0 18px; }
+.contact-intro__statement { max-width: 22ch !important; margin: 0 auto 28px; font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(2rem, 4.4vw, 3.5rem); line-height: 1.15; color: var(--ink); }
+.contact-intro__statement em { font-weight: 700; color: var(--brown); }
+.contact-intro p:not([class]) { max-width: 64ch; }
+.contact-intro__links { margin-top: 28px; font-weight: 600; letter-spacing: 0.04em; color: var(--brown); }
+.contact-intro__links a { white-space: nowrap; color: var(--brown); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--brown) 35%, transparent); }
+.contact-intro__links a:hover { border-color: var(--brown); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 64px); align-items: stretch; }
 .contact-list { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 16px; }
 .contact-list a { display: inline-flex; align-items: center; gap: 14px; color: var(--ink); text-decoration: none; font-size: 1.0625rem; }
