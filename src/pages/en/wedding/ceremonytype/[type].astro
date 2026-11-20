@@ -26,7 +26,14 @@ const label = c.h1.replace(/ in Greece$/i, '');
   {photos.length > 0 && <TrioHero photos={photos} alt={c.h1} />}
   <section class="title-band">
     <h1 class="h1">{c.h1}</h1>
-    {c.intro && <><hr class="thin-rule" /><p class="lead">{c.intro}</p></>}
+    {c.intro && (
+      <div class="intro-frame">
+        <div class="intro-frame__card">
+          <img class="intro-frame__logo" src="/img/logos/wlogo.svg" alt="" width="39" height="26" />
+          <p class="intro-frame__text">{c.intro}</p>
+        </div>
+      </div>
+    )}
     <p style="margin-top:22px"><a class="btn" href={`/en/contact?ceremony=${c.ceremony}#request`}>Plan Your {label}</a></p>
   </section>
 

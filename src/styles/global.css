@@ -1103,6 +1103,13 @@ img.about-hero__front { z-index: 1; pointer-events: none; }
 .planner__text { padding: clamp(28px, 5vw, 64px); }
 @media (max-width: 860px) { .planner { grid-template-columns: 1fr; } .planner img { min-height: 0; height: 360px; } }
 
+/* Ceremony pages: the intro sentence in the framed rose card of the old site (thin white
+   line, rose, cream band, rose card, the W). Brown text instead of the old white,
+   which could not be read on the rose. */
+.intro-frame { max-width: 600px; margin: 28px auto 0; padding: 7px; background: var(--rose); border: 1px solid var(--white); }
+.intro-frame__card { padding: clamp(28px, 3.5vw, 44px) clamp(20px, 3.5vw, 40px); background: var(--rose); border: 10px solid var(--cream); text-align: center; }
+.intro-frame__logo { display: block; width: clamp(28px, 4vw, 39px); height: auto; margin: 0 auto 18px; }
+.intro-frame__text { margin: 0 auto; max-width: 36em; font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(1.25rem, 2.2vw, 1.625rem); line-height: 1.55; color: var(--brown-text); }
 /* ---------- Contact ---------- */
 /* Opening text: "Contact Us" as the H1, the rest as normal text */
 .contact-intro { padding-bottom: 40px; }
