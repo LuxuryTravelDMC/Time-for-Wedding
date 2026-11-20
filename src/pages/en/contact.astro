@@ -19,10 +19,12 @@ const budgets = ['Approximately €1,500', '€2,000 – €2,500', '€3,000 �
   <section class="page-intro contact-intro">
     <div class="container container--narrow">
       <h1 class="h1">Contact Us</h1>
-      <p>Tell us about the wedding you are dreaming of, and let&rsquo;s start planning it together.</p>
-      <p>Whether you already know the destination, the date and the guest list, or you are only starting to imagine your day in Greece, we would love to hear from you. Fill in the form below with as much as you know, or simply write to us. We reply to every request within two working days.</p>
-      <p>Our team will guide you through every choice: the place, the ceremony, the venue and every detail in between.</p>
-      <p class="contact-intro__links"><a href={`mailto:${site.email}`}>{site.email}</a> <span aria-hidden="true">·</span> <a href={site.phoneHref}>{site.phoneDisplay}</a></p>
+      <div class="contact-intro__card">
+        <p>Tell us about the wedding you are dreaming of, and let&rsquo;s start planning it together.</p>
+        <p>Whether you already know the destination, the date and the guest list, or you are only starting to imagine your day in Greece, we would love to hear from you. Fill in the form below with as much as you know, or simply write to us. We reply to every request within two working days.</p>
+        <p>Our team will guide you through every choice: the place, the ceremony, the venue and every detail in between.</p>
+        <p class="contact-intro__links"><a href={`mailto:${site.email}`}>{site.email}</a> <span aria-hidden="true">·</span> <a href={site.phoneHref}>{site.phoneDisplay}</a></p>
+      </div>
     </div>
   </section>
 
