@@ -530,6 +530,11 @@ img.request-cta__front { z-index: 2; pointer-events: none; }
 @media (max-width: 960px) { .venues, .venues[data-count="2"] { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .venues, .venues[data-count="2"], .venues[data-count="1"] { grid-template-columns: 1fr; } }
 [data-tab-panel][hidden] { display: none !important; }
+/* Tabs with the same height: the button sits at the bottom of every panel, in the same place */
+[data-tabs-equal] { position: relative; }
+[data-tabs-equal] [data-tab-panel] { display: flex; flex-direction: column; min-height: var(--panel-h, 0); }
+[data-tabs-equal] [data-tab-panel] > * { flex: none; }
+.tab-cta { margin: auto 0 0; padding-top: 36px; }
 
 /* Venue carousel: 3 cards on desktop, 2 on tablets, one and a peek of the next on phones */
 .carousel { --gap: 22px; }

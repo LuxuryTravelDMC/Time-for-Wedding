@@ -153,6 +153,29 @@ document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
   (root as HTMLElement & { selectTab?: (k: string) => void }).selectTab = select;
 });
 
+// ---------- Tabs with the same height ([data-tabs-equal]) ----------
+// Every panel gets the height of the tallest one, so the button under the cards stays in
+// the same place whichever tab is open. Hidden panels are measured off-screen for a moment.
+document.querySelectorAll<HTMLElement>('[data-tabs-equal]').forEach((root) => {
+  const panels = [...root.querySelectorAll<HTMLElement>('[data-tab-panel]')];
+  const measure = () => {
+    root.style.removeProperty('--panel-h');
+    let max = 0;
+    panels.forEach((p) => {
+      if (p.hidden) {
+        p.style.cssText += ';display:flex!important;position:absolute;visibility:hidden;left:0;right:0';
+        max = Math.max(max, p.offsetHeight);
+        p.style.removeProperty('display'); p.style.removeProperty('position'); p.style.removeProperty('visibility'); p.style.removeProperty('left'); p.style.removeProperty('right');
+      } else max = Math.max(max, p.offsetHeight);
+    });
+    root.style.setProperty('--panel-h', `${max}px`);
+  };
+  measure();
+  document.fonts?.ready.then(measure);
+  let t = 0;
+  window.addEventListener('resize', () => { window.clearTimeout(t); t = window.setTimeout(measure, 150); });
+});
+
 // ---------- Slides that change by themselves (testimonials, ceremony types) ----------
 document.querySelectorAll<HTMLElement>('[data-slider]').forEach((root) => {
   const slides = [...root.querySelectorAll<HTMLElement>('[data-slide]')];

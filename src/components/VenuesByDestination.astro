@@ -17,7 +17,7 @@ const groups = DESTINATIONS.filter((d) => !only || d === only)
 const first = groups[0]?.slug;
 ---
 {groups.length > 0 && (
-  <div data-tabs data-tabs-anim>
+  <div data-tabs data-tabs-anim data-tabs-equal>
     {groups.length > 1 && (
       <div class="pills" role="tablist" aria-label="Destination">
         {groups.map((g) => (
@@ -30,7 +30,7 @@ const first = groups[0]?.slug;
         {g.venues.length > 0 ? (
           <>
             <VenueList venues={g.venues} label={`Wedding venues in ${g.name}`} desktop="carousel" />
-            <p class="center" style="margin-top: 36px">
+            <p class="center tab-cta">
               <a class="btn btn--outline" href={`/en/wedding/places/${g.slug}`}>All venues in {g.name} <Icon name="arrow" class="arrow" /></a>
             </p>
           </>
@@ -46,7 +46,7 @@ const first = groups[0]?.slug;
               </div>
             </a>
           </div>
-          <p class="center" style="margin-top: 36px">
+          <p class="center tab-cta">
             <a class="btn btn--outline" href={`/en/wedding/destinations/${g.slug}`}>Discover {g.name} <Icon name="arrow" class="arrow" /></a>
           </p>
           </>
