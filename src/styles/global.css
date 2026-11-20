@@ -1104,11 +1104,8 @@ img.about-hero__front { z-index: 1; pointer-events: none; }
 @media (max-width: 860px) { .planner { grid-template-columns: 1fr; } .planner img { min-height: 0; height: 360px; } }
 
 /* ---------- Contact ---------- */
-/* Opening: "Contact Us" as a small H1 above a large statement; the accents in bold brown */
+/* Opening text: "Contact Us" as the H1, the rest as normal text */
 .contact-intro { padding-bottom: 40px; }
-.contact-intro .kicker { margin: 0 0 18px; }
-.contact-intro__statement { max-width: 22ch !important; margin: 0 auto 28px; font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(2rem, 4.4vw, 3.5rem); line-height: 1.15; color: var(--ink); }
-.contact-intro__statement em { font-weight: 700; color: var(--brown); }
 .contact-intro p:not([class]) { max-width: 64ch; }
 .contact-intro__links { margin-top: 28px; font-weight: 600; letter-spacing: 0.04em; color: var(--brown); }
 .contact-intro__links a { white-space: nowrap; color: var(--brown); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--brown) 35%, transparent); }
