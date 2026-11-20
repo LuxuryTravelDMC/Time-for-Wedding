@@ -58,10 +58,12 @@ const ess = venue ? Object.entries(venue.essentials as Record<string, string | s
 
   {kind === 'venue' && (
     <>
-      <section class="media-hero"><Img name={venue.photos[0]} alt={venue.name} sizes="100vw" priority /></section>
-      <section class="title-band">
-        <p class="kicker">{venue.subtitle}</p>
-        <h1 class="h1">{venue.name}</h1>
+      <section class="place-hero">
+        <Img name={venue.photos[0]} alt={venue.name} sizes="100vw" priority />
+        <div class="place-hero__card">
+          <h1 class="place-hero__title">{venue.name}</h1>
+          <p class="place-hero__subtitle">{venue.subtitle}</p>
+        </div>
       </section>
       <section class="section">
         <div class="container split" style="align-items:start">
