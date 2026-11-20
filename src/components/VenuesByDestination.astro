@@ -35,6 +35,7 @@ const first = groups[0]?.slug;
             </p>
           </>
         ) : (
+          <>
           <div class="venues" data-count="1">
             <a class="venue-card venue-card--soon" href={`/en/contact?destination=${g.slug}#request`}>
               <div class="venue-card__media"><img src="/img/logos/wlogo.svg" alt="" width="120" height="79" /></div>
@@ -45,6 +46,10 @@ const first = groups[0]?.slug;
               </div>
             </a>
           </div>
+          <p class="center" style="margin-top: 36px">
+            <a class="btn btn--outline" href={`/en/wedding/destinations/${g.slug}`}>Discover {g.name} <Icon name="arrow" class="arrow" /></a>
+          </p>
+          </>
         )}
       </div>
     ))}
