@@ -9,6 +9,7 @@ import SectionHead from '../../../../components/SectionHead.astro';
 import VenueList from '../../../../components/VenueList.astro';
 import Lightbox from '../../../../components/Lightbox.astro';
 import CtaBand from '../../../../components/CtaBand.astro';
+import ServiceCarousel from '../../../../components/ServiceCarousel.astro';
 import Designer from '../../../../components/Designer.astro';
 import images from '../../../../data/images.json';
 import { venues, venuesFor, destinations, DEST_NAMES, DESTINATIONS, seo } from '../../../../lib/content';
@@ -21,11 +22,6 @@ export function getStaticPaths() {
 const { kind, dest, venue } = Astro.props as any;
 const withVenues = DESTINATIONS.filter((d) => venuesFor(d).length > 0);
 const big = (n: string) => { const w = (images as any)[n].widths; return `/img/${n}-${w[w.length - 1]}.webp`; };
-const more = [
-  { href: '/en/wedding/servicepackages/concierge', title: 'Concierge Service', text: '24/7 assistance with your wedding planning', img: 'destinations/specific-venue-additional-services-dsc03508-18' },
-  { href: '/en/wedding/servicepackages/photography', title: 'Wedding Photography', text: 'Professional photography for every moment of your wedding', img: 'destinations/specific-venue-additional-services-beleon-tours-my-greek-wedding-backs' },
-  { href: '/en/wedding/servicepackages/transport', title: 'Premium Transport', text: 'Top-tier wedding cars for your ceremony', img: 'services/premium-transportation' },
-];
 let page: { title: string; description: string; image: string } = { title: '', description: '', image: '' };
 if (kind === 'list') {
   const d = destinations.find((x) => x.slug === dest)!;
@@ -107,18 +103,7 @@ const ess = venue ? Object.entries(venue.essentials as Record<string, string | s
       <section class="section section--rose">
         <div class="container">
           <SectionHead title="More for Your Wedding" subtitle="Additional services for this venue" />
-          <div class="venues">
-            {more.map((m) => (
-              <a class="photo-card" href={m.href} style="height:280px">
-                <Img name={m.img} alt="" sizes="(max-width: 600px) 92vw, 400px" />
-                <span class="photo-card__body">
-                  <span class="photo-card__title">{m.title}</span>
-                  <span class="photo-card__text" style="display:block">{m.text}</span>
-                  <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
-                </span>
-              </a>
-            ))}
-          </div>
+          <ServiceCarousel />
         </div>
       </section>
       <Designer />

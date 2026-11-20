@@ -1,0 +1,23 @@
+---
+// "More for Your Wedding": every service as a looping carousel (service pages and
+// venue pages). `exclude` leaves out the service whose page we are on.
+import Carousel from './Carousel.astro';
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import { services } from '../lib/content';
+interface Props { exclude?: string; label?: string }
+const { exclude, label = 'Wedding services' } = Astro.props;
+const list = (services as any[]).filter((s) => s.slug !== exclude && s.card_image);
+---
+<Carousel label={label} count={list.length} item="services" loop>
+  {list.map((o) => (
+    <a class="photo-card more-card" href={`/en/wedding/servicepackages/${o.slug}`}>
+      <Img name={o.card_image} alt="" sizes="(max-width: 600px) 84vw, (max-width: 960px) 46vw, 400px" />
+      <span class="photo-card__body">
+        <span class="photo-card__title">{o.card_title}</span>
+        {o.card_text && <span class="photo-card__text">{o.card_text}</span>}
+        <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
+      </span>
+    </a>
+  ))}
+</Carousel>

@@ -12,7 +12,7 @@ import Img from '../../../../components/Img.astro';
 import Icon from '../../../../components/Icon.astro';
 import SectionHead from '../../../../components/SectionHead.astro';
 import CtaBand from '../../../../components/CtaBand.astro';
-import Carousel from '../../../../components/Carousel.astro';
+import ServiceCarousel from '../../../../components/ServiceCarousel.astro';
 import DestinationMark from '../../../../components/DestinationMark.astro';
 import { services, destinations, DEST_NAMES } from '../../../../lib/content';
 
@@ -26,7 +26,6 @@ const dests = s.destinations.map((d) => ({
   name: DEST_NAMES[d] ?? d.charAt(0).toUpperCase() + d.slice(1),
   href: destPages.has(d) ? `/en/wedding/destinations/${d}` : undefined,
 }));
-const others = services.filter((x) => x.slug !== s.slug); // every other service
 const hero = s.hero || s.card_image;
 ---
 <Base title={s.title} description={s.description || s.card_text} image={hero}>
@@ -81,18 +80,7 @@ const hero = s.hero || s.card_image;
   <section class="section section--rose">
     <div class="container">
       <SectionHead title="More for Your Wedding" subtitle="Discover our other services" />
-      <Carousel label="Other wedding services" count={others.length} item="services" loop>
-        {others.map((o) => (
-          <a class="photo-card more-card" href={`/en/wedding/servicepackages/${o.slug}`}>
-            <Img name={o.card_image} alt="" sizes="(max-width: 600px) 84vw, (max-width: 960px) 46vw, 400px" />
-            <span class="photo-card__body">
-              <span class="photo-card__title">{o.card_title}</span>
-              {o.card_text && <span class="photo-card__text">{o.card_text}</span>}
-              <span class="link-arrow">Explore <Icon name="arrow" class="arrow" /></span>
-            </span>
-          </a>
-        ))}
-      </Carousel>
+      <ServiceCarousel exclude={s.slug} label="Other wedding services" />
     </div>
   </section>
   <section class="section"><div class="container"><CtaBand /></div></section>
