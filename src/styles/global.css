@@ -525,8 +525,8 @@ img.request-cta__front { z-index: 2; pointer-events: none; }
 .venue-card__types { font-size: 0.875rem; margin: 0 0 14px; }
 .venue-card .link-arrow { margin-top: auto; font-size: 0.8125rem; }
 /* Destination without venues yet (Thessaloniki): the W on beige instead of a photo */
-.venue-card--soon .venue-card__media { display: grid; place-items: center; background: var(--beige); }
-.venue-card--soon .venue-card__media img { width: 30%; height: auto; object-fit: contain; }
+.venue-card--soon .venue-card__media--logo { display: grid; place-items: center; background: var(--beige); }
+.venue-card--soon .venue-card__media--logo img { width: 30%; height: auto; object-fit: contain; }
 @media (max-width: 960px) { .venues, .venues[data-count="2"] { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .venues, .venues[data-count="2"], .venues[data-count="1"] { grid-template-columns: 1fr; } }
 [data-tab-panel][hidden] { display: none !important; }

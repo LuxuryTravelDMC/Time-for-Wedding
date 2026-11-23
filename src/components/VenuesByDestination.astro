@@ -6,11 +6,14 @@
 // Switching destination: the brown pill glides to the new name, the old cards fade
 // out and the new ones are dealt from the middle (data-tabs-anim, site.ts).
 import VenueList from './VenueList.astro';
+import Img from './Img.astro';
 import Icon from './Icon.astro';
 import { venuesFor, DEST_NAMES, DESTINATIONS } from '../lib/content';
 interface Props { only?: string; limit?: number }
 const { only, limit = 12 } = Astro.props;
 const SOON = ['santorini', 'thessaloniki'];
+// a photo for the placeholder card instead of the W, where we have one
+const SOON_PHOTO: Record<string, string> = { thessaloniki: 'destinations/thessaloniki' };
 const groups = DESTINATIONS.filter((d) => !only || d === only)
   .map((d) => ({ slug: d, name: DEST_NAMES[d], venues: venuesFor(d).slice(0, limit) }))
   .filter((g) => g.venues.length > 0 || (!only && SOON.includes(g.slug)));
@@ -38,7 +41,9 @@ const first = groups[0]?.slug;
           <>
           <div class="venues" data-count="1">
             <a class="venue-card venue-card--soon" href={`/en/contact?destination=${g.slug}#request`}>
-              <div class="venue-card__media"><img src="/img/logos/wlogo.svg" alt="" width="120" height="79" /></div>
+              {SOON_PHOTO[g.slug]
+                ? <div class="venue-card__media"><Img name={SOON_PHOTO[g.slug]} alt={`Wedding in ${g.name}`} sizes="(max-width: 700px) 100vw, 560px" /></div>
+                : <div class="venue-card__media venue-card__media--logo"><img src="/img/logos/wlogo.svg" alt="" width="120" height="79" /></div>}
               <div class="venue-card__body">
                 <h3 class="venue-card__name">Venues in {g.name}</h3>
                 <p class="venue-card__types">Our selection is on its way. Tell us what you have in mind and we will send you personal venue ideas.</p>
