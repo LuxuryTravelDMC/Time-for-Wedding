@@ -1,0 +1,31 @@
+---
+// Wedding type pages: the top photos in one row that slides slowly to the left
+// in an endless loop, as on the old site. It stops while the mouse is over it and
+// goes on when the mouse leaves. The row is drawn twice so the loop has no seam.
+import Img from './Img.astro';
+import images from '../data/images.json';
+interface Props { photos: string[]; alt: string }
+const { photos, alt } = Astro.props;
+const meta = images as Record<string, { w: number; h: number }>;
+const ratio = (p: string) => meta[p].w / meta[p].h;
+const H = 530; // desktop height in px; the speed is about 40px a second
+const seconds = Math.round(photos.reduce((s, p) => s + ratio(p) * H + 6, 0) / 40);
+---
+<section class="marquee" aria-label={`${alt}, photos`} style={`--marquee-time:${seconds}s`}>
+  <div class="marquee__track">
+    {[0, 1].map((copy) => (
+      <div class="marquee__set" aria-hidden={copy === 1 ? 'true' : undefined}>
+        {photos.map((p, i) => (
+          <Img
+            name={p}
+            alt={copy === 0 ? `${alt}, photo ${i + 1}` : ''}
+            sizes={`${Math.round(ratio(p) * H)}px`}
+            priority={copy === 0 && i === 0}
+            loading={copy === 0 && i < 4 ? 'eager' : 'lazy'}
+            style={`aspect-ratio:${meta[p].w}/${meta[p].h}`}
+          />
+        ))}
+      </div>
+    ))}
+  </div>
+</section>

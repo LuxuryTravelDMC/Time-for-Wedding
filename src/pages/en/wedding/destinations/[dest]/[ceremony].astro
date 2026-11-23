@@ -2,7 +2,7 @@
 // One ceremony in one destination: Symbolic Wedding in Crete, Civil Wedding in Rhodes…
 import Base from '../../../../../layouts/Base.astro';
 import SectionHead from '../../../../../components/SectionHead.astro';
-import TrioHero from '../../../../../components/TrioHero.astro';
+import MarqueeHero from '../../../../../components/MarqueeHero.astro';
 import VenueList from '../../../../../components/VenueList.astro';
 import WeddingCard from '../../../../../components/WeddingCard.astro';
 import ServicesGrid from '../../../../../components/ServicesGrid.astro';
@@ -22,7 +22,7 @@ const photos = p.hero.map((h) => h.src);
 const cta = `/en/contact?ceremony=${p.ceremony}&destination=${p.destination}#request`;
 ---
 <Base title={p.title} description={p.description || p.intro} image={photos[0]}>
-  {photos.length > 0 && <TrioHero photos={photos} alt={p.h1} />}
+  {photos.length > 0 && <MarqueeHero photos={photos} alt={p.h1} />}
   <section class="title-band">
     <h1 class="h1">{p.h1}</h1>
     {p.intro && <><hr class="thin-rule" /><p class="lead">{p.intro}</p></>}

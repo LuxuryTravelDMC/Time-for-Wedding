@@ -871,6 +871,15 @@ a.svc-note:hover { background: #ecd0bd; }
 
 /* ---------- Couple gallery ---------- */
 .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--brown); }
+/* Wedding type pages: a row of photos sliding to the left in an endless loop; it pauses on hover */
+.marquee { overflow: hidden; height: min(530px, 62vh); background: var(--paper); }
+.marquee__track { display: flex; width: max-content; height: 100%; animation: marquee var(--marquee-time, 60s) linear infinite; }
+.marquee:hover .marquee__track, .marquee:focus-within .marquee__track { animation-play-state: paused; }
+.marquee__set { display: flex; gap: 6px; height: 100%; padding-right: 6px; }
+.marquee__set img { height: 100%; width: auto; object-fit: cover; display: block; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee { overflow-x: auto; } .marquee__track { animation: none; } .marquee__set[aria-hidden] { display: none; } }
+@media (max-width: 700px) { .marquee { height: 300px; } }
 .trio img { width: 100%; height: min(72vh, 640px); object-fit: cover; object-position: 50% 30%; }
 /* Couple pages: looping photo slider at the top (one photo at a time) */
 .hero-slider { position: relative; display: grid; overflow: hidden; height: min(78vh, 720px); background: var(--ink); }
