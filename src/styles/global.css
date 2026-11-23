@@ -1051,24 +1051,31 @@ html:has(.lightbox.is-open) { background: var(--cream); } /* the reserved scroll
   .post-story__card, .post-story--right .post-story__card { position: relative; top: auto; left: auto; right: auto; transform: none; width: auto; margin: -48px 16px 0; }
   .stories { gap: 56px; margin-top: 56px; }
 }
-/* Blog: the logo's round triangle pattern as whole circles in different sizes, behind the content */
-.blog-deco { position: absolute; z-index: 0; height: auto; aspect-ratio: 1; opacity: 0.5; pointer-events: none; }
-.blog-deco--1 { width: min(560px, 60vw); top: 60px; right: max(-160px, -10vw); }            /* beside the first article */
 .blog-organize { position: relative; overflow-x: clip; }
 .blog-organize .container { position: relative; z-index: 1; }
-.post-story .story-deco { position: absolute; z-index: 0; width: var(--size); height: auto; opacity: 0.45; pointer-events: none; top: calc(var(--size) * -0.45); right: calc(var(--size) * -0.15); } /* in the empty corner beside each story */
-.post-story--right .story-deco { top: auto; right: auto; bottom: calc(var(--size) * -0.4); left: calc(var(--size) * -0.2); }
 .post-story__media, .post-story__card { z-index: 1; }
-.blog-deco--6 { width: 340px; top: -110px; right: -70px; opacity: 0.45; }                    /* over the edge of the last section */
+/* Blog: the logo's round pattern as whole circles; place, size and opacity come from blog_deco.json */
+.deco { position: absolute; z-index: 0; width: var(--s); height: auto; aspect-ratio: 1; pointer-events: none; }
+/* edit mode (?edit): grab, move and resize the circles */
+.deco-edit .deco { z-index: 5; pointer-events: auto; cursor: move; outline: 1px dashed rgba(176, 93, 65, 0.6); outline-offset: 2px; border-radius: 50%; touch-action: none; }
+.deco-edit .deco.is-selected { outline: 2px solid var(--brown); }
+.deco-panel { position: fixed; z-index: 400; right: 16px; bottom: 16px; width: 280px; padding: 16px; background: var(--paper); border-radius: 10px; box-shadow: 0 12px 40px rgba(76, 57, 43, 0.25); font-size: 0.875rem; color: var(--ink); }
+.deco-panel h3 { margin: 0 0 6px; font-family: var(--font-display); font-style: italic; color: var(--brown); font-size: 1.2rem; }
+.deco-panel p { margin: 0 0 10px; font-size: 0.8125rem; color: var(--brown-text); }
+.deco-panel label { display: grid; gap: 4px; margin: 10px 0; font-weight: 600; }
+.deco-panel input[type=range] { width: 100%; accent-color: var(--brown); }
+.deco-panel__row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.deco-panel button { flex: 1 1 auto; padding: 8px 10px; border: 1px solid var(--brown); border-radius: var(--radius-btn); background: none; color: var(--brown); font: inherit; font-size: 0.8125rem; font-weight: 600; cursor: pointer; }
+.deco-panel button.is-main { background: var(--brown); color: var(--white); }
+.deco-panel textarea { width: 100%; height: 80px; margin-top: 8px; font: 11px/1.4 monospace; }
 @media (max-width: 860px) {
   .blog-hero__text { padding-top: clamp(24px, 6vw, 40px); } /* top right, as on desktop */
   .blog-hero__text .h1 { max-width: 15ch; font-size: clamp(1.75rem, 7.6vw, 2.4rem); }
   .blog-hero::after { background: linear-gradient(to top, rgba(76, 57, 43, 0.45) 0%, rgba(76, 57, 43, 0.16) 55%, rgba(76, 57, 43, 0.12) 100%); }
   .blog-list { padding-top: clamp(40px, 8vw, 64px); }
   .blog-feature { margin-top: 0; }
-  .blog-deco--1 { width: 64vw; top: 10px; right: -24vw; }
-  .post-story .story-deco { display: none; }
-  .blog-deco--6 { width: 44vw; top: -18vw; right: -12vw; }
+  .deco { width: calc(var(--s) * 0.45); }
+  .deco[data-where^="story"] { display: none; } /* no empty space beside the stories on phones */
 }
 .article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .article-card { display: flex; flex-direction: column; background: var(--paper); border-radius: var(--radius-card); overflow: hidden; text-decoration: none; color: var(--text); box-shadow: var(--shadow-soft); transition: transform 0.4s var(--ease); }

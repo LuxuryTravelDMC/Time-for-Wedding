@@ -15,11 +15,17 @@ import Img from '../../components/Img.astro';
 import Icon from '../../components/Icon.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import page from '../../data/blog_page.json';
+import deco from '../../data/blog_deco.json';
 import { blog, seo, plain } from '../../lib/content';
 const s = seo['/en/blog'];
 const featured = blog.find((b) => (b as any).featured) ?? blog[0];
 const rest = blog.filter((b) => b !== featured);
 const excerpt = (a: any) => a.excerpt || plain(a.body);
+// The round pattern circles. Their place, size and opacity live in src/data/blog_deco.json;
+// open the page with ?edit to move them by hand and copy new settings (see site.ts).
+const circles = (where: string) => (deco as { where: string; x: number; y: number; size: number; opacity: number }[])
+  .map((d, i) => ({ ...d, i })).filter((d) => d.where === where);
+const LOGO = '/img/logos/wlt-logoframe-bronze.svg';
 ---
 <Base title={s.title} description={s.description} image={page.hero}>
   <section class="blog-hero">
@@ -34,7 +40,7 @@ const excerpt = (a: any) => a.excerpt || plain(a.body);
 
   <section class="section blog-list">
     {/* the round triangle pattern of the logo, whole circles in several sizes (owner's request) */}
-    <img class="blog-deco blog-deco--1" src="/img/logos/wlt-logoframe-bronze.svg" alt="" width="640" height="640" loading="lazy" />
+    {circles('list').map((d) => <img class="deco" data-deco={d.i} data-where={d.where} src={LOGO} alt="" width="640" height="640" loading="lazy" style={`left:${d.x}%;top:${d.y}%;--s:${d.size}px;opacity:${d.opacity}`} />)}
     <div class="container">
       <a class="blog-feature" href={`/en/blog/${featured.slug}`} data-reveal>
         <div class="blog-feature__media"><Img name={featured.card_image || featured.hero} alt={featured.card_alt || featured.hero_alt || ''} sizes="(max-width: 860px) 100vw, 1160px" /></div>
@@ -48,7 +54,7 @@ const excerpt = (a: any) => a.excerpt || plain(a.body);
       <div class="stories">
         {rest.map((a, i) => (
           <a class:list={['post-story', { 'post-story--right': i % 2 === 1 }]} href={`/en/blog/${a.slug}`} data-reveal>
-            {i % 3 !== 2 && <img class="story-deco" src="/img/logos/wlt-logoframe-bronze.svg" alt="" width="300" height="300" loading="lazy" style={`--size:${[230, 130, 300, 170, 260, 110][i % 6]}px`} />}
+            {circles(`story-${i}`).map((d) => <img class="deco" data-deco={d.i} data-where={d.where} src={LOGO} alt="" width="300" height="300" loading="lazy" style={`left:${d.x}%;top:${d.y}%;--s:${d.size}px;opacity:${d.opacity}`} />)}
             <div class="post-story__media"><Img name={a.card_image || a.hero} alt={a.card_alt || a.hero_alt || ''} sizes="(max-width: 860px) 100vw, 840px" /></div>
             <div class="post-story__card">
               <span class="post-story__label">{String(i + 1).padStart(2, '0')}</span>
@@ -63,7 +69,7 @@ const excerpt = (a: any) => a.excerpt || plain(a.body);
   </section>
 
   <section class="section section--paper blog-organize">
-    <img class="blog-deco blog-deco--6" src="/img/logos/wlt-logoframe-bronze.svg" alt="" width="640" height="640" loading="lazy" />
+    {circles('organize').map((d) => <img class="deco" data-deco={d.i} data-where={d.where} src={LOGO} alt="" width="640" height="640" loading="lazy" style={`left:${d.x}%;top:${d.y}%;--s:${d.size}px;opacity:${d.opacity}`} />)}
     <div class="container split">
       <div class="split__media" data-reveal><Img name={page.organize_image} alt="Bride and groom kissing on a white terrace overlooking the Santorini caldera" sizes="(max-width: 860px) 92vw, 720px" /></div>
       <div class="prose" data-reveal>

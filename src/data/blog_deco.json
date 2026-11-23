@@ -1,0 +1,65 @@
+[
+ {
+  "where": "list",
+  "x": 70.81,
+  "y": 0.83,
+  "size": 560,
+  "opacity": 0.5
+ },
+ {
+  "where": "story-0",
+  "x": 83.15,
+  "y": -19.17,
+  "size": 230,
+  "opacity": 0.45
+ },
+ {
+  "where": "story-1",
+  "x": -2.24,
+  "y": 85.56,
+  "size": 130,
+  "opacity": 0.45
+ },
+ {
+  "where": "story-3",
+  "x": -2.93,
+  "y": 81.11,
+  "size": 170,
+  "opacity": 0.45
+ },
+ {
+  "where": "story-4",
+  "x": 80.95,
+  "y": -21.67,
+  "size": 260,
+  "opacity": 0.45
+ },
+ {
+  "where": "story-6",
+  "x": 83.15,
+  "y": -19.17,
+  "size": 230,
+  "opacity": 0.45
+ },
+ {
+  "where": "story-7",
+  "x": -2.24,
+  "y": 85.56,
+  "size": 130,
+  "opacity": 0.45
+ },
+ {
+  "where": "story-9",
+  "x": -2.93,
+  "y": 81.11,
+  "size": 170,
+  "opacity": 0.45
+ },
+ {
+  "where": "organize",
+  "x": 81.05,
+  "y": -15.46,
+  "size": 340,
+  "opacity": 0.45
+ }
+]

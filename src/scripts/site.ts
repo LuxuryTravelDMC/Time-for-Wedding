@@ -517,3 +517,67 @@ document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
   box.addEventListener('touchend', (e) => { if ((e.target as HTMLElement).closest('[data-thumbs]')) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1)); });
 });
 
+
+// ---------- Blog circles: edit mode (open the page with ?edit) ----------
+// For the owner: drag a circle to move it, use the sliders for size and opacity,
+// then "Copy settings" and send the text to Claude, who saves it in blog_deco.json.
+if (new URLSearchParams(location.search).has('edit') && document.querySelector('.deco')) {
+  document.body.classList.add('deco-edit');
+  const all = () => [...document.querySelectorAll<HTMLImageElement>('.deco')];
+  const panel = document.createElement('div');
+  panel.className = 'deco-panel';
+  panel.innerHTML = `<h3>Circles</h3><p>Drag a circle to move it. Click one to change its size and opacity.</p>
+    <label>Size <span data-v="size"></span><input type="range" min="40" max="900" step="10" data-in="size"></label>
+    <label>Opacity <span data-v="opacity"></span><input type="range" min="0.05" max="1" step="0.05" data-in="opacity"></label>
+    <div class="deco-panel__row"><button type="button" data-act="dup">Duplicate</button><button type="button" data-act="del">Delete</button></div>
+    <div class="deco-panel__row"><button type="button" class="is-main" data-act="copy">Copy settings</button></div>
+    <textarea readonly hidden></textarea>`;
+  document.body.append(panel);
+  const size = panel.querySelector<HTMLInputElement>('[data-in="size"]')!;
+  const op = panel.querySelector<HTMLInputElement>('[data-in="opacity"]')!;
+  const out = panel.querySelector('textarea')!;
+  let sel: HTMLImageElement | null = null;
+  const px = (el: HTMLElement) => parseFloat(getComputedStyle(el).getPropertyValue('--s')) || el.offsetWidth;
+  const show = () => {
+    panel.querySelector('[data-v="size"]')!.textContent = sel ? `${Math.round(px(sel))}px` : '';
+    panel.querySelector('[data-v="opacity"]')!.textContent = sel ? Number(sel.style.opacity || 1).toFixed(2) : '';
+    if (sel) { size.value = String(px(sel)); op.value = sel.style.opacity || '1'; }
+    all().forEach((d) => d.classList.toggle('is-selected', d === sel));
+  };
+  const bind = (d: HTMLImageElement) => {
+    d.draggable = false;
+    // circles inside a story sit in its link: a drag must not open the article
+    d.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); });
+    d.addEventListener('pointerdown', (e) => {
+      e.preventDefault(); sel = d; show();
+      const parent = d.offsetParent as HTMLElement; const pr = parent.getBoundingClientRect();
+      const r = d.getBoundingClientRect(); const dx = e.clientX - r.left; const dy = e.clientY - r.top;
+      d.setPointerCapture(e.pointerId);
+      const move = (ev: PointerEvent) => {
+        d.style.left = `${(((ev.clientX - dx - pr.left) / pr.width) * 100).toFixed(2)}%`;
+        d.style.top = `${(((ev.clientY - dy - pr.top) / pr.height) * 100).toFixed(2)}%`;
+      };
+      const up = () => { d.removeEventListener('pointermove', move); d.removeEventListener('pointerup', up); };
+      d.addEventListener('pointermove', move); d.addEventListener('pointerup', up);
+    });
+  };
+  all().forEach(bind);
+  size.addEventListener('input', () => { if (sel) { sel.style.setProperty('--s', `${size.value}px`); show(); } });
+  op.addEventListener('input', () => { if (sel) { sel.style.opacity = op.value; show(); } });
+  panel.addEventListener('click', async (e) => {
+    const act = (e.target as HTMLElement).dataset.act;
+    if (act === 'dup' && sel) {
+      const c = sel.cloneNode() as HTMLImageElement;
+      c.style.left = `${parseFloat(sel.style.left) + 3}%`; c.style.top = `${parseFloat(sel.style.top) + 3}%`;
+      sel.after(c); bind(c); sel = c; show();
+    }
+    if (act === 'del' && sel) { sel.remove(); sel = null; show(); }
+    if (act === 'copy') {
+      const data = all().map((d) => ({ where: d.dataset.where, x: parseFloat(d.style.left), y: parseFloat(d.style.top), size: Math.round(px(d)), opacity: Number(d.style.opacity || 1) }));
+      const text = JSON.stringify(data);
+      out.hidden = false; out.value = text; out.select();
+      try { await navigator.clipboard.writeText(text); (e.target as HTMLElement).textContent = 'Copied! Send it to Claude'; } catch { /* the text stays in the box below */ }
+    }
+  });
+  show();
+}
