@@ -5,7 +5,7 @@ import SectionHead from '../../../../../components/SectionHead.astro';
 import MarqueeHero from '../../../../../components/MarqueeHero.astro';
 import VenueList from '../../../../../components/VenueList.astro';
 import WeddingCard from '../../../../../components/WeddingCard.astro';
-import ServicesGrid from '../../../../../components/ServicesGrid.astro';
+import ServicesStack from '../../../../../components/ServicesStack.astro';
 import Faq from '../../../../../components/Faq.astro';
 import CtaBand from '../../../../../components/CtaBand.astro';
 import { destCeremony, venuesFor, venueTypes, coupleBySlug, DEST_NAMES, CEREMONY_NAMES, CEREMONY_SHORT } from '../../../../../lib/content';
@@ -50,7 +50,7 @@ const cta = `/en/contact?ceremony=${p.ceremony}&destination=${p.destination}#req
   <section class="section">
     <div class="container">
       <SectionHead title="Tailored Services" subtitle="Thoughtfully curated experiences, designed around you." />
-      <ServicesGrid />
+      <ServicesStack />
     </div>
   </section>
 
