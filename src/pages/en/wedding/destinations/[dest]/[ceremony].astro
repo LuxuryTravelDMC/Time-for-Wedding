@@ -25,7 +25,14 @@ const cta = `/en/contact?ceremony=${p.ceremony}&destination=${p.destination}#req
   {photos.length > 0 && <MarqueeHero photos={photos} alt={p.h1} />}
   <section class="title-band">
     <h1 class="h1">{p.h1}</h1>
-    {p.intro && <><hr class="thin-rule" /><p class="lead">{p.intro}</p></>}
+    {p.intro && (
+      <div class="intro-frame">
+        <div class="intro-frame__card">
+          <img class="intro-frame__logo" src="/img/logos/wlogo.svg" alt="" width="39" height="26" />
+          <p class="intro-frame__text">{p.intro}</p>
+        </div>
+      </div>
+    )}
     <p style="margin-top:22px"><a class="btn" href={cta}>Plan Your Wedding in {name}</a></p>
   </section>
 
