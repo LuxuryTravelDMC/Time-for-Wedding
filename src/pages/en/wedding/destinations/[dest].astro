@@ -8,13 +8,12 @@ import VenuesByDestination from '../../../../components/VenuesByDestination.astr
 import WeddingCard from '../../../../components/WeddingCard.astro';
 import Carousel from '../../../../components/Carousel.astro';
 import Designer from '../../../../components/Designer.astro';
-import { destinations, venuesFor, couples, CEREMONY_NAMES } from '../../../../lib/content';
+import { destinations, couples, CEREMONY_NAMES } from '../../../../lib/content';
 
 export function getStaticPaths() {
   return destinations.map((d) => ({ params: { dest: d.slug }, props: { d } }));
 }
 const { d } = Astro.props;
-const venues = venuesFor(d.slug);
 const weddings = couples.filter((c) => c.destSlug === d.slug).slice(0, 6);
 const title = d.title || `Wedding in ${d.name} | Wedding by Luxury Travel`;
 ---
@@ -36,14 +35,13 @@ const title = d.title || `Wedding in ${d.name} | Wedding by Luxury Travel`;
     </section>
   )}
 
-  {venues.length > 0 && (
-    <section class="section section--paper" id="venues">
-      <div class="container">
-        <SectionHead title={`Wedding Venues in ${d.name}`} subtitle={`Choose a setting that reflects your unique love story in ${d.name}`} />
-        <VenuesByDestination only={d.slug} />
-      </div>
-    </section>
-  )}
+  {/* shown on every destination; without venues yet it holds one "venue ideas" card */}
+  <section class="section section--paper" id="venues">
+    <div class="container">
+      <SectionHead title={`Wedding Venues in ${d.name}`} subtitle={`Choose a setting that reflects your unique love story in ${d.name}`} />
+      <VenuesByDestination only={d.slug} />
+    </div>
+  </section>
 
   {d.pins.length > 0 && (
     <section class="section">

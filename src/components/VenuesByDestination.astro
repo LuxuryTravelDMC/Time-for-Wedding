@@ -8,15 +8,16 @@
 import VenueList from './VenueList.astro';
 import Img from './Img.astro';
 import Icon from './Icon.astro';
-import { venuesFor, DEST_NAMES, DESTINATIONS } from '../lib/content';
+import { venuesFor, DEST_NAMES, DESTINATIONS, destinations } from '../lib/content';
 interface Props { only?: string; limit?: number }
 const { only, limit = 12 } = Astro.props;
 const SOON = ['santorini', 'thessaloniki'];
 // a photo for the placeholder card instead of the W, where we have one
-const SOON_PHOTO: Record<string, string> = { thessaloniki: 'destinations/thessaloniki-white-tower' };
+// the placeholder card shows the destination's own photo (the W only if there is none)
+const SOON_PHOTO: Record<string, string> = Object.fromEntries((destinations as any[]).filter((d) => d.image).map((d) => [d.slug, d.image]));
 const groups = DESTINATIONS.filter((d) => !only || d === only)
   .map((d) => ({ slug: d, name: DEST_NAMES[d], venues: venuesFor(d).slice(0, limit) }))
-  .filter((g) => g.venues.length > 0 || (!only && SOON.includes(g.slug)));
+  .filter((g) => g.venues.length > 0 || (only ? true : SOON.includes(g.slug)));
 const first = groups[0]?.slug;
 ---
 {groups.length > 0 && (
@@ -51,9 +52,11 @@ const first = groups[0]?.slug;
               </div>
             </a>
           </div>
-          <p class="center tab-cta">
-            <a class="btn btn--outline" href={`/en/wedding/destinations/${g.slug}`}>Discover {g.name} <Icon name="arrow" class="arrow" /></a>
-          </p>
+          {!only && (
+            <p class="center tab-cta">
+              <a class="btn btn--outline" href={`/en/wedding/destinations/${g.slug}`}>Discover {g.name} <Icon name="arrow" class="arrow" /></a>
+            </p>
+          )}
           </>
         )}
       </div>
