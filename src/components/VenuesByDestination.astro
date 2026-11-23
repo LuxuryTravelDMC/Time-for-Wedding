@@ -13,7 +13,7 @@ interface Props { only?: string; limit?: number }
 const { only, limit = 12 } = Astro.props;
 const SOON = ['santorini', 'thessaloniki'];
 // a photo for the placeholder card instead of the W, where we have one
-const SOON_PHOTO: Record<string, string> = { thessaloniki: 'destinations/thessaloniki' };
+const SOON_PHOTO: Record<string, string> = { thessaloniki: 'destinations/thessaloniki-white-tower' };
 const groups = DESTINATIONS.filter((d) => !only || d === only)
   .map((d) => ({ slug: d, name: DEST_NAMES[d], venues: venuesFor(d).slice(0, limit) }))
   .filter((g) => g.venues.length > 0 || (!only && SOON.includes(g.slug)));
