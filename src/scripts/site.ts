@@ -423,6 +423,25 @@ document.querySelectorAll<HTMLElement>('[data-map]').forEach((map) => {
 });
 
 // ---------- Destinations "book": one panel opens at a time ----------
+// ---------- Services as stacked strips (wedding type pages) ----------
+// Hover or focus opens a strip. On touch screens the first tap opens it, the second
+// follows the link.
+document.querySelectorAll<HTMLElement>('[data-svc-stack]').forEach((stack) => {
+  const items = [...stack.querySelectorAll<HTMLElement>('[data-svc-item]')];
+  const open = (el: HTMLElement) => items.forEach((x) => x.classList.toggle('is-open', x === el));
+  let wasOpen = false;
+  items.forEach((el) => {
+    el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') open(el); });
+    // remember the state before touch emulation or focus opens the strip
+    el.addEventListener('pointerdown', () => { wasOpen = el.classList.contains('is-open'); });
+    el.addEventListener('focus', () => open(el));
+    el.addEventListener('click', (e) => {
+      if ((e as PointerEvent).pointerType !== 'mouse' && !wasOpen && e.detail > 0) { e.preventDefault(); open(el); }
+      wasOpen = true;
+    });
+  });
+});
+
 document.querySelectorAll<HTMLElement>('[data-book]').forEach((book) => {
   const panels = [...book.querySelectorAll<HTMLElement>('[data-book-panel]')];
   const open = (p: HTMLElement) => panels.forEach((x) => { const on = x === p; x.classList.toggle('is-active', on); x.setAttribute('aria-expanded', String(on)); });

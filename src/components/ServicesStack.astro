@@ -1,0 +1,27 @@
+---
+// Wedding type pages: the five services as horizontal strips stacked on top of each
+// other, as on the old site. One strip is open (the last one at first); hovering,
+// focusing or tapping another one opens it. Each strip is a link to the service.
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+const items = [
+  { href: '/en/wedding/servicepackages/transport', title: 'Premium Transport', text: 'Top-tier wedding cars for your ceremony', img: 'services/premium-transportation' },
+  { href: '/en/wedding/servicepackages/accommodation', title: 'Deluxe Accommodation', text: 'Curated hotels & villas for your wedding', img: 'services/deluxe-accomodation' },
+  { href: '/en/wedding/servicepackages/tours', title: 'Tailor-made Tours', text: 'Tours for couples across Greece', img: 'services/tailor-made-tour' },
+  { href: '/en/wedding/servicepackages/concierge', title: 'Concierge Service', text: '24/7 assistance with your wedding planning', img: 'services/concirge-service-canaves-oia' },
+  { href: '/en/wedding/servicepackages/yacht', title: 'Yacht Rentals', text: 'Private yacht experiences for two', img: 'services/yacht-rental' },
+];
+const open = items.length - 1;
+---
+<div class="svc-stack" data-svc-stack>
+  {items.map((s, i) => (
+    <a class:list={['svc-stack__item', { 'is-open': i === open }]} href={s.href} data-svc-item>
+      <Img name={s.img} alt="" sizes="(max-width: 1200px) 100vw, 1200px" />
+      <span class="svc-stack__body">
+        <span class="svc-stack__title">{s.title}</span>
+        <span class="svc-stack__text">{s.text}</span>
+      </span>
+      <span class="svc-stack__more">Explore <Icon name="arrow" class="arrow" /></span>
+    </a>
+  ))}
+</div>

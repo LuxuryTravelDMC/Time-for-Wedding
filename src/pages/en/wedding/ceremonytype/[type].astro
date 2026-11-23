@@ -6,7 +6,7 @@ import Icon from '../../../../components/Icon.astro';
 import SectionHead from '../../../../components/SectionHead.astro';
 import TrioHero from '../../../../components/TrioHero.astro';
 import WeddingCard from '../../../../components/WeddingCard.astro';
-import ServicesGrid from '../../../../components/ServicesGrid.astro';
+import ServicesStack from '../../../../components/ServicesStack.astro';
 import Designer from '../../../../components/Designer.astro';
 import Faq from '../../../../components/Faq.astro';
 import { ceremonies, coupleBySlug, destCeremony, DEST_NAMES } from '../../../../lib/content';
@@ -75,7 +75,7 @@ const label = c.h1.replace(/ in Greece$/i, '');
   <section class="section">
     <div class="container">
       <SectionHead title="Tailored Services" subtitle="Thoughtfully curated experiences, designed around you." />
-      <ServicesGrid />
+      <ServicesStack />
     </div>
   </section>
 
