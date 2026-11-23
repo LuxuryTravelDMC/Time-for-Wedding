@@ -1051,14 +1051,24 @@ html:has(.lightbox.is-open) { background: var(--cream); } /* the reserved scroll
   .post-story__card, .post-story--right .post-story__card { position: relative; top: auto; left: auto; right: auto; transform: none; width: auto; margin: -48px 16px 0; }
   .stories { gap: 56px; margin-top: 56px; }
 }
-.blog-list__deco { position: absolute; z-index: 0; right: 0; top: 40px; width: min(640px, 70vw); height: auto; transform: translateX(50%); opacity: 0.55; pointer-events: none; } /* just under the photo, beside the first article */
+/* Blog: the logo's round triangle pattern as whole circles in different sizes, behind the content */
+.blog-deco { position: absolute; z-index: 0; height: auto; aspect-ratio: 1; opacity: 0.5; pointer-events: none; }
+.blog-deco--1 { width: min(560px, 60vw); top: 60px; right: max(-160px, -10vw); }            /* beside the first article */
+.blog-organize { position: relative; overflow-x: clip; }
+.blog-organize .container { position: relative; z-index: 1; }
+.post-story .story-deco { position: absolute; z-index: 0; width: var(--size); height: auto; opacity: 0.45; pointer-events: none; top: calc(var(--size) * -0.45); right: calc(var(--size) * -0.15); } /* in the empty corner beside each story */
+.post-story--right .story-deco { top: auto; right: auto; bottom: calc(var(--size) * -0.4); left: calc(var(--size) * -0.2); }
+.post-story__media, .post-story__card { z-index: 1; }
+.blog-deco--6 { width: 340px; top: -110px; right: -70px; opacity: 0.45; }                    /* over the edge of the last section */
 @media (max-width: 860px) {
   .blog-hero__text { padding-top: clamp(24px, 6vw, 40px); } /* top right, as on desktop */
   .blog-hero__text .h1 { max-width: 15ch; font-size: clamp(1.75rem, 7.6vw, 2.4rem); }
   .blog-hero::after { background: linear-gradient(to top, rgba(76, 57, 43, 0.45) 0%, rgba(76, 57, 43, 0.16) 55%, rgba(76, 57, 43, 0.12) 100%); }
   .blog-list { padding-top: clamp(40px, 8vw, 64px); }
   .blog-feature { margin-top: 0; }
-  .blog-list__deco { top: auto; bottom: 0; width: min(420px, 58vw); transform: translate(50%, 30%); }
+  .blog-deco--1 { width: 64vw; top: 10px; right: -24vw; }
+  .post-story .story-deco { display: none; }
+  .blog-deco--6 { width: 44vw; top: -18vw; right: -12vw; }
 }
 .article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .article-card { display: flex; flex-direction: column; background: var(--paper); border-radius: var(--radius-card); overflow: hidden; text-decoration: none; color: var(--text); box-shadow: var(--shadow-soft); transition: transform 0.4s var(--ease); }

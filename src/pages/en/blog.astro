@@ -5,7 +5,8 @@
 // Hero, mixing the original site and the new one (owner's choice): the title on the
 // right as on the original, the brown layer and the plain rose kicker of the new one;
 // the first article rises only a little into the photo, so the photo stays visible;
-// the round triangle pattern from the logo peeks in from the right edge.
+// the round triangle pattern from the logo appears as whole circles in several sizes
+// and places down the page (second review).
 // Article list ("stories", owner's choice): each article is a wide photo with a cream
 // card resting on its edge, alternating sides; the first article is the same idea at a
 // larger scale (panoramic photo, card at the bottom right, "Featured").
@@ -32,7 +33,8 @@ const excerpt = (a: any) => a.excerpt || plain(a.body);
   </section>
 
   <section class="section blog-list">
-    <img class="blog-list__deco" src="/img/logos/wlt-logoframe-bronze.svg" alt="" width="640" height="640" loading="lazy" />
+    {/* the round triangle pattern of the logo, whole circles in several sizes (owner's request) */}
+    <img class="blog-deco blog-deco--1" src="/img/logos/wlt-logoframe-bronze.svg" alt="" width="640" height="640" loading="lazy" />
     <div class="container">
       <a class="blog-feature" href={`/en/blog/${featured.slug}`} data-reveal>
         <div class="blog-feature__media"><Img name={featured.card_image || featured.hero} alt={featured.card_alt || featured.hero_alt || ''} sizes="(max-width: 860px) 100vw, 1160px" /></div>
@@ -46,6 +48,7 @@ const excerpt = (a: any) => a.excerpt || plain(a.body);
       <div class="stories">
         {rest.map((a, i) => (
           <a class:list={['post-story', { 'post-story--right': i % 2 === 1 }]} href={`/en/blog/${a.slug}`} data-reveal>
+            {i % 3 !== 2 && <img class="story-deco" src="/img/logos/wlt-logoframe-bronze.svg" alt="" width="300" height="300" loading="lazy" style={`--size:${[230, 130, 300, 170, 260, 110][i % 6]}px`} />}
             <div class="post-story__media"><Img name={a.card_image || a.hero} alt={a.card_alt || a.hero_alt || ''} sizes="(max-width: 860px) 100vw, 840px" /></div>
             <div class="post-story__card">
               <span class="post-story__label">{String(i + 1).padStart(2, '0')}</span>
@@ -60,6 +63,7 @@ const excerpt = (a: any) => a.excerpt || plain(a.body);
   </section>
 
   <section class="section section--paper blog-organize">
+    <img class="blog-deco blog-deco--6" src="/img/logos/wlt-logoframe-bronze.svg" alt="" width="640" height="640" loading="lazy" />
     <div class="container split">
       <div class="split__media" data-reveal><Img name={page.organize_image} alt="Bride and groom kissing on a white terrace overlooking the Santorini caldera" sizes="(max-width: 860px) 92vw, 720px" /></div>
       <div class="prose" data-reveal>
