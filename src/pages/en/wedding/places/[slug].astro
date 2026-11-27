@@ -48,6 +48,16 @@ const ess = venue ? Object.entries(venue.essentials as Record<string, string | s
           <VenueList venues={venuesFor(dest)} label={`Wedding venues in ${DEST_NAMES[dest]}`} />
         </div>
       </section>
+      {(destinations.find((x) => x.slug === dest) as any)?.venues_text && (
+        <section class="section section--paper">
+          <div class="container">
+            <h2 class="h2 center">Choosing Your Venue in {DEST_NAMES[dest]}</h2>
+            <div class="venue-notes" data-reveal>
+              {(destinations.find((x) => x.slug === dest) as any).venues_text.map((t: string) => <p set:html={t} />)}
+            </div>
+          </div>
+        </section>
+      )}
       <section class="section" style="padding-top:0"><div class="container"><CtaBand title={`Your wedding in ${DEST_NAMES[dest]}`} /></div></section>
     </>
   )}

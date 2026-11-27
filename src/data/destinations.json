@@ -1,343 +1,397 @@
 [
  {
-  "slug": "mykonos",
-  "name": "Mykonos",
-  "image": "cache/dest-book-24ab7dbde6b54965b64a539431264d21",
-  "short": "Mykonos has long been one of Greece’s most iconic wedding destinations, loved for its Cycladic beauty, golden beaches and unmistakably cosmopolitan atmosphere. Yet even on an island famous for its vibrant lifestyle, privacy is never out of reach. With the right wedding planning, your ceremony can unfold far from the crowds without sacrificing the views, romance or style that brought you to Mykonos in the first place. Think of exchanging vows aboard a private yacht cruising along the island’s coastline or near the secluded islet of Tragonissi. From venue selection and wedding design to accommodation, guest transfers, yacht charters and every detail of the day itself, our team creates a wedding in Mykonos shaped entirely around you.",
-  "hero": "cache/dest-book-24ab7dbde6b54965b64a539431264d21",
-  "intro": "<p>Mykonos has long been one of Greece’s most iconic wedding destinations, loved for its Cycladic beauty, golden beaches and unmistakably cosmopolitan atmosphere. Yet even on an island famous for its vibrant lifestyle, privacy is never out of reach. With the right wedding planning, your ceremony can unfold far from the crowds without sacrificing the views, romance or style that brought you to Mykonos in the first place. Think of exchanging vows aboard a private yacht cruising along the island’s coastline or near the secluded islet of Tragonissi. From venue selection and wedding design to accommodation, guest transfers, yacht charters and every detail of the day itself, our team creates a wedding in Mykonos shaped entirely around you.</p>",
-  "map": "destinations/specific-greece-regions-maps-mykonos-map.svg",
-  "pins": [
-   {
-    "ceremony": "symbolic",
-    "title": "Symbolic Wedding in Mykonos",
-    "text": "Looking for a celebration where luxury meets island charm? A symbolic wedding in Mykonos combines stylish venues, golden beaches and vibrant nightlife, making it a perfect choice for couples planning an elegant wedding in Greece.",
-    "top": "6%",
-    "left": "2%"
-   },
-   {
-    "ceremony": "official",
-    "title": "Civil Wedding in Mykonos",
-    "text": "A luxury yacht in Mykonos is far more than a way to travel - it's where your wedding journey begins. Whether you choose to exchange your vows on board, at a private villa or beside the sea, we'll take care of every legal detail behind the scenes, making your civil wedding in Mykonos truly special.",
-    "top": "15%",
-    "left": "50%"
-   },
-   {
-    "ceremony": "orthodox",
-    "title": "Church Wedding in Mykonos",
-    "text": "Behind Mykonos' glamorous reputation lies a very different island, where more than 400 churches and chapels reflect centuries of Orthodox tradition. Panagia Paraportiani perfectly captures the authentic island character, making it an unforgettable destination for an Orthodox or Catholic wedding in Mykonos.",
-    "top": "50%",
-    "left": "55%"
-   },
-   {
-    "ceremony": "proposal",
-    "title": "Wedding Proposal in Mykonos",
-    "text": "Mykonos is a special place with tailor-made holidays for it every visitor. Following this phylosophy wedding proposals in Mykonos are also specifically curated around your wishes and dreams. So, no samples, no pre-written scenarios, when it comes to wedding proposal on this magnificient destination we go solely with pure improvisation, making this special day full of surprises both for you and for us.",
-    "top": "78%",
-    "left": "28%"
-   }
-  ],
-  "title": "Wedding in Mykonos | Wedding by Luxury Travel",
-  "description": "Mykonos has long been one of Greece’s most iconic wedding destinations, loved for its Cycladic beauty, golden beaches and unmistakably cosmopolitan…"
- },
- {
   "slug": "santorini",
   "name": "Santorini",
   "image": "cache/dest-book-5aa9998532a849eab27b7e7075b2b292",
   "short": "Few places in the world rival the romance of Santorini, where breathtaking views and timeless beauty frame every love story.",
   "hero": "cache/dest-book-5aa9998532a849eab27b7e7075b2b292",
-  "intro": "<p>Few places in the world rival the romance of Santorini, where breathtaking views and timeless beauty frame every love story.</p>",
+  "intro": "<p>Santorini may be famous for one view, but a wedding here can take many forms. Caldera terraces in Oia and Imerovigli create the island’s most iconic backdrop, while wineries, private villas and volcanic beaches reveal a different side of the destination. Planning a wedding in Santorini is about choosing more than the photograph: access, wind, guest comfort, ceremony type and the way each part of the day connects all matter. Our team coordinates the venue, accommodation, transportation, photography, decoration and experiences around the wedding, while matching the plan to the island’s practical realities. Whether you imagine a legal ceremony, church wedding, symbolic vows or a private proposal, we create a Santorini wedding that feels personal rather than simply picturesque.</p>",
   "map": "destinations/specific-greece-regions-maps-santorini-map.svg",
   "pins": [
    {
     "ceremony": "symbolic",
-    "title": "Symbolic Wedding in Santorini",
-    "text": "Few places rival the romance of a symbolic wedding in Santorini. From whitewashed villages to volcanic beaches, we handle every detail of your symbolic wedding planning, creating an intimate ceremony as breathtaking as Santorini itself.",
+    "text": "A symbolic wedding in Santorini gives you complete freedom to make the island part of the ceremony without legal formalities. Choose the words, timing and atmosphere, then let the volcanic landscape provide the drama.",
     "top": "6%",
     "left": "2%"
    },
    {
-    "ceremony": "official",
-    "title": "Civil Wedding in Santorini",
-    "text": "A civil wedding in Santorini deserves far more than a Town Hall ceremony. Exchange your vows overlooking the caldera, on the famous volcanic Black Beach or at the private villa you've chosen for your stay. We'll arrange for the legal ceremony to take place exactly where you've always imagined saying \"I do\".",
-    "top": "15%",
-    "left": "50%"
-   },
-   {
     "ceremony": "orthodox",
-    "title": "Church Wedding in Santorini",
-    "text": "Santorini is home to hundreds of whitewashed chapels, where iconic blue domes and breathtaking caldera views have become the defining image of a church wedding in Greece. Anastasi Church in Oia is just one beautiful example of the island's distinctive Orthodox heritage.",
+    "text": "A church wedding in Santorini brings Christian tradition into one of Greece’s most recognizable landscapes. Orthodox churches and the established Catholic community offer different possibilities, with religious requirements coordinated in advance.",
     "top": "50%",
     "left": "55%"
    },
    {
+    "ceremony": "official",
+    "text": "A civil wedding in Santorini can turn a legal marriage into part of the destination experience. Depending on municipal approval, hotels, wineries, villas and caldera venues may offer alternatives to a conventional Town Hall ceremony.",
+    "top": "15%",
+    "left": "50%"
+   },
+   {
     "ceremony": "proposal",
-    "title": "Wedding Proposal in Santorini",
-    "text": "",
+    "text": "A wedding proposal in Santorini is about finding the right view without losing the surprise. Private terraces, wineries and quieter caldera spots can deliver the drama while keeping the moment genuinely personal.",
     "top": "78%",
     "left": "28%"
    }
   ],
   "title": "Wedding in Santorini | Wedding by Luxury Travel",
-  "description": "Few places in the world rival the romance of Santorini, where breathtaking views and timeless beauty frame every love story."
+  "description": "Few places in the world rival the romance of Santorini, where breathtaking views and timeless beauty frame every love story.",
+  "venues_text": [
+   "A Santorini wedding venue does not have to revolve entirely around the caldera. Elevated terraces deliver the island’s most recognizable panorama, but wineries bring vineyards and volcanic soil into the experience, while hotels, private properties and restaurants offer different levels of privacy and service. Even the island’s darker volcanic coastline can create a striking alternative for couples who want Santorini without building the entire wedding around one famous view.",
+   "Scenery is only half the decision in Santorini; the other half is how your guests will actually use the space. Some properties involve stairs, narrow lanes or longer walks from the nearest vehicle access, which affects everyone from older guests to the catering team. Wind protection, ceremony and dinner areas, event conditions and capacity can also vary substantially between venues that look similar online. For legal ceremonies, the exact location must work with current municipal arrangements as well. The goal is a venue that supports the wedding, not a wedding that has to adapt to the venue."
+  ]
+ },
+ {
+  "slug": "mykonos",
+  "name": "Mykonos",
+  "image": "cache/dest-book-24ab7dbde6b54965b64a539431264d21",
+  "short": "For couples drawn to style and exclusivity, Mykonos delivers chic venues, vibrant energy, and luxury by the sea.",
+  "hero": "cache/dest-book-24ab7dbde6b54965b64a539431264d21",
+  "intro": "<p>Mykonos has long been one of Greece’s most iconic wedding destinations, loved for its Cycladic beauty, golden beaches and unmistakably cosmopolitan atmosphere. Yet even on an island famous for its vibrant lifestyle, privacy is never out of reach. With the right wedding planning, your day can unfold far from the crowds without sacrificing the views, romance or style that brought you to Mykonos in the first place. A private yacht near Tragonissi, a secluded villa terrace or an elegant seaside venue can each create a completely different experience. From venue selection and wedding design to accommodation, guest transfers, yacht charters and every detail of the day itself, our team creates a wedding in Mykonos shaped entirely around you.</p>",
+  "map": "destinations/specific-greece-regions-maps-mykonos-map.svg",
+  "pins": [
+   {
+    "ceremony": "symbolic",
+    "text": "No legal paperwork, just a symbolic ceremony written your way, on a villa terrace, by the sea or on a yacht deck. Not every Mykonos villa allows events, though, and summer brings the meltemi wind, so we check both before you book.",
+    "top": "6%",
+    "left": "2%"
+   },
+   {
+    "ceremony": "orthodox",
+    "text": "Mykonos is predominantly Orthodox, but Catholic couples are covered too: Our Lady of the Rosary in Alefkandra, by the windmills. Whichever you choose, the religious paperwork comes first, even if you’re already legally married.",
+    "top": "50%",
+    "left": "55%"
+   },
+   {
+    "ceremony": "official",
+    "text": "Plan to land a few days early. Both partners currently need to appear in person at the municipal office at least two working days before a civil wedding in Mykonos, and some paperwork can follow the ceremony, so leave time on both sides.",
+    "top": "15%",
+    "left": "50%"
+   },
+   {
+    "ceremony": "proposal",
+    "text": "Little Venice and the windmills look magical at sunset, which is exactly why half the island gathers there. For a private proposal in Mykonos, try Chora’s quiet lanes early in the morning or a candlelit terrace after dark, and save the landmarks for photos.",
+    "top": "78%",
+    "left": "28%"
+   }
+  ],
+  "title": "Wedding in Mykonos | Wedding by Luxury Travel",
+  "description": "Mykonos has long been one of Greece’s most iconic wedding destinations, loved for its Cycladic beauty, golden beaches and unmistakably cosmopolitan…",
+  "venues_text": [
+   "Where you marry in Mykonos shapes the mood of the whole day. Around Chora and the west coast, hotel terraces look out over the sunset, close to the island’s famous windmills. The south coast is known for beach venues at places such as Platis Gialos and Elia, while private villas across the island offer seclusion, sea views and space to celebrate on your own terms. Luxury hotels can also bring the ceremony, dinner and guest rooms together in one place.",
+   "What looks effortless in Mykonos usually depends on a few details being checked early. Event permission should be confirmed separately when a villa is primarily rented as accommodation, and venue rules can affect music, finishing times and décor. Guest access deserves attention too, as some attractive locations involve pedestrian lanes, steps or drop-off points away from the entrance. Exposed outdoor spaces can also feel very different when the summer meltemi is blowing, which is why wind shelter belongs on the checklist alongside capacity, privacy and atmosphere."
+  ]
  },
  {
   "slug": "crete",
   "name": "Crete",
   "image": "cache/dest-book-05d76e88628c421dab9e732bfa7254d6",
-  "short": "From dramatic cliffs and secluded beaches to historic estates and charming villages, Crete offers endless possibilities for a beautiful destination wedding. With nearly 20 years of wedding planning experience in Crete and an extensive local network, we provide access to the island's finest wedding venues and create truly personalized weddings.",
+  "short": "Whether you dream of a beachfront ceremony, a traditional chapel wedding, or a celebration at a luxury resort, Crete has it all.",
   "hero": "cache/dest-book-05d76e88628c421dab9e732bfa7254d6",
-  "intro": "<p>From dramatic cliffs and secluded beaches to historic estates and charming villages, Crete offers endless possibilities for a beautiful destination wedding. With nearly 20 years of wedding planning experience in Crete and an extensive local network, we provide access to the island's finest wedding venues and create truly personalized weddings.</p>",
+  "intro": "<p>Crete is large enough for a wedding to feel completely different from one part of the island to another. Chania brings Venetian streets and harbor atmosphere; Elounda and Agios Nikolaos offer a polished resort setting; the south coast feels wilder and more secluded. That variety is one of Crete’s greatest strengths, but it also makes local planning especially important. Venue choice, guest accommodation, transfers, ceremony requirements and even weather conditions can change with the region. Our team brings these pieces together, coordinating the wedding around the part of Crete that best suits your plans. From a legal marriage or church ceremony to symbolic vows or a private proposal, a wedding in Crete can feel deeply personal without losing the island’s unmistakable character.</p>",
   "map": "destinations/specific-greece-regions-maps-crete-map.svg",
   "pins": [
    {
     "ceremony": "symbolic",
-    "title": "Symbolic Wedding in Crete",
-    "text": "A symbolic wedding in Crete offers endless possibilities. From spectacular coastlines and private estates to hidden beaches and authentic villages, every wedding venue has its own character. As your symbolic wedding planner in Crete, we bring nearly 20 years of local knowledge to every ceremony.",
+    "text": "Midweek can be the smart choice. Venues in Crete often cost less from Monday to Thursday, handy when your symbolic wedding has a long guest list. We also choose the ceremony spot by its microclimate, as both coasts can get windy.",
     "top": "6%",
     "left": "2%"
    },
    {
-    "ceremony": "official",
-    "title": "Civil Wedding in Crete",
-    "text": "From the historic Venetian Loggia in Heraklion to the pink sands of Elafonissi, Crete offers unforgettable locations for a legal ceremony. We'll handle every legal aspect while coordinating transportation, photography and every detail of your civil wedding, leaving you free to enjoy every moment.",
-    "top": "15%",
-    "left": "50%"
-   },
-   {
     "ceremony": "orthodox",
-    "title": "Church Wedding in Crete",
-    "text": "Centuries of Christian tradition have shaped a remarkable religious landscape of Byzantine chapels and Venetian churches across Crete. The Chapel of Agios Nikolaos in Georgioupolis beautifully reflects this diversity, making Crete an excellent destination for a church wedding in Crete.",
+    "text": "One of you Orthodox, the other Catholic, Anglican or Protestant? An Orthodox church wedding in Crete may still be possible, depending on baptism and church approval. We clarify what’s permitted for you before choosing the church and the reception venue.",
     "top": "50%",
     "left": "55%"
    },
    {
+    "ceremony": "official",
+    "text": "A civil wedding in Crete is a legal marriage shaped partly by the municipality you choose. Different areas follow their own procedures, so documents, ceremony timing and possible locations need to be coordinated locally.",
+    "top": "15%",
+    "left": "50%"
+   },
+   {
     "ceremony": "proposal",
-    "title": "Wedding Proposal in Crete",
-    "text": "Wedding Proposal in Crete.... let us keep its features in secret. Use your imagination, and share your vision with our team. If good enough, wedding proposal in Crete imagined by you will be displayed right in this card.",
+    "text": "Balos and Elafonisi are breathtaking but crowded and protected, so enjoy them together and propose somewhere nearby. Crete is also bigger than it looks: we keep the spot close enough that a “casual dinner” doesn’t start with two hours in the car.",
     "top": "78%",
     "left": "28%"
    }
   ],
   "title": "Wedding in Crete | Wedding by Luxury Travel",
-  "description": "From dramatic cliffs and secluded beaches to historic estates and charming villages, Crete offers endless possibilities for a beautiful destination…"
- },
- {
-  "slug": "corfu",
-  "name": "Corfu",
-  "image": "cache/dest-book-6df0b5be5b3940d9b0de38a0b3a7f95c",
-  "short": "Are you looking for a wedding destination that combines Venetian elegance, lush landscapes and stunning coastal scenery? From historic palaces and picturesque monasteries to hidden beaches and private wineries, Corfu offers exceptional wedding venues, while our local expertise lets us execute bespoke weddings in both iconic landmarks and hidden island gems.",
-  "hero": "cache/dest-book-6df0b5be5b3940d9b0de38a0b3a7f95c",
-  "intro": "<p>Are you looking for a wedding destination that combines Venetian elegance, lush landscapes and stunning coastal scenery? From historic palaces and picturesque monasteries to hidden beaches and private wineries, Corfu offers exceptional wedding venues, while our local expertise lets us execute bespoke weddings in both iconic landmarks and hidden island gems.</p>",
-  "map": "destinations/specific-greece-regions-maps-corfu-map.svg",
-  "pins": [
-   {
-    "ceremony": "symbolic",
-    "title": "Symbolic Wedding in Corfu",
-    "text": "More than any other Greek island, Corfu captivates with its lush greenery, crystal-clear waters and refined aristocratic charm. From the iconic Achilleion Palace to romantic coastal wedding venues, it offers unforgettable settings for a symbolic wedding in Greece.",
-    "top": "6%",
-    "left": "2%"
-   },
-   {
-    "ceremony": "official",
-    "title": "Civil Wedding in Corfu",
-    "text": "Corfu offers church weddings that are as diverse as the island itself. From the peaceful Church of Ypapanti, embraced by crystal-clear waters, to the magnificent Cathedral of Virgin Mary Spilaiotissa in Corfu Town, every ceremony reflects a different side of the island's timeless character.",
-    "top": "15%",
-    "left": "50%"
-   },
-   {
-    "ceremony": "orthodox",
-    "title": "Church Wedding in Corfu",
-    "text": "Corfu offers church weddings that are as diverse as the island itself. From the peaceful Church of Ypapanti, embraced by crystal-clear waters, to the magnificent Cathedral of Virgin Mary Spilaiotissa in Corfu Town, every ceremony reflects a different side of the island's timeless character.",
-    "top": "50%",
-    "left": "55%"
-   },
-   {
-    "ceremony": "proposal",
-    "title": "Wedding Proposal in Corfu",
-    "text": "Wedding proposal in Corfu is a very romantic event. How romantic? Well, noone will give you a precise answer - you definetely need a personal experience of it to draw your personal conclusions.",
-    "top": "78%",
-    "left": "28%"
-   }
-  ],
-  "title": "Wedding in Corfu | Wedding by Luxury Travel",
-  "description": "Are you looking for a wedding destination that combines Venetian elegance, lush landscapes and stunning coastal scenery?"
- },
- {
-  "slug": "rhodes",
-  "name": "Rhodes",
-  "image": "destinations/rhodes",
-  "short": "Historic venues, seaside locations and year-round sunshine make Rhodes one of Greece's most versatile wedding destinations.",
-  "hero": "destinations/rhodes",
-  "intro": "",
-  "map": "destinations/specific-greece-regions-maps-rhodes-map.svg",
-  "pins": [
-   {
-    "ceremony": "symbolic",
-    "title": "Symbolic Wedding in Rhodes",
-    "text": "Rhodes combines medieval charm, sun-drenched coastlines and extraordinary natural scenery, making it one of Greece's most versatile settings for a symbolic wedding. From the whitewashed lanes of Lindos to secluded beaches and private gardens, we create truly one-of-a-kind ceremonies rooted in the island's unique character.",
-    "top": "6%",
-    "left": "2%"
-   },
-   {
-    "ceremony": "official",
-    "title": "Civil Wedding in Rhodes",
-    "text": "Some churches inspire through their surroundings, others through the stories they have carried for centuries. Rhodes gives you both, from the iconic St. Paul's Chapel in Lindos to the revered Monastery of Panagia Tsambika, making the island an exceptional destination for a church wedding in Rhodes.",
-    "top": "15%",
-    "left": "50%"
-   },
-   {
-    "ceremony": "orthodox",
-    "title": "Church Wedding in Rhodes",
-    "text": "Some churches inspire through their surroundings, others through the stories they have carried for centuries. Rhodes gives you both, from the iconic St. Paul's Chapel in Lindos to the revered Monastery of Panagia Tsambika, making the island an exceptional destination for a church wedding in Rhodes.",
-    "top": "50%",
-    "left": "55%"
-   },
-   {
-    "ceremony": "proposal",
-    "title": "Wedding Proposal in Rhodes",
-    "text": "",
-    "top": "78%",
-    "left": "28%"
-   }
-  ],
-  "title": "Wedding in Rhodes | Wedding by Luxury Travel",
-  "description": "Historic venues, seaside locations and year-round sunshine make Rhodes one of Greece's most versatile wedding destinations."
+  "description": "From dramatic cliffs and secluded beaches to historic estates and charming villages, Crete offers endless possibilities for a beautiful destination…",
+  "venues_text": [
+   "As the largest Greek island, Crete offers an exceptionally wide range of wedding venues. A resort can accommodate much of the wedding in one place, while a private villa offers greater intimacy. Wineries, waterfront terraces, beaches and countryside locations create completely different moods, and some properties even have a chapel in their grounds. Rather than starting with a style, it often makes sense to decide how you want the day to flow, then find the Cretan venue to match.",
+   "Distance is one of the biggest factors when comparing venues in Crete. A church, hotel and reception space can all look close enough on an island map while creating unnecessary travel once the actual route is considered. Outdoor venues also need to be judged individually for wind and sea exposure rather than by assuming one coast will always be calmer. Each area’s own municipality sets the rules for civil weddings, while a chapel within a resort still has its own religious requirements. Geography, accommodation and ceremony type therefore come first, and the shortlist follows."
+  ]
  },
  {
   "slug": "athens",
   "name": "Athens",
   "image": "destinations/athens",
-  "short": "Beyond the Acropolis, Athens and Attica reveal elegant estates, luxury resorts and private beachfront properties for unforgettable celebrations.",
+  "short": "From rooftop ceremonies overlooking the Acropolis to elegant seaside celebrations, Athens offers the best of both worlds.",
   "hero": "destinations/athens",
-  "intro": "",
+  "intro": "<p>Athens gives a destination wedding something few Greek locations can offer: the energy of a historic capital and the Mediterranean coast within the same experience. One day can begin among neoclassical streets and Acropolis views, then continue beside the sea on the Athens Riviera. The city also brings practical advantages, with extensive hotel choice, international connections and access to a particularly wide network of wedding professionals. That flexibility makes careful planning important, especially when the ceremony, reception and accommodation are in different parts of the metropolitan area. From venue selection and guest transportation to decoration, photography and the wider stay, we coordinate every element around the way you want to experience Athens — whether your wedding feels urban, seaside or combines both.</p>",
   "map": "destinations/specific-greece-regions-maps-athens-map.svg",
   "pins": [
    {
     "ceremony": "symbolic",
-    "title": "Symbolic Wedding in Athens",
-    "text": "Ancient heritage, neoclassical elegance and modern luxury come together in Athens. Whether you dream of exchanging vows overlooking the Acropolis, on a luxury yacht or at one of Greece's finest beachfront resorts, symbolic wedding planning opens the door to truly unforgettable ceremonies.",
+    "text": "From an intimate terrace near Lycabettus to a fine-dining venue or a large event space, Athens can host a symbolic wedding of almost any size. Moving between places takes planning, so transfers are timed around real traffic, not map distances.",
     "top": "6%",
     "left": "2%"
    },
    {
-    "ceremony": "official",
-    "title": "Civil Wedding in Athens",
-    "text": "Whether you picture a grand cathedral ceremony or an intimate blessing beside the sea, Athens makes both possible. From the Metropolitan Cathedral to elegant chapels within luxury resorts, every couple can find a church that perfectly reflects their vision.",
-    "top": "15%",
-    "left": "50%"
-   },
-   {
     "ceremony": "orthodox",
-    "title": "Church Wedding in Athens",
-    "text": "Whether you picture a grand cathedral ceremony or an intimate blessing beside the sea, Athens makes both possible. From the Metropolitan Cathedral to elegant chapels within luxury resorts, every couple can find a church that perfectly reflects their vision.",
+    "text": "Worried your guests won’t follow the service? St Paul’s Anglican Church in Athens was founded for English speakers, and other communities here welcome international couples too. Orthodox services are usually in Greek, so we explain each stage beforehand.",
     "top": "50%",
     "left": "55%"
    },
    {
+    "ceremony": "official",
+    "text": "Vouliagmeni and Glyfada may feel like Athens, but legally they belong to separate municipalities, each with its own civil-wedding rules. Before planning a legal ceremony on the Riviera, we work out which one covers your venue and what it allows.",
+    "top": "15%",
+    "left": "50%"
+   },
+   {
     "ceremony": "proposal",
-    "title": "Wedding Proposal in Athens",
-    "text": "",
+    "text": "City lover or sea lover? For the first, take the funicular up Lycabettus, with the photographer already waiting; for the second, head to a private yacht or beach dinner on the Riviera. A proposal in Athens can go either way.",
     "top": "78%",
     "left": "28%"
    }
   ],
   "title": "Wedding in Athens | Wedding by Luxury Travel",
-  "description": "Beyond the Acropolis, Athens and Attica reveal elegant estates, luxury resorts and private beachfront properties for unforgettable celebrations."
- },
- {
-  "slug": "skopelos",
-  "name": "Skopelos",
-  "image": "destinations/zakinthos",
-  "short": "Pine-covered hills and quiet coves give Skopelos a gentler setting for an intimate destination wedding.",
-  "hero": "destinations/zakinthos",
-  "intro": "",
-  "map": "destinations/specific-greece-regions-maps-zakynthos-map.svg",
-  "pins": [
-   {
-    "ceremony": "symbolic",
-    "title": "Symbolic Wedding in Skopelos",
-    "text": "",
-    "top": "6%",
-    "left": "2%"
-   },
-   {
-    "ceremony": "official",
-    "title": "Civil Wedding in Skopelos",
-    "text": "",
-    "top": "15%",
-    "left": "50%"
-   },
-   {
-    "ceremony": "orthodox",
-    "title": "Church Wedding in Skopelos",
-    "text": "",
-    "top": "50%",
-    "left": "55%"
-   },
-   {
-    "ceremony": "proposal",
-    "title": "Wedding Proposal in Skopelos",
-    "text": "",
-    "top": "78%",
-    "left": "28%"
-   }
-  ],
-  "title": "Wedding in Skopelos | Wedding by Luxury Travel",
-  "description": "Pine-covered hills and quiet coves give Skopelos a gentler setting for an intimate destination wedding."
+  "description": "Beyond the Acropolis, Athens and Attica reveal elegant estates, luxury resorts and private beachfront properties for unforgettable celebrations.",
+  "venues_text": [
+   "Athens gives you the freedom to decide how much of the city you want inside the wedding itself. A rooftop can make the Acropolis part of dinner without leaving the center, while neoclassical buildings, hotels and private terraces create a more architectural atmosphere. Move towards the coast and the character changes completely: estates, resorts and seaside venues along the Athens Riviera can make the same destination feel almost like a separate Mediterranean escape.",
+   "That variety is a major advantage, provided the wedding is not spread too widely across the city. Athens’ traffic can turn an ambitious ceremony–photoshoot–reception route into far more travelling than the map suggests, so guest accommodation and venue locations need to be considered together. Civil ceremonies are another reason to check the map: the Riviera alone spans several municipalities, and the rules for civil weddings differ between them. On the other hand, Athens offers exceptional depth in hotels, catering, entertainment and specialist wedding suppliers, making it particularly flexible for larger events or weddings with more complex production requirements."
+  ]
  },
  {
   "slug": "halkidiki",
   "name": "Halkidiki",
   "image": "destinations/halkidiki",
-  "short": "Fine beaches, luxury resorts and picturesque Byzantine chapels make Halkidiki a standout choice for destination weddings in northern Greece.",
+  "short": "Blessed with pristine beaches and stunning natural scenery, Halkidiki seems carved for unforgettable seaside romance.",
   "hero": "destinations/halkidiki",
-  "intro": "",
+  "intro": "<p>Halkidiki can feel like an island escape without the island logistics. Guests fly into Thessaloniki and continue by road to a coastline of pine forests, clear water, luxury resorts and quieter bays. Kassandra, Sithonia and eastern Halkidiki each create a different wedding experience, from polished resort living to more secluded coastal settings and the spiritual landscape around Mount Athos. That variety makes the region flexible for couples, but it also means the exact area matters for venues, guest accommodation, ceremony rules and transportation. With nearly two decades of local experience, we coordinate the wedding around the part of Halkidiki that genuinely fits your plans, whether you are arranging a legal marriage, church ceremony, symbolic vows or a proposal by the sea.</p>",
   "map": "destinations/specific-greece-regions-maps-halkidiki-map.svg",
   "pins": [
    {
     "ceremony": "symbolic",
-    "title": "Symbolic Wedding in Chalkidiki",
-    "text": "With some of Greece's finest beaches, secluded bays and hidden coastal spots, Halkidiki is a natural stage for an intimate symbolic wedding. As our home destination for nearly two decades, we offer unparalleled local knowledge and exclusive access to private locations where your ceremony can feel truly personal and unhurried.",
+    "text": "A symbolic wedding in Halkidiki can be intimate, resort-based or completely private. Beaches are only the beginning: villas, terraces, olive groves and yachts give you freedom to shape the ceremony around the landscape.",
     "top": "6%",
     "left": "2%"
    },
    {
-    "ceremony": "official",
-    "title": "Civil Wedding in Chalkidiki",
-    "text": "The spiritual legacy of Mount Athos extends far beyond the peninsula itself, with historic metochia and chapels found throughout Halkidiki. Agioi Theodoroi in Nea Roda reflects this centuries-old tradition, offering a peaceful seaside setting for an Orthodox wedding in Halkidiki.",
-    "top": "15%",
-    "left": "50%"
-   },
-   {
     "ceremony": "orthodox",
-    "title": "Church Wedding in Chalkidiki",
-    "text": "The spiritual legacy of Mount Athos extends far beyond the peninsula itself, with historic metochia and chapels found throughout Halkidiki. Agioi Theodoroi in Nea Roda reflects this centuries-old tradition, offering a peaceful seaside setting for an Orthodox wedding in Halkidiki.",
+    "text": "Some Halkidiki resorts have a church right in the grounds, such as the stone Orthodox church near Sani Marina, so guests barely need a transfer. Near Ouranoupoli, Eagles Palace has a wedding chapel that also welcomes non-Orthodox ceremonies.",
     "top": "50%",
     "left": "55%"
    },
    {
+    "ceremony": "official",
+    "text": "A civil wedding in Halkidiki is a legal marriage shaped by the municipality you choose. Kassandra offers added flexibility with approved municipal public spaces, while other areas follow their own local procedures.",
+    "top": "15%",
+    "left": "50%"
+   },
+   {
     "ceremony": "proposal",
-    "title": "Wedding Proposal in Chalkidiki",
-    "text": "",
+    "text": "Polished, adventurous or quietly atmospheric? Kassandra suits a resort-style evening, Sithonia a boat trip around the bays of Vourvourou and Diaporos, and the coast near Ouranoupoli a proposal with Mount Athos on the horizon. We match the peninsula to your partner.",
     "top": "78%",
     "left": "28%"
    }
   ],
   "title": "Wedding in Chalkidiki | Wedding by Luxury Travel",
-  "description": "Fine beaches, luxury resorts and picturesque Byzantine chapels make Halkidiki a standout choice for destination weddings in northern Greece."
+  "description": "Fine beaches, luxury resorts and picturesque Byzantine chapels make Halkidiki a standout choice for destination weddings in northern Greece.",
+  "venues_text": [
+   "In Halkidiki, a surprising amount of the wedding can happen in one place. Large resorts can bring accommodation, beaches, restaurants, reception spaces and even a chapel together, while private villas and smaller coastal venues create a more intimate format. Away from the beach, pine-shaded gardens, sea-view terraces and even yachts can host the ceremony, giving Halkidiki’s wedding venues far more range than its coastline alone suggests.",
+   "The venue also determines which part of Halkidiki your guests will experience. Some areas offer extensive resort infrastructure, while others suit quieter bays and more independent properties, so accommodation and transfers should follow the venue rather than be planned separately. Civil-wedding rules are set locally and vary between Kassandra, Sithonia and the east, and a hotel that hosts weddings cannot automatically hold a legal ceremony anywhere on its grounds. Once those details are clear, privacy, access and guest logistics decide the final choice."
+  ]
+ },
+ {
+  "slug": "corfu",
+  "name": "Corfu",
+  "image": "cache/dest-book-6df0b5be5b3940d9b0de38a0b3a7f95c",
+  "short": "Romance lingers around every corner in Corfu, elevating every wedding with its unmistakable charm.",
+  "hero": "cache/dest-book-6df0b5be5b3940d9b0de38a0b3a7f95c",
+  "intro": "<p>Corfu offers a very different vision of a Greek island wedding. Venetian architecture, olive-covered hills and the deep blue Ionian Sea create an atmosphere that feels elegant, romantic and distinctly European. Corfu Town brings historic streets, squares and waterfront landmarks into the day, while estates, luxury hotels and coastal venues open up quieter possibilities elsewhere on the island. Choosing the right area matters: sunset orientation, road access, guest transfers and the distance between ceremony and reception can all shape the experience. We coordinate these practical details alongside the venue, accommodation, decoration, photography and transportation, creating a wedding in Corfu that makes the most of the island’s character — whether you choose a legal marriage, church ceremony, symbolic vows or a carefully planned proposal.</p>",
+  "map": "destinations/specific-greece-regions-maps-corfu-map.svg",
+  "pins": [
+   {
+    "ceremony": "symbolic",
+    "text": "A symbolic wedding in Corfu can feel refined, private and completely personal. Historic estates and Ionian Sea views create very different moods, while the right coastal orientation can make sunset part of the ceremony itself.",
+    "top": "6%",
+    "left": "2%"
+   },
+   {
+    "ceremony": "orthodox",
+    "text": "A church wedding in Corfu reflects the island’s diverse Christian heritage. Orthodox tradition sits alongside established Catholic and Anglican communities, with historic town churches and peaceful waterside chapels offering very different religious settings.",
+    "top": "50%",
+    "left": "55%"
+   },
+   {
+    "ceremony": "official",
+    "text": "In Corfu, the legal ceremony sets the clock. Central Corfu’s current schedule covers Thursdays from 11:00 to 14:00 and the last Saturday of each month, so we secure your slot first, then plan photos, transfers and the sunset dinner around it.",
+    "top": "15%",
+    "left": "50%"
+   },
+   {
+    "ceremony": "proposal",
+    "text": "Want the sun to actually sink into the sea? For a sunset proposal in Corfu, head west to Pelekas, Afionas or Kaiser’s Throne. Summer roads are slow, so we time the drive and the final walk, and nobody is seen checking a watch.",
+    "top": "78%",
+    "left": "28%"
+   }
+  ],
+  "title": "Wedding in Corfu | Wedding by Luxury Travel",
+  "description": "Are you looking for a wedding destination that combines Venetian elegance, lush landscapes and stunning coastal scenery?",
+  "venues_text": [
+   "Corfu’s most interesting wedding venues often have a strong identity of their own. A historic estate or old-town location can draw on the island’s Venetian heritage, while hotel gardens and private properties offer more space and seclusion. Along the coast, waterside terraces and dedicated seaside venues shift the focus towards the Ionian landscape. The result is a destination where the venue can feel architectural, garden-led or completely coastal without losing the character that makes Corfu recognizable.",
+   "Choosing between those options involves more than deciding which photograph you prefer. Coastal orientation affects the evening light, with western locations generally better placed for a sunset over the sea, while public beaches cannot always provide the privacy a wedding with guests requires. Corfu’s road network and summer traffic also make realistic transfer times important when the hotel, ceremony and reception are separated. Civil weddings add another layer, as Corfu is split into three municipalities, each with its own arrangements. Weighing all of this early means the shortlist only includes venues that work on the day, not just on screen."
+  ]
+ },
+ {
+  "slug": "rhodes",
+  "name": "Rhodes",
+  "image": "destinations/rhodes",
+  "short": "Steeped in medieval charm, Rhodes creates a wedding backdrop worthy of a modern fairytale.",
+  "hero": "destinations/rhodes",
+  "intro": "<p>Rhodes can make a wedding feel ancient, coastal and wonderfully Mediterranean all at once. The Medieval City brings centuries of history into the experience, while whitewashed Lindos, sheltered eastern bays and elegant seaside venues offer a completely different atmosphere further south. Because Rhodes is a large island, choosing the right area matters: summer heat, wind exposure, travel times and the distance between ceremony, reception and accommodation can all influence the day. We plan these practical details alongside the venue, transportation, decoration, photography and guest arrangements, building the wedding around the part of Rhodes that suits you best. Whether you imagine a legal marriage, church ceremony, symbolic vows or an unforgettable proposal, the island gives each one its own sense of place.</p>",
+  "map": "destinations/specific-greece-regions-maps-rhodes-map.svg",
+  "pins": [
+   {
+    "ceremony": "symbolic",
+    "text": "Ixia and Ialyssos on the west coast catch more summer wind, while Faliraki and Lindos are usually more sheltered. Even a dream spot like Anthony Quinn Bay needs permission before a symbolic wedding can take place there, so we sort that out early.",
+    "top": "6%",
+    "left": "2%"
+   },
+   {
+    "ceremony": "orthodox",
+    "text": "A church wedding in Rhodes draws naturally on deep Orthodox tradition, while an established Catholic community gives international couples additional possibilities. Historic churches, monasteries and Lindos chapels can each create a very different religious setting.",
+    "top": "50%",
+    "left": "55%"
+   },
+   {
+    "ceremony": "official",
+    "text": "Picture a legal ceremony in Rhodes City, then dinner in Lindos: that means a long transfer for every guest. Since each area also has its own municipal office, we usually keep the civil ceremony, reception and hotels in one part of the island.",
+    "top": "15%",
+    "left": "50%"
+   },
+   {
+    "ceremony": "proposal",
+    "text": "Let Lindos do the work: a rooftop facing its Acropolis needs little more than the ring. Just skip the midday climb in July and August. We plan the proposal for the cooler hours, with shade and water close by.",
+    "top": "78%",
+    "left": "28%"
+   }
+  ],
+  "title": "Wedding in Rhodes | Wedding by Luxury Travel",
+  "description": "Historic venues, seaside locations and year-round sunshine make Rhodes one of Greece's most versatile wedding destinations.",
+  "venues_text": [
+   "In Rhodes, choosing a wedding venue often begins with choosing which version of the island you want around you. The Old Town offers courtyards, historic architecture and a powerful sense of place; Lindos brings whitewashed rooftops, elevated terraces and views towards its Acropolis and bays. Around Kallithea and other coastal areas, hotels, gardens and seaside properties create more open, contemporary possibilities. The range makes Rhodes especially flexible for couples who want character without being tied to one particular style of venue.",
+   "Practical details then narrow the choice. Inside the medieval walls, cobbled lanes and narrow gates affect how guests and the wedding team reach the venue. In Lindos, July and August heat makes the ceremony hour, shade and short walking distances especially important. For a legal wedding, the municipality’s official ceremony locations are spread across Rhodes, so the civil part can often stay close to the reception. Sorting these points out early leaves the venue’s character free to shine."
+  ]
+ },
+ {
+  "slug": "peloponnese",
+  "name": "Peloponnese",
+  "image": "destinations/peloponnes",
+  "short": "Where exceptional luxury meets the authentic soul of Greece, the Peloponnese offers a wedding experience unlike any other.",
+  "hero": "destinations/peloponnes",
+  "intro": "<p>The Peloponnese is for couples who want to discover a different side of Greece. Medieval Monemvasia, romantic Nafplio, the olive landscapes of Messinia and sophisticated coastal resorts can each create an entirely different wedding experience within the same region. That variety also makes location especially important: distances, guest accommodation, transportation, venue access and local permissions all depend on the part of the Peloponnese you choose. We coordinate these practical details alongside the venue, design, photography and wider stay, keeping the wedding geographically comfortable while making the most of everything around it. Whether you imagine symbolic vows, a historic church, a legal marriage or a proposal that becomes an adventure of its own, a wedding in the Peloponnese rarely feels like the obvious Greek choice.</p>",
+  "map": null,
+  "pins": [
+   {
+    "ceremony": "symbolic",
+    "text": "Fly into Athens for Nafplio or Porto Heli, or into Kalamata for Messinia and Costa Navarino. Helicopter transfers are a realistic option here too, but the real secret is keeping the whole programme in one area, so guests aren’t crossing the region."
+   },
+   {
+    "ceremony": "orthodox",
+    "text": "Catholic couples don’t have to travel to Athens for the ceremony: in Nafplio, the Frankoklisia has served as a Catholic church since the 19th century. For a traditional ceremony with resort comfort, Costa Navarino in Messinia has chapels of its own."
+   },
+   {
+    "ceremony": "official",
+    "text": "A resort that looks perfect on the map can be hours from its municipal office, and couples may have to visit that office in person. For a civil wedding in the Peloponnese, it goes on the map before the venue does."
+   },
+   {
+    "ceremony": "proposal",
+    "text": "Voidokilia’s perfect curve of turquoise water needs no arch or decoration, and as a protected Natura 2000 site, it shouldn’t have one. A discreet photographer, a few flowers in your bag and the ring are all it takes."
+   }
+  ],
+  "title": "Wedding in Peloponnese | Wedding by Luxury Travel",
+  "description": "Where exceptional luxury meets the authentic soul of Greece, the Peloponnese offers a wedding experience unlike any other.",
+  "venues_text": [
+   "In the Peloponnese, a wedding venue can shape far more than the ceremony itself. A fortified historic town creates one kind of destination wedding, while a coastal resort can keep accommodation, dining and the celebration within one wider property. Private villas, marina settings, countryside venues and properties surrounded by olive landscapes offer still more possibilities. The right choice usually gives the whole stay a clear center, not just a beautiful setting for a few hours.",
+   "That matters because changing areas can mean substantial travel for guests and suppliers. Access also varies considerably: inside Monemvasia, for example, vehicles remain outside the fortified town, so people and equipment continue on foot. Historic and archaeological locations may require permissions beyond the venue booking itself, and civil ceremonies follow the rules of whichever municipality covers the venue. Planning accommodation, arrival routes and the reception around that venue keeps everything within easy reach, so guests spend the day celebrating rather than on the road."
+  ]
+ },
+ {
+  "slug": "skopelos",
+  "name": "Skopelos",
+  "image": "destinations/zakinthos",
+  "short": "Pine-covered hills, hidden coves, and a touch of Mamma Mia! magic give Skopelos a wedding atmosphere that feels wonderfully authentic.",
+  "hero": "destinations/zakinthos",
+  "intro": "<p>Skopelos feels removed from the pace of Greece’s busier islands, with pine-covered hills, quiet coves, traditional streets and a coastline that still feels wonderfully natural. Reaching the island by sea becomes part of the experience, while its connection with <em>Mamma Mia!</em> adds a familiar touch of movie romance without defining everything Skopelos has to offer. A wedding here can feel intimate, relaxed and deeply connected to the landscape. Careful planning still matters, particularly when coordinating ferries, guest accommodation, transfers, weather and access to more remote locations. We bring those details together around the part of the island that suits you best, whether you are planning symbolic vows, a church ceremony, a legal marriage or a proposal that feels completely spontaneous.</p>",
+  "map": "destinations/specific-greece-regions-maps-zakynthos-map.svg",
+  "pins": [
+   {
+    "ceremony": "symbolic",
+    "text": "A symbolic wedding in Skopelos suits couples who want something unhurried and personal. Pine-covered hills, quiet beaches and harbour views give the ceremony character without needing elaborate production or legal formalities.",
+    "top": "6%",
+    "left": "2%"
+   },
+   {
+    "ceremony": "orthodox",
+    "text": "Skopelos Town is full of historic churches, such as Panagitsa tou Pyrgou above the old port. Marrying near Chora keeps the church, reception and guest hotels close together, without a 100-step climb or a 30 km drive to the famous clifftop chapel.",
+    "top": "50%",
+    "left": "55%"
+   },
+   {
+    "ceremony": "official",
+    "text": "A civil wedding in Skopelos can make the legal marriage part of the island experience. Outdoor locations may be possible with municipal arrangements, while ferry schedules, documents and arrival timing need planning together.",
+    "top": "15%",
+    "left": "50%"
+   },
+   {
+    "ceremony": "proposal",
+    "text": "Panormos and Milia are the classic sunset beaches of Skopelos. Since wind can decide which side of the island stays calm, we prepare a second spot with a similar mood, and your partner will never suspect a Plan B existed.",
+    "top": "78%",
+    "left": "28%"
+   }
+  ],
+  "title": "Wedding in Skopelos | Wedding by Luxury Travel",
+  "description": "Pine-covered hills and quiet coves give Skopelos a gentler setting for an intimate destination wedding.",
+  "venues_text": [
+   "Skopelos lends itself to intimate weddings. Harbour-side locations, small hotels, private terraces, beaches and traditional churches suit couples who prefer atmosphere over scale, while countryside properties and elevated spots bring the island’s greener side into the day. Agios Ioannis Kastri adds the famous Mamma Mia connection, but it is only one possibility among many. The wedding venues that suit the island best tend to feel part of the landscape rather than separate from it.",
+   "Venue choice also determines how easily the wedding works for guests. Everyone arrives by sea, so ferry times, accommodation and local transfers need to fit together, especially when the ceremony is far from Chora. Some locations involve winding roads, steep access or long walks, and the chapel of Agios Ioannis, high on its rock, means a long climb on foot. Wind conditions can vary between different coasts too. Getting these details right is what keeps a Skopelos wedding relaxed rather than improvised."
+  ]
  },
  {
   "slug": "thessaloniki",
   "name": "Thessaloniki",
   "image": "destinations/thessaloniki-white-tower",
-  "short": "Thessaloniki is our home city, and few places in Greece combine history and city life so naturally. UNESCO-listed Byzantine churches, the old walls of the Upper Town and the long seafront promenade to the White Tower create a setting that feels both grand and relaxed. A wedding in Thessaloniki suits couples who love food, culture and an easy urban rhythm, with an international airport minutes away and the beaches of Halkidiki about an hour's drive. From a church ceremony in a centuries-old chapel to a rooftop reception overlooking the Thermaic Gulf, we plan every detail with the local knowledge that only a team based in the city can offer.",
+  "short": "Waterfront sunsets, centuries of history, and effortless city energy give Thessaloniki a distinctive Mediterranean character for a modern Greek wedding.",
   "hero": "destinations/thessaloniki-white-tower",
-  "intro": "",
+  "intro": "<p>Thessaloniki offers a Greek wedding with city energy, waterfront views and centuries of history, all within one connected urban destination. The Thermaic Gulf, Ano Poli, Byzantine walls and lively center give the day very different moods without requiring an island transfer. Guests can fly directly into the city, stay centrally and continue to Halkidiki before or after the wedding, making Thessaloniki especially practical for an international group. We coordinate venues, accommodation, transportation, photography and the wider stay around the way you want to experience the city. Whether you are planning symbolic vows, a church ceremony, a legal marriage or a surprise proposal, a wedding in Thessaloniki can feel distinctly Greek without following the usual island formula.</p>",
   "map": null,
-  "pins": [],
+  "pins": [
+   {
+    "ceremony": "symbolic",
+    "text": "Hold the ceremony at a hotel or private venue, then let the city’s history fill the photos: the Rotunda, the White Tower, the lanes of the historic center. Thessaloniki’s landmarks become part of your symbolic wedding without needing to host it."
+   },
+   {
+    "ceremony": "orthodox",
+    "text": "A church wedding in Thessaloniki becomes part of a living Christian history. Byzantine churches stand alongside Catholic, Anglican, Armenian and Protestant communities, giving international couples unusually broad possibilities for a religious ceremony."
+   },
+   {
+    "ceremony": "official",
+    "text": "Ten minutes is all a City Hall slot takes, but the paperwork behind it starts long before. Thessaloniki currently holds civil weddings on Wednesday and Thursday evenings, so we plan your documents, flights and appointment together before you settle on a short stay."
+   },
+   {
+    "ceremony": "proposal",
+    "text": "Skip the race against the sunset. After dark, Thessaloniki’s waterfront glows and the restaurants stay lively, so a proposal can arrive halfway through dinner and drinks, with no viewpoint deadline to give the surprise away."
+   }
+  ],
   "title": "Wedding in Thessaloniki | Wedding by Luxury Travel",
-  "description": "Our home city: Byzantine churches, the Upper Town and the seafront promenade make Thessaloniki a relaxed, elegant setting for your wedding in Greece."
+  "description": "Our home city: Byzantine churches, the Upper Town and the seafront promenade make Thessaloniki a relaxed, elegant setting for your wedding in Greece.",
+  "venues_text": [
+   "Wedding venues in Thessaloniki work especially well for couples who want the convenience of a city without giving up atmosphere. Rooftop spaces, elegant hotels, private event venues and restaurants can host the ceremony or reception, while the rest of Thessaloniki becomes part of the day around them. Instead of asking one property to provide every backdrop, you can combine a well-equipped venue with photographs along the waterfront, in Ano Poli or among the city’s historic architecture.",
+   "That flexibility can also make the wedding easier to organize around an international guest list. Central accommodation, venues and evening plans can remain relatively close, reducing the amount of transportation needed during the day. For a church wedding, the city’s many Christian communities widen the choice, although individual churches still have their own religious and availability requirements. For civil weddings, the municipal appointment needs to be coordinated separately from the reception. Planned together with guest hotels and the route through the city, the venue anchors a day that makes full use of Thessaloniki, rather than one that just happens to take place there."
+  ]
  },
  {
   "slug": "cyprus",

@@ -1,6 +1,6 @@
 ---
 // Wedding venues grouped by destination. Destinations without venues are not
-// shown, except the ones in SOON (Santorini, Thessaloniki), which get one
+// shown, except the ones in SOON (Santorini, Peloponnese, Thessaloniki), which get one
 // card asking for venue ideas until their venues are added. Desktop: two venues side by side, three or more in a carousel.
 // Phones: two or more venues are a slider (swipe or arrows).
 // Switching destination: the brown pill glides to the new name, the old cards fade
@@ -11,14 +11,15 @@ import Icon from './Icon.astro';
 import { venuesFor, DEST_NAMES, DESTINATIONS, destinations } from '../lib/content';
 interface Props { only?: string; limit?: number }
 const { only, limit = 12 } = Astro.props;
-const SOON = ['santorini', 'thessaloniki'];
+const SOON = ['santorini', 'peloponnese', 'thessaloniki'];
 // a photo for the placeholder card instead of the W, where we have one
 // the placeholder card shows the destination's own photo (the W only if there is none)
 const SOON_PHOTO: Record<string, string> = Object.fromEntries((destinations as any[]).filter((d) => d.image).map((d) => [d.slug, d.image]));
 const groups = DESTINATIONS.filter((d) => !only || d === only)
   .map((d) => ({ slug: d, name: DEST_NAMES[d], venues: venuesFor(d).slice(0, limit) }))
   .filter((g) => g.venues.length > 0 || (only ? true : SOON.includes(g.slug)));
-const first = groups[0]?.slug;
+// open on the first destination that already has venues (not a "coming soon" card)
+const first = (groups.find((g) => g.venues.length > 0) ?? groups[0])?.slug;
 ---
 {groups.length > 0 && (
   <div data-tabs data-tabs-anim data-tabs-equal>

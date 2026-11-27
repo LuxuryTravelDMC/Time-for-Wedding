@@ -8,10 +8,10 @@ import destCeremonyRaw from '../data/dest_ceremony.json';
 import blogRaw from '../data/blog.json';
 import seoRaw from '../data/seo.json';
 
-export const DESTINATIONS = ['mykonos', 'santorini', 'crete', 'corfu', 'rhodes', 'athens', 'skopelos', 'halkidiki', 'thessaloniki', 'cyprus'] as const;
+export const DESTINATIONS = ['santorini', 'mykonos', 'crete', 'athens', 'halkidiki', 'corfu', 'rhodes', 'peloponnese', 'skopelos', 'thessaloniki', 'cyprus'] as const;
 export const DEST_NAMES: Record<string, string> = {
   mykonos: 'Mykonos', santorini: 'Santorini', crete: 'Crete', corfu: 'Corfu', rhodes: 'Rhodes',
-  athens: 'Athens', skopelos: 'Skopelos', halkidiki: 'Halkidiki', thessaloniki: 'Thessaloniki', cyprus: 'Cyprus',
+  athens: 'Athens', skopelos: 'Skopelos', halkidiki: 'Halkidiki', thessaloniki: 'Thessaloniki', peloponnese: 'Peloponnese', cyprus: 'Cyprus',
 };
 // Ceremony keys keep the old addresses (/ceremonytype/official …)
 export const CEREMONIES = ['official', 'symbolic', 'orthodox', 'proposal'] as const;

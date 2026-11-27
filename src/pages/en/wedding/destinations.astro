@@ -1,8 +1,8 @@
 ---
 // Destinations.
-// Changes from the review: the whole text is visible (no "Discover more" button);
-// only destinations that have venues appear in "Wedding Venues", and two venues
-// are the same size; "How to choose…" is now an article on the blog.
+// Texts from the owner's document "03 Destinations section": card texts, the
+// "Wedding Destinations" text and the full "How to Choose…" text (visible, no
+// "Discover more"). Only destinations that have venues appear in "Wedding Venues".
 import Base from '../../../layouts/Base.astro';
 import Img from '../../../components/Img.astro';
 import Icon from '../../../components/Icon.astro';
@@ -48,11 +48,10 @@ const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'E
   <section class="section">
     <div class="container split" style="align-items:start">
       <div data-reveal>
-        <h2 class="h2">There Is No Single Perfect Wedding Destination</h2>
-        <p class="slogan">Only the one that perfectly reflects your love story.</p>
+        <h2 class="h2">{page.intro_title}</h2>
       </div>
       <div class="prose" data-reveal>
-        <p set:html={page.intro} />
+        <Fragment set:html={page.intro} />
         <Fragment set:html={page.intro_more} />
       </div>
     </div>
@@ -65,18 +64,11 @@ const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'E
     </div>
   </section>
 
-  <!-- "How to choose…" is now a blog article; here, a link to it -->
-  <section class="section">
-    <div class="container">
-      <article class="teaser" data-reveal>
-        <div class="teaser__media"><Img name="destinations/mykonos" alt="Whitewashed houses and the sea on Mykonos" sizes="(max-width: 760px) 100vw, 520px" /></div>
-        <div class="teaser__body">
-          <p class="kicker">From our blog</p>
-          <h2 class="h3">How to Choose the Right Wedding Destination in Greece</h2>
-          <p>Santorini or Crete, an island or the mainland, peak season or September? A practical guide to the choices that shape your wedding destination.</p>
-          <a class="btn btn--outline" href="/en/blog/how-to-choose-the-right-wedding-destination-in-greece">Read the article <Icon name="arrow" class="arrow" /></a>
-        </div>
-      </article>
+  <!-- The main SEO text, whole and visible -->
+  <section class="section" id="how-to-choose">
+    <div class="container container--narrow">
+      <h2 class="h2" data-reveal>{page.choose_title}</h2>
+      <div class="prose choose-text" data-reveal set:html={page.choose} />
     </div>
   </section>
 

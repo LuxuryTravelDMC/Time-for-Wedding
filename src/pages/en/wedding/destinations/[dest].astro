@@ -8,13 +8,18 @@ import VenuesByDestination from '../../../../components/VenuesByDestination.astr
 import WeddingCard from '../../../../components/WeddingCard.astro';
 import Carousel from '../../../../components/Carousel.astro';
 import Designer from '../../../../components/Designer.astro';
-import { destinations, couples, CEREMONY_NAMES } from '../../../../lib/content';
+import { destinations, couples, destCeremony, venuesFor, CEREMONY_NAMES } from '../../../../lib/content';
 
 export function getStaticPaths() {
   return destinations.map((d) => ({ params: { dest: d.slug }, props: { d } }));
 }
 const { d } = Astro.props;
 const weddings = couples.filter((c) => c.destSlug === d.slug).slice(0, 6);
+// a ceremony card links to its own page (Symbolic Wedding in Crete…) where one exists,
+// otherwise to the request form with the ceremony and destination already chosen
+const cardHref = (c: string) => destCeremony.some((x) => x.destination === d.slug && x.ceremony === c)
+  ? `/en/wedding/destinations/${d.slug}/${c}` : `/en/contact?ceremony=${c}&destination=${d.slug}#request`;
+const hasVenuePage = venuesFor(d.slug).length > 0; // the venue texts live on /en/wedding/places/<dest> when it exists
 const title = d.title || `Wedding in ${d.name} | Wedding by Luxury Travel`;
 ---
 <Base title={title} description={d.description || d.short} image={d.hero || d.image}>
@@ -38,8 +43,13 @@ const title = d.title || `Wedding in ${d.name} | Wedding by Luxury Travel`;
   {/* shown on every destination; without venues yet it holds one "venue ideas" card */}
   <section class="section section--paper" id="venues">
     <div class="container">
-      <SectionHead title={`Wedding Venues in ${d.name}`} subtitle={`Choose a setting that reflects your unique love story in ${d.name}`} />
+      <SectionHead title={`Wedding Venues in ${d.name}`} subtitle={`Discover the many sides of ${d.name}`} />
       <VenuesByDestination only={d.slug} />
+      {!hasVenuePage && d.venues_text && (
+        <div class="venue-notes" data-reveal>
+          {d.venues_text.map((t: string) => <p set:html={t} />)}
+        </div>
+      )}
     </div>
   </section>
 
@@ -47,14 +57,14 @@ const title = d.title || `Wedding in ${d.name} | Wedding by Luxury Travel`;
     <section class="section">
       <div class="container">
         <SectionHead title={`Your Wedding in ${d.name}`} subtitle="Explore every way to make it yours" />
-        <div class="dest-map">
+        <div class:list={['dest-map', { 'dest-map--nomap': !d.map }]}>
           {d.map && <div class="dest-map__img" data-reveal><img src={`/img/${d.map}`} alt={`Map of ${d.name}`} width="800" height="572" loading="lazy" /></div>}
           <div class="dest-map__list">
             {d.pins.map((p) => (
               <div class="dest-map__item" data-reveal>
-                <h3>{p.title || `${CEREMONY_NAMES[p.ceremony]} in ${d.name}`}</h3>
-                <p>{p.text}</p>
-                <a class="link-arrow" href={`/en/wedding/destinations/${d.slug}/${p.ceremony}`}>Explore <Icon name="arrow" class="arrow" /></a>
+                <h3>{`${CEREMONY_NAMES[p.ceremony]} in ${d.name}`}</h3>
+                <p set:html={p.text} />
+                <a class="link-arrow" href={cardHref(p.ceremony)} aria-label={`${CEREMONY_NAMES[p.ceremony]} in ${d.name}`}>{cardHref(p.ceremony).startsWith('/en/contact') ? 'Plan it with us' : 'Explore'} <Icon name="arrow" class="arrow" /></a>
               </div>
             ))}
           </div>
